@@ -11,9 +11,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <div class="auth-container">
 
@@ -33,7 +51,7 @@ Create your account and begin improving your dance skills through structured les
 
 <div class="auth-right">
 
-<form class="auth-card">
+<form class="auth-card" id="registerForm">
 
 <h2>Create Account</h2>
 
@@ -43,17 +61,19 @@ Register to start your learning journey.
 
 </p>
 
-<input type="text" placeholder="Full Name" required>
+<input type="text" id="regName" placeholder="Full Name" required>
 
-<input type="email" placeholder="Email Address" required>
+<input type="email" id="regEmail" placeholder="Email Address" required>
 
-<input type="text" placeholder="Student ID" required>
+<input type="text" id="regStudentId" placeholder="Student ID" required>
 
-<input type="password" placeholder="Password" required>
+<input type="password" id="regPassword" placeholder="Password" required minlength="6">
 
-<input type="password" placeholder="Confirm Password" required>
+<input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
 
-<button type="submit">
+<textarea id="regGoal" placeholder="What's your learning goal? (Optional)"></textarea>
+
+<button type="submit" id="registerBtn">
 
 Create Account
 
@@ -76,6 +96,64 @@ Login Here
 </div>
 
 </div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+// Check auth state with splash
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        window.location.href = "dashboard.html";
+    } else {
+        document.getElementById("splashScreen").classList.add("hidden");
+    }
+});
+</script>
+
+<script>
+const registerForm = document.getElementById("registerForm");
+registerForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("regName").value;
+    const email = document.getElementById("regEmail").value;
+    const studentId = document.getElementById("regStudentId").value;
+    const password = document.getElementById("regPassword").value;
+    const confirmPassword = document.getElementById("regConfirmPassword").value;
+    const goal = document.getElementById("regGoal").value.trim();
+    const btn = document.getElementById("registerBtn");
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    btn.textContent = "Creating Account...";
+    btn.disabled = true;
+
+    const learningGoal = goal || "My goal is to improve my dance skills, coordination, musicality, and confidence through the MOVEQUEST learning modules.";
+
+    registerUser(name, email, password)
+        .then((user) => {
+            return db.collection("users").doc(user.uid).update({
+                studentId: studentId,
+                learningGoal: learningGoal
+            });
+        })
+        .then(() => { window.location.href = "dashboard.html"; })
+        .catch((error) => {
+            alert(error.message);
+            btn.textContent = "Create Account";
+            btn.disabled = false;
+        });
+});
+</script>
 
 </body>
 

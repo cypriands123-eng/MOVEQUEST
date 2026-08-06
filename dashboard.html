@@ -10,9 +10,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <header class="main-header">
 
@@ -38,9 +56,9 @@
 
         <a href="progress.html">Progress</a>
 
-        <a href="profile.html">Profile</a>
+        <a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
 
-        <a href="index.html" class="login-btn">Logout</a>
+        <a href="#" class="login-btn" id="logoutBtn">Logout</a>
 
     </nav>
 
@@ -82,7 +100,7 @@ Continue your MOVEQUEST learning journey and improve your dance skills one lesso
 
 <div class="stat-card">
 
-<h2>0%</h2>
+<h2 id="dashPercent">0%</h2>
 
 <p>Course Progress</p>
 
@@ -90,17 +108,17 @@ Continue your MOVEQUEST learning journey and improve your dance skills one lesso
 
 <div class="stat-card">
 
-<h2>0</h2>
+<h2 id="dashPoints">0</h2>
 
-<p>Lessons Completed</p>
+<p>Points</p>
 
 </div>
 
 <div class="stat-card">
 
-<h2>7</h2>
+<h2 id="dashBadges">0</h2>
 
-<p>Remaining Lessons</p>
+<p>Badges</p>
 
 </div>
 
@@ -114,7 +132,7 @@ Continue Learning
 
 <div class="dashboard-grid">
 
-<div class="dashboard-course">
+<div class="dashboard-course" data-lesson="1">
 
 <img src="images/posture.jpg">
 
@@ -130,7 +148,7 @@ Start Lesson
 
 </div>
 
-<div class="dashboard-course">
+<div class="dashboard-course locked" data-lesson="2">
 
 <img src="images/rhythm.jpg">
 
@@ -140,13 +158,13 @@ Start Lesson
 
 <a href="lesson2.html">
 
-Start Lesson
+Locked
 
 </a>
 
 </div>
 
-<div class="dashboard-course">
+<div class="dashboard-course locked" data-lesson="3">
 
 <img src="images/coordination.jpg">
 
@@ -156,7 +174,7 @@ Start Lesson
 
 <a href="lesson3.html">
 
-Start Lesson
+Locked
 
 </a>
 
@@ -201,6 +219,57 @@ View All Lessons
 </p>
 
 </footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+// Require authentication with splash
+requireAuth().then((user) => {
+    populateUserData(user);
+
+    // Fetch progress from Firestore then hide splash
+    fetchUserProgress(user.uid).then((data) => {
+        if (data && data.progress) {
+            const completed = data.progress.lessonsCompleted || 0;
+            const percent = Math.round((completed / 7) * 100);
+            const points = data.progress.points || 0;
+            const badges = (data.progress.badges || []).length;
+
+            document.getElementById("dashPercent").textContent = percent + "%";
+            document.getElementById("dashPoints").textContent = points;
+            document.getElementById("dashBadges").textContent = badges;
+
+            // Unlock lessons on dashboard
+            const courses = document.querySelectorAll(".dashboard-course");
+            courses.forEach(function(course) {
+                const lessonNum = parseInt(course.getAttribute("data-lesson"));
+                const link = course.querySelector("a");
+
+                if (lessonNum <= completed + 1) {
+                    course.classList.remove("locked");
+                    link.textContent = "Start Lesson";
+                } else {
+                    course.classList.add("locked");
+                    link.textContent = "Locked";
+                }
+            });
+        }
+        hideSplash();
+    }).catch(() => { hideSplash(); });
+}).catch(() => { hideSplash(); });
+
+// Logout
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    logoutUser();
+});
+</script>
 
 </body>
 

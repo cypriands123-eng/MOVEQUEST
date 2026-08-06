@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MOVEQUEST | Home</title>
+<title>MOVEQUEST | Landing</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -122,6 +122,8 @@ Explore Lessons
 
 
 <!-- STATISTICS -->
+
+<section class="statistics">
 
 <div class="stat-card">
     <h2>7</h2>
@@ -361,7 +363,7 @@ Explore Lessons
 
     </div>
 
-</section>>
+</section>
 
 
 
@@ -426,6 +428,92 @@ Explore Lessons
 </div>
 </section>
 
+
+
+<!-- GET STARTED / AUTH SECTION -->
+
+<section class="get-started">
+
+    <h2>Get Started with MOVEQUEST</h2>
+
+    <p class="section-subtitle">
+        Log in to continue your learning journey or create a new account to begin.
+    </p>
+
+    <div class="auth-split">
+
+        <!-- Login Card -->
+        <div class="auth-split-card">
+
+            <div class="auth-split-icon">
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+
+            <h3>Already a Member?</h3>
+
+            <p>
+                Log in to continue where you left off and keep improving your dance skills.
+            </p>
+
+            <form onsubmit="return false;">
+
+                <input type="email" placeholder="Email Address" required>
+
+                <input type="password" placeholder="Password" required>
+
+                <button type="submit" onclick="window.location.href='dashboard.html'">
+                    Login
+                </button>
+
+            </form>
+
+            <a href="login.html" class="auth-link">
+                Need help? Go to full login page
+            </a>
+
+        </div>
+
+        <!-- Divider -->
+        <div class="auth-split-divider">
+            <span>OR</span>
+        </div>
+
+        <!-- Register Card -->
+        <div class="auth-split-card">
+
+            <div class="auth-split-icon register-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <h3>New to MOVEQUEST?</h3>
+
+            <p>
+                Create your free account and start learning basic dance skills today.
+            </p>
+
+            <form onsubmit="return false;">
+
+                <input type="text" placeholder="Full Name" required>
+
+                <input type="email" placeholder="Email Address" required>
+
+                <input type="password" placeholder="Password" required>
+
+                <button type="submit" class="register-btn" onclick="window.location.href='dashboard.html'">
+                    Create Account
+                </button>
+
+            </form>
+
+            <a href="register.html" class="auth-link">
+                Need help? Go to full register page
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- CALL TO ACTION -->
@@ -527,6 +615,59 @@ Create Account
     </p>
 
 </footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+// Landing page login form
+const loginForm = document.querySelector(".auth-split-card:first-child form");
+if (loginForm) {
+    loginForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        const password = this.querySelector('input[type="password"]').value;
+        const btn = this.querySelector("button");
+        btn.textContent = "Logging in...";
+        btn.disabled = true;
+
+        loginUser(email, password)
+            .then(() => { window.location.href = "dashboard.html"; })
+            .catch((error) => {
+                alert(error.message);
+                btn.textContent = "Login";
+                btn.disabled = false;
+            });
+    });
+}
+
+// Landing page register form
+const registerForm = document.querySelector(".auth-split-card:last-child form");
+if (registerForm) {
+    registerForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = this.querySelector('input[type="text"]').value;
+        const email = this.querySelector('input[type="email"]').value;
+        const password = this.querySelector('input[type="password"]').value;
+        const btn = this.querySelector("button");
+        btn.textContent = "Creating Account...";
+        btn.disabled = true;
+
+        registerUser(name, email, password)
+            .then(() => { window.location.href = "dashboard.html"; })
+            .catch((error) => {
+                alert(error.message);
+                btn.textContent = "Create Account";
+                btn.disabled = false;
+            });
+    });
+}
+</script>
 
 </body>
 

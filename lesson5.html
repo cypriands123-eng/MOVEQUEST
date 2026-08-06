@@ -10,9 +10,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <header class="main-header">
 
@@ -38,13 +56,9 @@
 
 <a href="progress.html">Progress</a>
 
-<a href="profile.html">Profile</a>
+<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
 
-<a href="about.html">About</a>
-
-<a href="contact.html">Contact</a>
-
-<a href="index.html" class="login-btn">Logout</a>
+<a href="#" class="login-btn" id="logoutBtn">Logout</a>
 
 </nav>
 
@@ -114,11 +128,11 @@ Learn how dance movements are organized into meaningful sequences. Develop the a
 
 <h2>Lesson Video</h2>
 
-<video controls class="lesson-video">
+<div class="lesson-video">
 
-<source src="videos/lesson5.mp4" type="video/mp4">
+<iframe src="https://www.youtube.com/embed/HC-s1G7RriQ" title="Lesson 5 - Choreographic Understanding" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-</video>
+</div>
 
 <h2>Lesson Notes</h2>
 
@@ -229,6 +243,35 @@ A Web-Based Learning Platform for Improving Dance Skills among BPED Students.
 </p>
 
 </footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+requireAuth().then((user) => {
+    return fetchUserProgress(user.uid);
+}).then((data) => {
+    const unlocked = (data && data.progress && data.progress.lessonsCompleted) || 0;
+    if (unlocked < 4) {
+        window.location.href = "lessons.html";
+        return;
+    }
+    populateUserData(auth.currentUser);
+    hideSplash();
+}).catch(() => {
+    hideSplash();
+});
+
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    logoutUser();
+});
+</script>
 
 </body>
 

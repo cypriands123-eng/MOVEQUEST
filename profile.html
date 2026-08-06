@@ -11,9 +11,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <header class="main-header">
 
@@ -39,9 +57,9 @@
 
 <a href="progress.html">Progress</a>
 
-<a href="profile.html" class="active">Profile</a>
+<a href="profile.html" class="nav-profile active"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
 
-<a href="index.html">Logout</a>
+<a href="#" id="logoutBtn">Logout</a>
 
 </nav>
 
@@ -69,7 +87,7 @@
 
 <div class="profile-stat">
 
-<h2>7</h2>
+<h2 id="totalLessons">7</h2>
 
 <p>Total Lessons</p>
 
@@ -77,7 +95,7 @@
 
 <div class="profile-stat">
 
-<h2>0%</h2>
+<h2 id="profilePercent">0%</h2>
 
 <p>Progress</p>
 
@@ -85,7 +103,15 @@
 
 <div class="profile-stat">
 
-<h2>0</h2>
+<h2 id="profilePoints">0</h2>
+
+<p>Points</p>
+
+</div>
+
+<div class="profile-stat">
+
+<h2 id="profileBadges">0</h2>
 
 <p>Badges</p>
 
@@ -113,7 +139,7 @@
 
 <h3>🎯 Learning Goal</h3>
 
-<p>
+<p id="learningGoal">
 
 My goal is to improve my dance skills, coordination, musicality, and confidence through the MOVEQUEST learning modules.
 
@@ -127,39 +153,9 @@ My goal is to improve my dance skills, coordination, musicality, and confidence 
 
 <h3>🏅 Achievements</h3>
 
-<div class="achievement-grid">
+<div class="achievement-grid" id="achievementGrid">
 
-<div class="achievement-card">
-
-🏅
-
-<p>Beginner</p>
-
-</div>
-
-<div class="achievement-card">
-
-🎵
-
-<p>Rhythm Master</p>
-
-</div>
-
-<div class="achievement-card">
-
-💃
-
-<p>Dance Explorer</p>
-
-</div>
-
-<div class="achievement-card">
-
-🏆
-
-<p>Champion</p>
-
-</div>
+<p style="color:var(--text-light);text-align:center;grid-column:1/-1;">Complete lessons to earn badges.</p>
 
 </div>
 
@@ -220,6 +216,73 @@ A Web-Based Learning Platform for Improving Dance Skills among BPED Students.
 </p>
 
 </footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+requireAuth().then((user) => {
+    populateUserData(user);
+
+    // Update profile info
+    const profileName = document.querySelector(".profile-header h1");
+    if (profileName && user.displayName) {
+        profileName.textContent = user.displayName;
+    }
+
+    // Update email
+    const infoBoxes = document.querySelectorAll(".info-box p");
+    infoBoxes.forEach(function(p) {
+        if (p.textContent.includes("Email:")) {
+            p.innerHTML = "<strong>Email:</strong> " + user.email;
+        }
+    });
+
+    fetchUserProgress(user.uid).then((data) => {
+        if (data) {
+            // Learning goal
+            if (data.learningGoal) {
+                document.getElementById("learningGoal").textContent = data.learningGoal;
+            }
+
+            if (data.progress) {
+                const p = data.progress;
+                const completed = p.lessonsCompleted || 0;
+                const points = p.points || 0;
+                const badges = p.badges || [];
+                const percent = Math.round((completed / 7) * 100);
+
+                document.getElementById("profilePercent").textContent = percent + "%";
+                document.getElementById("profilePoints").textContent = points;
+                document.getElementById("profileBadges").textContent = badges.length;
+
+                // Badges
+                const grid = document.getElementById("achievementGrid");
+                if (badges.length > 0) {
+                    grid.innerHTML = "";
+                    badges.forEach(function(id) {
+                        const b = BADGE_LIST[id];
+                        if (b) {
+                            grid.innerHTML += '<div class="achievement-card">' + b.icon + '<p>' + b.name + '</p></div>';
+                        }
+                    });
+                }
+            }
+        }
+        hideSplash();
+    }).catch(() => { hideSplash(); });
+}).catch(() => { hideSplash(); });
+
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    logoutUser();
+});
+</script>
 
 </body>
 

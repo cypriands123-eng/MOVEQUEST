@@ -11,9 +11,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <div class="auth-container">
 
@@ -37,7 +55,7 @@ guided practice, and progress tracking.
 
 <div class="auth-right">
 
-<form class="auth-card">
+<form class="auth-card" id="loginForm">
 
 <h2>Login</h2>
 
@@ -47,11 +65,11 @@ Sign in to continue learning.
 
 </p>
 
-<input type="email" placeholder="Email Address" required>
+<input type="email" id="loginEmail" placeholder="Email Address" required>
 
-<input type="password" placeholder="Password" required>
+<input type="password" id="loginPassword" placeholder="Password" required>
 
-<button type="submit">
+<button type="submit" id="loginBtn">
 
 Login
 
@@ -69,17 +87,50 @@ Register Here
 
 </p>
 
-<a href="dashboard.html" class="demo-btn">
-
-Demo Login →
-
-</a>
-
 </form>
 
 </div>
 
 </div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+// Check auth state with splash
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        window.location.href = "dashboard.html";
+    } else {
+        document.getElementById("splashScreen").classList.add("hidden");
+    }
+});
+</script>
+
+<script>
+const loginForm = document.getElementById("loginForm");
+loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    const btn = document.getElementById("loginBtn");
+    btn.textContent = "Logging in...";
+    btn.disabled = true;
+
+    loginUser(email, password)
+        .then(() => { window.location.href = "dashboard.html"; })
+        .catch((error) => {
+            alert(error.message);
+            btn.textContent = "Login";
+            btn.disabled = false;
+        });
+});
+</script>
 
 </body>
 

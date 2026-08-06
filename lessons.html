@@ -11,9 +11,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <header class="main-header">
 
@@ -35,17 +53,13 @@
 
 <a href="dashboard.html">Dashboard</a>
 
-<a href="lessons.html">Lessons</a>
+<a href="lessons.html" class="active">Lessons</a>
 
 <a href="progress.html">Progress</a>
 
-<a href="profile.html">Profile</a>
+<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
 
-<a href="about.html">About</a>
-
-<a href="contact.html">Contact</a>
-
-<a href="index.html" class="login-btn">Logout</a>
+<a href="#" class="login-btn" id="logoutBtn">Logout</a>
 
 </nav>
 
@@ -66,7 +80,7 @@ Complete each lesson in sequence to build your dance skills from basic movements
 </div>
 
 <div class="lesson-grid">
-    <div class="lesson-item">
+    <div class="lesson-item" data-lesson="1">
 
 <img src="images/posture.jpg">
 
@@ -95,7 +109,7 @@ Start Lesson
 </a>
 
 </div>
-<div class="lesson-item">
+<div class="lesson-item locked" data-lesson="2">
 
 <img src="images/rhythm.jpg">
 
@@ -119,12 +133,12 @@ Develop timing and movement with music.
 
 <a href="lesson2.html">
 
-Start Lesson
+Locked
 
 </a>
 
 </div>
-<div class="lesson-item">
+<div class="lesson-item locked" data-lesson="3">
 
 <img src="images/coordination.jpg">
 
@@ -148,12 +162,12 @@ Improve body coordination and movement control.
 
 <a href="lesson3.html">
 
-Start Lesson
+Locked
 
 </a>
 
 </div>
-<div class="lesson-item">
+<div class="lesson-item locked" data-lesson="4">
 
 <img src="images/footwork.jpg">
 
@@ -177,14 +191,14 @@ Learn stepping patterns and proper weight transfer.
 
 <a href="lesson4.html">
 
-Start Lesson
+Locked
 
 </a>
 
 </div>
-<div class="lesson-item">
+<div class="lesson-item locked" data-lesson="5">
 
-<img src="images/choreo.jpg">
+<img src="images/choreography.jpg">
 
 <span class="lesson-badge intermediate">
 
@@ -206,12 +220,12 @@ Understand choreography, transitions, and formations.
 
 <a href="lesson5.html">
 
-Start Lesson
+Locked
 
 </a>
 
 </div>
-<div class="lesson-item">
+<div class="lesson-item locked" data-lesson="6">
 
 <img src="images/guided-practice.jpg">
 
@@ -235,12 +249,12 @@ Apply all learned skills through guided routines.
 
 <a href="lesson6.html">
 
-Start Lesson
+Locked
 
 </a>
 
 </div>
-<div class="lesson-item">
+<div class="lesson-item locked" data-lesson="7">
 
 <img src="images/final-challenge.jpg">
 
@@ -264,7 +278,7 @@ Perform the complete dance routine independently.
 
 <a href="lesson7.html">
 
-Start Lesson
+Locked
 
 </a>
 
@@ -334,6 +348,52 @@ A Web-Based Learning Platform for Improving Dance Skills.
 </p>
 
 </footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+requireAuth().then(function(user) {
+    populateUserData(user);
+
+    fetchUserProgress(user.uid).then(function(data) {
+        const completed = (data && data.progress) ? data.progress.lessonsCompleted || 0 : 0;
+
+        // Unlock lessons based on progress
+        const items = document.querySelectorAll(".lesson-item");
+        items.forEach(function(item) {
+            const lessonNum = parseInt(item.getAttribute("data-lesson"));
+            const link = item.querySelector("a");
+
+            if (lessonNum <= completed + 1) {
+                // Unlock this lesson
+                item.classList.remove("locked");
+                link.textContent = "Start Lesson";
+            } else {
+                // Keep locked
+                item.classList.add("locked");
+                link.textContent = "Locked";
+            }
+        });
+
+        hideSplash();
+    }).catch(function() {
+        hideSplash();
+    });
+}).catch(function() {
+    hideSplash();
+});
+
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    logoutUser();
+});
+</script>
 
 </body>
 

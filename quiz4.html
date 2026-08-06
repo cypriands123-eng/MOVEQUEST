@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOVEQUEST | Lesson 4 Quiz</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
+
+<header class="main-header">
+<div class="logo">
+<span class="logo-icon">💙</span>
+<div>
+<h2>MOVEQUEST</h2>
+<small>Dance Learning Platform</small>
+</div>
+</div>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="lessons.html">Lessons</a>
+<a href="progress.html">Progress</a>
+<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
+<a href="#" class="login-btn" id="logoutBtn">Logout</a>
+</nav>
+</header>
+
+<section class="quiz-content">
+<h1><i class="fa-solid fa-clipboard-question"></i> Lesson 4 Quiz</h1>
+<p>Answer all questions below. You need at least 75% to pass and unlock the next lesson.</p>
+<form id="quizForm"></form>
+<div id="quizResult" style="display:none;">
+<div class="lesson-tip" style="margin-top:25px;">
+<h3 id="resultTitle"></h3>
+<p id="resultMessage"></p>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<p>© 2026 MOVEQUEST</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+<script src="quiz-config.js"></script>
+<script>const LESSON_NUMBER = 4;</script>
+<script src="quiz-common.js"></script>
+
+</body>
+</html>

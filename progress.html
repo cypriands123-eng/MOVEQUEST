@@ -10,9 +10,27 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading your experience...</p>
+</div>
 
 <header class="main-header">
 
@@ -38,9 +56,9 @@
 
 <a href="progress.html" class="active">Progress</a>
 
-<a href="profile.html">Profile</a>
+<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
 
-<a href="index.html">Logout</a>
+<a href="#" id="logoutBtn">Logout</a>
 
 </nav>
 
@@ -66,13 +84,13 @@ Monitor your improvement throughout the MOVEQUEST learning journey.
 
 <h2>Overall Course Progress</h2>
 
-<span>0%</span>
+<span id="progressPercent">0%</span>
 
 </div>
 
 <div class="progress-bar">
 
-<div class="progress-fill"></div>
+<div class="progress-fill" id="progressFill"></div>
 
 </div>
 
@@ -82,9 +100,9 @@ Monitor your improvement throughout the MOVEQUEST learning journey.
 
 <div class="progress-card">
 
-<h3>📚 Lessons Completed</h3>
+<h3><i class="fa-solid fa-book"></i> Lessons Completed</h3>
 
-<h2>0 / 7</h2>
+<h2 id="lessonsCount">0 / 7</h2>
 
 <p>Complete all lessons to finish the course.</p>
 
@@ -92,9 +110,9 @@ Monitor your improvement throughout the MOVEQUEST learning journey.
 
 <div class="progress-card">
 
-<h3>📝 Quizzes Passed</h3>
+<h3><i class="fa-solid fa-clipboard-check"></i> Quizzes Passed</h3>
 
-<h2>0 / 7</h2>
+<h2 id="quizzesCount">0 / 7</h2>
 
 <p>Pass every quiz to unlock all achievements.</p>
 
@@ -102,23 +120,35 @@ Monitor your improvement throughout the MOVEQUEST learning journey.
 
 <div class="progress-card">
 
-<h3>⭐ Current Level</h3>
+<h3><i class="fa-solid fa-star"></i> Points Earned</h3>
 
-<h2>Beginner</h2>
+<h2 id="pointsCount">0</h2>
 
-<p>Keep learning to reach Intermediate and Advanced.</p>
+<p>Earn 100 points per quiz completed.</p>
 
 </div>
 
 <div class="progress-card">
 
-<h3>🏆 Achievement</h3>
+<h3><i class="fa-solid fa-trophy"></i> Current Level</h3>
 
-<h2>None Yet</h2>
+<h2 id="levelName">Beginner</h2>
 
-<p>Complete lessons to earn badges.</p>
+<p>Keep learning to reach Intermediate and Advanced.</p>
 
 </div>
+
+</div>
+
+<h2 class="progress-title">
+
+Badges Earned
+
+</h2>
+
+<div class="badge-grid" id="badgeGrid">
+
+<p style="color:var(--text-light);text-align:center;grid-column:1/-1;">Complete lessons and quizzes to earn badges.</p>
 
 </div>
 
@@ -128,63 +158,21 @@ Lesson Progress
 
 </h2>
 
-<div class="lesson-progress">
+<div class="lesson-progress" id="lessonProgress">
 
-<div class="lesson-row">
+<div class="lesson-row"><span>Lesson 1 – Body Posture</span><span class="lesson-status">Not Started</span></div>
 
-<span>Lesson 1 – Body Posture</span>
+<div class="lesson-row"><span>Lesson 2 – Rhythm and Musicality</span><span class="lesson-status">Locked</span></div>
 
-<span>Not Started</span>
+<div class="lesson-row"><span>Lesson 3 – Coordination</span><span class="lesson-status">Locked</span></div>
 
-</div>
+<div class="lesson-row"><span>Lesson 4 – Basic Footwork</span><span class="lesson-status">Locked</span></div>
 
-<div class="lesson-row">
+<div class="lesson-row"><span>Lesson 5 – Choreographic Understanding</span><span class="lesson-status">Locked</span></div>
 
-<span>Lesson 2 – Rhythm and Musicality</span>
+<div class="lesson-row"><span>Lesson 6 – Guided Practice</span><span class="lesson-status">Locked</span></div>
 
-<span>Not Started</span>
-
-</div>
-
-<div class="lesson-row">
-
-<span>Lesson 3 – Coordination</span>
-
-<span>Not Started</span>
-
-</div>
-
-<div class="lesson-row">
-
-<span>Lesson 4 – Basic Footwork</span>
-
-<span>Not Started</span>
-
-</div>
-
-<div class="lesson-row">
-
-<span>Lesson 5 – Choreographic Understanding</span>
-
-<span>Not Started</span>
-
-</div>
-
-<div class="lesson-row">
-
-<span>Lesson 6 – Guided Practice</span>
-
-<span>Not Started</span>
-
-</div>
-
-<div class="lesson-row">
-
-<span>Lesson 7 – Final Dance Challenge</span>
-
-<span>Not Started</span>
-
-</div>
+<div class="lesson-row"><span>Lesson 7 – Final Dance Challenge</span><span class="lesson-status">Locked</span></div>
 
 </div>
 
@@ -221,6 +209,89 @@ Continue Learning
 </p>
 
 </footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+const LESSON_NAMES = {
+    1: "Body Posture",
+    2: "Rhythm and Musicality",
+    3: "Coordination",
+    4: "Basic Footwork",
+    5: "Choreographic Understanding",
+    6: "Guided Practice",
+    7: "Final Dance Challenge"
+};
+
+requireAuth().then((user) => {
+    populateUserData(user);
+
+    fetchUserProgress(user.uid).then((data) => {
+        if (data && data.progress) {
+            const p = data.progress;
+            const completed = p.lessonsCompleted || 0;
+            const quizzes = p.quizzesPassed || 0;
+            const points = p.points || 0;
+            const level = p.currentLevel || "Beginner";
+            const badges = p.badges || [];
+            const lessons = p.lessons || {};
+            const percent = Math.round((completed / 7) * 100);
+
+            // Top stats
+            document.getElementById("progressPercent").textContent = percent + "%";
+            document.getElementById("progressFill").style.width = percent + "%";
+            document.getElementById("lessonsCount").textContent = completed + " / 7";
+            document.getElementById("quizzesCount").textContent = quizzes + " / 7";
+            document.getElementById("pointsCount").textContent = points;
+            document.getElementById("levelName").textContent = level;
+
+            // Badges
+            const badgeGrid = document.getElementById("badgeGrid");
+            if (badges.length > 0) {
+                badgeGrid.innerHTML = "";
+                badges.forEach(function(id) {
+                    const b = BADGE_LIST[id];
+                    if (b) {
+                        badgeGrid.innerHTML += '<div class="achievement-card">' + b.icon + '<p>' + b.name + '</p></div>';
+                    }
+                });
+            }
+
+            // Lesson rows
+            const rows = document.querySelectorAll("#lessonProgress .lesson-row");
+            for (let i = 1; i <= 7; i++) {
+                const statusEl = rows[i - 1].querySelector(".lesson-status");
+                const lessonData = lessons[i];
+
+                if (lessonData && lessonData.quizDone) {
+                    const scoreText = lessonData.total ? lessonData.score + "/" + lessonData.total : "";
+                    statusEl.innerHTML = '<span style="color:var(--success);font-weight:600;">Completed</span>' +
+                        (scoreText ? ' <span style="color:var(--text-light);font-size:13px;">(Score: ' + scoreText + ')</span>' : '');
+                } else if (i <= completed + 1) {
+                    statusEl.textContent = "In Progress";
+                    statusEl.style.color = "var(--accent)";
+                    statusEl.style.fontWeight = "600";
+                } else {
+                    statusEl.textContent = "Locked";
+                    statusEl.style.color = "var(--text-light)";
+                }
+            }
+        }
+        hideSplash();
+    }).catch(() => { hideSplash(); });
+}).catch(() => { hideSplash(); });
+
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    logoutUser();
+});
+</script>
 
 </body>
 
