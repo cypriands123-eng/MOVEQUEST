@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MOVEQUEST | Lesson 1 Quiz</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+MOVEQUEST
+
+</div>
+
+<nav>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="lessons.html">Lessons</a>
+
+<a href="index.html">Logout</a>
+
+</nav>
+
+</header>
+
+<section class="quiz-content">
+
+<h1>Lesson 1 Quiz</h1>
+
+<p>
+
+Choose the correct answer for each question.
+
+</p>
+
+<form id="quizForm">
+
+<div class="question">
+
+<h3>1. Why is proper posture important in dancing?</h3>
+
+<label><input type="radio" name="q1" value="a"> It improves balance and movement.</label><br>
+
+<label><input type="radio" name="q1" value="b"> It makes dancing slower.</label><br>
+
+<label><input type="radio" name="q1" value="c"> It reduces practice time.</label>
+
+</div>
+
+<div class="question">
+
+<h3>2. Which body part should remain relaxed?</h3>
+
+<label><input type="radio" name="q2" value="a"> Knees</label><br>
+
+<label><input type="radio" name="q2" value="b"> Shoulders</label><br>
+
+<label><input type="radio" name="q2" value="c"> Fingers</label>
+
+</div>
+
+<div class="question">
+
+<h3>3. Where should you look while maintaining posture?</h3>
+
+<label><input type="radio" name="q3" value="a"> Down</label><br>
+
+<label><input type="radio" name="q3" value="b"> Forward</label><br>
+
+<label><input type="radio" name="q3" value="c"> Behind you</label>
+
+</div>
+
+<button type="button" onclick="checkQuiz()">
+
+Submit Quiz
+
+</button>
+
+</form>
+
+<h2 id="score"></h2>
+
+</section>
+
+<script>
+
+function checkQuiz(){
+
+let score=0;
+
+if(document.querySelector('input[name="q1"]:checked')?.value==="a") score++;
+
+if(document.querySelector('input[name="q2"]:checked')?.value==="b") score++;
+
+if(document.querySelector('input[name="q3"]:checked')?.value==="b") score++;
+
+document.getElementById("score").innerHTML="Your Score: "+score+" / 3";
+
+}
+
+</script>
+
+</body>
+
+</html>
