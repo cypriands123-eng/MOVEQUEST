@@ -8,7 +8,7 @@ const QUIZ_CONFIG = {
         emailEntry: "entry.1350519511",
         scoreEntry: null, // set to an entry ID if your form has a score field
         questions: [
-            { entryId: "entry.561153732", label: "Answer is option 2", options: ["Option 1", "Option 2", "Option 3", "Option 4"], answer: "Option 2" }
+            { entryId: "entry.561153732", label: "Answer is option 2", options: ["Option 1", "Option 2", "Option 3", "Option 4"], answer: "Option 2" },
             { entryId: "entry.1853079539", label: "answer opt 1", options: ["Option 1", "Option 2", "Option 3", "Option 4"], answer: "Option 1" }
         ]
     },
