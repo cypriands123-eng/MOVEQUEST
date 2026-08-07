@@ -5,7 +5,7 @@
 const QUIZ_CONFIG = {
     1: {
         formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfm2fS6iHcDo-7bOJKLDc09YPrzr3XiabcG_VTuAZhfxTsbAA/formResponse", 
-        emailEntry: "entry.1350519511",
+        emailEntry: "entry.1609859999",
         scoreEntry: null, // set to an entry ID if your form has a score field
         questions: [
             { entryId: "entry.561153732", label: "Answer is option 2", options: ["Option 1", "Option 2", "Option 3", "Option 4"], answer: "Option 2" },
