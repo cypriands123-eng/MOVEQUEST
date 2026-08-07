@@ -48,10 +48,9 @@ function submitQuiz() {
         if (selected && selected.value === q.answer) score++;
     });
 
-    const params = new URLSearchParams();
-    params.append(config.emailEntry, currentUser.email);
+    var params = new URLSearchParams();
     config.questions.forEach(function(q) {
-        const selected = document.querySelector('input[name="' + q.entryId + '"]:checked');
+        var selected = document.querySelector('input[name="' + q.entryId + '"]:checked');
         if (selected) params.append(q.entryId, selected.value);
     });
     if (config.scoreEntry) params.append(config.scoreEntry, score + " / " + total);
@@ -62,8 +61,7 @@ function submitQuiz() {
     fetch(config.formUrl, {
         method: "POST",
         body: params,
-        mode: "no-cors",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        mode: "no-cors"
     });
 
     markQuizCompleted(LESSON_NUMBER, score, total).then(function(res) {
