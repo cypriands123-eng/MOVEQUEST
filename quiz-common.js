@@ -48,18 +48,23 @@ function submitQuiz() {
         if (selected && selected.value === q.answer) score++;
     });
 
-    const formData = new FormData();
-    formData.append(config.emailEntry, currentUser.email);
+    const params = new URLSearchParams();
+    params.append(config.emailEntry, currentUser.email);
     config.questions.forEach(function(q) {
         const selected = document.querySelector('input[name="' + q.entryId + '"]:checked');
-        if (selected) formData.append(q.entryId, selected.value);
+        if (selected) params.append(q.entryId, selected.value);
     });
-    if (config.scoreEntry) formData.append(config.scoreEntry, score + " / " + total);
-    formData.append("fvv", "1");
-    formData.append("pageHistory", "0");
-    formData.append("fbzx", Math.random().toString());
+    if (config.scoreEntry) params.append(config.scoreEntry, score + " / " + total);
+    params.append("fvv", "1");
+    params.append("pageHistory", "0");
+    params.append("fbzx", Math.random().toString());
 
-    fetch(config.formUrl, { method: "POST", body: formData, mode: "no-cors" });
+    fetch(config.formUrl, {
+        method: "POST",
+        body: params,
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    });
 
     markQuizCompleted(LESSON_NUMBER, score, total).then(function(res) {
         result.style.display = "block";
