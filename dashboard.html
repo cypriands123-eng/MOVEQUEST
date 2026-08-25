@@ -231,37 +231,45 @@ View All Lessons
 <script>
 // Require authentication with splash
 requireAuth().then((user) => {
-    populateUserData(user);
-
-    // Fetch progress from Firestore then hide splash
-    fetchUserProgress(user.uid).then((data) => {
-        if (data && data.progress) {
-            const completed = data.progress.lessonsCompleted || 0;
-            const percent = Math.round((completed / 7) * 100);
-            const points = data.progress.points || 0;
-            const badges = (data.progress.badges || []).length;
-
-            document.getElementById("dashPercent").textContent = percent + "%";
-            document.getElementById("dashPoints").textContent = points;
-            document.getElementById("dashBadges").textContent = badges;
-
-            // Unlock lessons on dashboard
-            const courses = document.querySelectorAll(".dashboard-course");
-            courses.forEach(function(course) {
-                const lessonNum = parseInt(course.getAttribute("data-lesson"));
-                const link = course.querySelector("a");
-
-                if (lessonNum <= completed + 1) {
-                    course.classList.remove("locked");
-                    link.textContent = "Start Lesson";
-                } else {
-                    course.classList.add("locked");
-                    link.textContent = "Locked";
-                }
-            });
+    // Check if teacher — redirect to teacher panel
+    db.collection("users").doc(user.uid).get().then((doc) => {
+        if (doc.exists && doc.data().isAdmin) {
+            window.location.href = "admin.html";
+            return;
         }
-        hideSplash();
-    }).catch(() => { hideSplash(); });
+
+        populateUserData(user);
+
+        // Fetch progress from Firestore then hide splash
+        fetchUserProgress(user.uid).then((data) => {
+            if (data && data.progress) {
+                const completed = data.progress.lessonsCompleted || 0;
+                const percent = Math.round((completed / 7) * 100);
+                const points = data.progress.points || 0;
+                const badges = (data.progress.badges || []).length;
+
+                document.getElementById("dashPercent").textContent = percent + "%";
+                document.getElementById("dashPoints").textContent = points;
+                document.getElementById("dashBadges").textContent = badges;
+
+                // Unlock lessons on dashboard
+                const courses = document.querySelectorAll(".dashboard-course");
+                courses.forEach(function(course) {
+                    const lessonNum = parseInt(course.getAttribute("data-lesson"));
+                    const link = course.querySelector("a");
+
+                    if (lessonNum <= completed + 1) {
+                        course.classList.remove("locked");
+                        link.textContent = "Start Lesson";
+                    } else {
+                        course.classList.add("locked");
+                        link.textContent = "Locked";
+                    }
+                });
+            }
+            hideSplash();
+        }).catch(() => { hideSplash(); });
+    });
 }).catch(() => { hideSplash(); });
 
 // Logout

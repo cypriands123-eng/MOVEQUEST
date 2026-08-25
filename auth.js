@@ -7,13 +7,13 @@
 function registerUser(name, email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Update display name
-            return userCredential.user.updateProfile({ displayName: name })
-                .then(() => {
-                    // Save user data to Firestore
-                    return db.collection("users").doc(userCredential.user.uid).set({
+            var user = userCredential.user;
+            return user.updateProfile({ displayName: name })
+                .then(function() {
+                    return db.collection("users").doc(user.uid).set({
                         name: name,
                         email: email,
+                        isAdmin: false,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         progress: {
                             lessonsCompleted: 0,
@@ -33,7 +33,9 @@ function registerUser(name, email, password) {
                         }
                     });
                 })
-                .then(() => userCredential.user);
+                .then(function() {
+                    return user;
+                });
         });
 }
 
@@ -178,6 +180,7 @@ function markQuizCompleted(lessonNumber, score, totalQuestions) {
             return userRef.set({
                 name: user.displayName || "",
                 email: user.email,
+                isAdmin: false,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 progress: {
                     lessonsCompleted: 0,
@@ -195,7 +198,7 @@ function markQuizCompleted(lessonNumber, score, totalQuestions) {
                         7: { quizDone: false, score: 0, total: 0 }
                     }
                 }
-            }).then(() => {
+            }).then(function() {
                 return userRef.get();
             });
         }

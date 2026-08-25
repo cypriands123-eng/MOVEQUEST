@@ -106,14 +106,8 @@ Login Here
 <script src="auth.js"></script>
 
 <script>
-// Check auth state with splash
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        window.location.href = "dashboard.html";
-    } else {
-        document.getElementById("splashScreen").classList.add("hidden");
-    }
-});
+// Hide splash immediately — registration handler controls redirects
+document.getElementById("splashScreen").classList.add("hidden");
 </script>
 
 <script>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MOVEQUEST | Teacher Panel</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Splash Screen -->
+<div class="splash-screen" id="splashScreen">
+    <div class="splash-logo">
+        <img src="images/logo.png" alt="MOVEQUEST">
+        <h2>MOVEQUEST</h2>
+    </div>
+    <div class="splash-spinner"></div>
+    <p class="splash-text">Loading teacher panel...</p>
+</div>
+
+<header class="main-header">
+
+<div class="logo">
+
+<span class="logo-icon">💙</span>
+
+<div>
+
+<h2>MOVEQUEST</h2>
+
+<small>Teacher Panel</small>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="admin.html" class="active"><i class="fa-solid fa-shield-halved"></i> Teacher Panel</a>
+
+<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Teacher</span></a>
+
+<a href="#" class="login-btn" id="logoutBtn">Logout</a>
+
+</nav>
+
+</header>
+
+<section class="admin-page">
+
+<div class="admin-header">
+
+<div>
+
+<h1><i class="fa-solid fa-shield-halved"></i> Teacher Panel</h1>
+
+<p>Review student video submissions, provide ratings and feedback.</p>
+
+</div>
+
+<div class="admin-stats" id="adminStats">
+
+<div class="admin-stat-card">
+
+<i class="fa-solid fa-users"></i>
+
+<div>
+
+<h3 id="totalStudents">0</h3>
+
+<p>Students</p>
+
+</div>
+
+</div>
+
+<div class="admin-stat-card">
+
+<i class="fa-solid fa-video"></i>
+
+<div>
+
+<h3 id="totalUploads">0</h3>
+
+<p>Uploads</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Filter Bar -->
+<div class="admin-filter-bar">
+
+<div class="admin-search">
+
+<i class="fa-solid fa-search"></i>
+
+<input type="text" id="searchInput" placeholder="Search by student name or email...">
+
+</div>
+
+<select id="filterPart">
+
+<option value="all">All Parts</option>
+
+<option value="1">Part 1</option>
+
+<option value="2">Part 2</option>
+
+<option value="3">Part 3</option>
+
+<option value="4">Part 4</option>
+
+<option value="5">Part 5</option>
+
+</select>
+
+</div>
+
+<!-- Uploads List -->
+<div class="admin-uploads-list" id="uploadsList">
+
+<div class="admin-empty-state">
+
+<i class="fa-solid fa-inbox"></i>
+
+<h3>No uploads yet</h3>
+
+<p>Student video submissions will appear here.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+<div class="footer-grid">
+
+<div>
+
+<h2>MOVEQUEST</h2>
+
+<p>A Web-Based Learning Platform for Improving Dance Skills.</p>
+
+</div>
+
+<div>
+
+<h3>Quick Links</h3>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="lessons.html">Lessons</a>
+
+<a href="profile.html">Profile</a>
+
+</div>
+
+<div>
+
+<h3>Teacher</h3>
+
+<a href="admin.html">Video Submissions</a>
+
+<p>Review & Feedback</p>
+
+</div>
+
+<div>
+
+<h3>Developed For</h3>
+
+<p>BPED Students</p>
+
+<p>Consolatrix College of Toledo City Inc.</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">© 2026 MOVEQUEST. All Rights Reserved.</p>
+
+</footer>
+
+<!-- Feedback Modal -->
+<div class="upload-modal" id="feedbackModal">
+    <div class="upload-modal-content">
+        <div class="upload-modal-header">
+            <h3><i class="fa-solid fa-comment-dots"></i> Review Submission</h3>
+            <button class="upload-modal-close" onclick="closeFeedbackModal()">&times;</button>
+        </div>
+        <div class="upload-modal-body">
+            <div class="feedback-student-info" id="feedbackStudentInfo"></div>
+
+            <div class="feedback-section">
+                <label>Student Video</label>
+                <div class="feedback-video-link" id="feedbackVideoLink"></div>
+            </div>
+
+            <div class="feedback-section">
+                <label>Rating</label>
+                <div class="star-rating" id="feedbackStarRating">
+                    <i class="fa-solid fa-star" data-value="1"></i>
+                    <i class="fa-solid fa-star" data-value="2"></i>
+                    <i class="fa-solid fa-star" data-value="3"></i>
+                    <i class="fa-solid fa-star" data-value="4"></i>
+                    <i class="fa-solid fa-star" data-value="5"></i>
+                </div>
+                <p class="rating-text" id="feedbackRatingText">Select a rating</p>
+            </div>
+
+            <div class="feedback-section">
+                <label>Feedback Comment</label>
+                <textarea id="feedbackComment" placeholder="Write your feedback for this student..."></textarea>
+            </div>
+
+            <div class="feedback-existing" id="feedbackExisting" style="display:none;">
+                <label>Previous Feedback</label>
+                <div id="feedbackExistingContent"></div>
+            </div>
+        </div>
+        <div class="upload-modal-footer">
+            <button class="upload-cancel-btn" onclick="closeFeedbackModal()">Cancel</button>
+            <button class="upload-submit-btn" id="feedbackSubmitBtn" onclick="submitFeedback()">
+                <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase-config.js"></script>
+<script src="auth.js"></script>
+
+<script>
+var currentUser = null;
+var allUploads = [];
+var currentFeedbackUpload = null;
+var feedbackRating = 0;
+
+var VIDEOS = {
+    1: "ARSC Animation Song - Part 1",
+    2: "ARSC Animation Song - Part 2",
+    3: "ARSC Animation Song - Part 3",
+    4: "ARSC Animation Song - Part 4",
+    5: "ARSC Animation Song - Part 5"
+};
+
+// Auth check — must be admin
+requireAuth().then(function(user) {
+    currentUser = user;
+    return db.collection("users").doc(user.uid).get();
+}).then(function(doc) {
+    if (!doc.exists || !doc.data().isAdmin) {
+        alert("Access denied. Teachers only.");
+        window.location.href = "dashboard.html";
+        return;
+    }
+    populateUserData(currentUser);
+    loadAllUploads();
+    hideSplash();
+}).catch(function() {
+    window.location.href = "login.html";
+});
+
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+    logoutUser();
+});
+
+// Load all uploads
+function loadAllUploads() {
+    db.collection("video_uploads")
+        .orderBy("uploadedAt", "desc")
+        .get()
+        .then(function(snapshot) {
+            allUploads = [];
+            var students = {};
+
+            snapshot.forEach(function(doc) {
+                var data = doc.data();
+                data.docId = doc.id;
+                allUploads.push(data);
+                if (!students[data.userId]) {
+                    students[data.userId] = {
+                        name: data.userName,
+                        email: data.userEmail
+                    };
+                }
+            });
+
+            document.getElementById("totalUploads").textContent = allUploads.length;
+            document.getElementById("totalStudents").textContent = Object.keys(students).length;
+
+            renderUploads(allUploads);
+        });
+}
+
+// Render uploads list
+function renderUploads(uploads) {
+    var list = document.getElementById("uploadsList");
+
+    if (uploads.length === 0) {
+        list.innerHTML = '<div class="admin-empty-state">' +
+            '<i class="fa-solid fa-inbox"></i>' +
+            '<h3>No uploads found</h3>' +
+            '<p>No submissions match your search.</p>' +
+            '</div>';
+        return;
+    }
+
+    var html = "";
+    uploads.forEach(function(upload, index) {
+        var date = upload.uploadedAt ? upload.uploadedAt.toDate().toLocaleDateString("en-US", {
+            year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
+        }) : "Unknown date";
+
+        var partName = VIDEOS[upload.cardNumber] || "Part " + upload.cardNumber;
+
+        html += '<div class="admin-upload-card" data-index="' + index + '">' +
+            '<div class="admin-upload-info">' +
+                '<div class="admin-upload-avatar">' +
+                    '<i class="fa-solid fa-user"></i>' +
+                '</div>' +
+                '<div class="admin-upload-details">' +
+                    '<h3>' + escapeHtml(upload.userName || "Unknown") + '</h3>' +
+                    '<p><i class="fa-solid fa-envelope"></i> ' + escapeHtml(upload.userEmail || "") + '</p>' +
+                    '<p><i class="fa-solid fa-video"></i> ' + escapeHtml(partName) + '</p>' +
+                    '<p><i class="fa-solid fa-file"></i> ' + escapeHtml(upload.fileName || "video.mp4") + '</p>' +
+                    '<p><i class="fa-solid fa-clock"></i> ' + date + '</p>' +
+                '</div>' +
+            '</div>' +
+            '<div class="admin-upload-actions">' +
+                '<button class="admin-feedback-btn" onclick="openFeedbackModal(' + index + ')">' +
+                    '<i class="fa-solid fa-comment-dots"></i> Rate & Feedback' +
+                '</button>' +
+            '</div>' +
+        '</div>';
+    });
+
+    list.innerHTML = html;
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+    var div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Search and filter
+document.getElementById("searchInput").addEventListener("input", filterUploads);
+document.getElementById("filterPart").addEventListener("change", filterUploads);
+
+function filterUploads() {
+    var search = document.getElementById("searchInput").value.toLowerCase();
+    var part = document.getElementById("filterPart").value;
+
+    var filtered = allUploads.filter(function(upload) {
+        var matchSearch = !search ||
+            (upload.userName && upload.userName.toLowerCase().indexOf(search) !== -1) ||
+            (upload.userEmail && upload.userEmail.toLowerCase().indexOf(search) !== -1);
+
+        var matchPart = part === "all" || upload.cardNumber === parseInt(part);
+
+        return matchSearch && matchPart;
+    });
+
+    renderUploads(filtered);
+}
+
+// Feedback modal
+function openFeedbackModal(index) {
+    currentFeedbackUpload = allUploads[index];
+    feedbackRating = 0;
+
+    var partName = VIDEOS[currentFeedbackUpload.cardNumber] || "Part " + currentFeedbackUpload.cardNumber;
+
+    document.getElementById("feedbackStudentInfo").innerHTML =
+        '<h3>' + escapeHtml(currentFeedbackUpload.userName || "Unknown") + '</h3>' +
+        '<p>' + escapeHtml(currentFeedbackUpload.userEmail || "") + '</p>' +
+        '<p><strong>' + escapeHtml(partName) + '</strong> — ' + escapeHtml(currentFeedbackUpload.fileName || "video.mp4") + '</p>';
+
+    // Google Drive link
+    var driveSearchQuery = encodeURIComponent("MOVEQUEST Video Uploads " + (currentFeedbackUpload.userEmail || "") + " " + partName);
+    var driveLink = currentFeedbackUpload.fileUrl || ("https://drive.google.com/drive/search?q=" + driveSearchQuery);
+    document.getElementById("feedbackVideoLink").innerHTML =
+        '<a href="' + escapeHtml(driveLink) + '" target="_blank" class="drive-link">' +
+            '<i class="fa-brands fa-google-drive"></i> View Video on Google Drive' +
+        '</a>' +
+        '<p class="drive-hint">Folder: MOVEQUEST Video Uploads / ' + escapeHtml(currentFeedbackUpload.userEmail || "") + ' / ' + escapeHtml(partName) + '</p>';
+
+    // Reset form
+    document.getElementById("feedbackComment").value = "";
+    document.getElementById("feedbackRatingText").textContent = "Select a rating";
+    document.getElementById("feedbackExisting").style.display = "none";
+    document.getElementById("feedbackSubmitBtn").disabled = false;
+    document.getElementById("feedbackSubmitBtn").innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
+
+    updateFeedbackStars();
+
+    // Load existing feedback
+    loadExistingFeedback();
+
+    document.getElementById("feedbackModal").classList.add("active");
+}
+
+function closeFeedbackModal() {
+    document.getElementById("feedbackModal").classList.remove("active");
+    currentFeedbackUpload = null;
+}
+
+// Star rating in feedback modal
+document.querySelectorAll("#feedbackStarRating i").forEach(function(star) {
+    star.addEventListener("click", function() {
+        feedbackRating = parseInt(this.getAttribute("data-value"));
+        updateFeedbackStars();
+        var texts = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
+        document.getElementById("feedbackRatingText").textContent = texts[feedbackRating];
+    });
+    star.addEventListener("mouseenter", function() {
+        var val = parseInt(this.getAttribute("data-value"));
+        highlightFeedbackStars(val);
+    });
+});
+
+document.getElementById("feedbackStarRating").addEventListener("mouseleave", function() {
+    updateFeedbackStars();
+});
+
+function highlightFeedbackStars(count) {
+    document.querySelectorAll("#feedbackStarRating i").forEach(function(star) {
+        var val = parseInt(star.getAttribute("data-value"));
+        star.classList.toggle("active", val <= count);
+    });
+}
+
+function updateFeedbackStars() {
+    highlightFeedbackStars(feedbackRating);
+}
+
+// Load existing admin feedback for this upload
+function loadExistingFeedback() {
+    if (!currentFeedbackUpload) return;
+
+    var uploadKey = currentFeedbackUpload.userId + "_part_" + currentFeedbackUpload.cardNumber;
+
+    db.collection("admin_feedback").doc(uploadKey).get().then(function(doc) {
+        if (doc.exists) {
+            var data = doc.data();
+            var existingDiv = document.getElementById("feedbackExisting");
+            var contentDiv = document.getElementById("feedbackExistingContent");
+
+            var starsHtml = "";
+            for (var i = 1; i <= 5; i++) {
+                starsHtml += '<i class="fa-solid fa-star' + (i <= (data.rating || 0) ? ' active' : '') + '"></i>';
+            }
+
+            var date = data.feedbackAt ? data.feedbackAt.toDate().toLocaleDateString() : "";
+
+            contentDiv.innerHTML =
+                '<div class="existing-feedback-card">' +
+                    '<div class="existing-feedback-stars">' + starsHtml + '</div>' +
+                    '<p>' + escapeHtml(data.comment || "No comment") + '</p>' +
+                    '<span class="existing-feedback-date">' + date + '</span>' +
+                '</div>';
+
+            existingDiv.style.display = "block";
+
+            // Pre-fill the form with existing values
+            feedbackRating = data.rating || 0;
+            updateFeedbackStars();
+            var texts = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
+            document.getElementById("feedbackRatingText").textContent = feedbackRating > 0 ? texts[feedbackRating] : "Select a rating";
+            document.getElementById("feedbackComment").value = data.comment || "";
+        }
+    });
+}
+
+// Submit feedback
+function submitFeedback() {
+    if (!currentFeedbackUpload || !currentUser) return;
+
+    var comment = document.getElementById("feedbackComment").value.trim();
+    if (feedbackRating === 0) {
+        alert("Please select a rating.");
+        return;
+    }
+
+    var btn = document.getElementById("feedbackSubmitBtn");
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+    var uploadKey = currentFeedbackUpload.userId + "_part_" + currentFeedbackUpload.cardNumber;
+
+    db.collection("admin_feedback").doc(uploadKey).set({
+        studentId: currentFeedbackUpload.userId,
+        studentName: currentFeedbackUpload.userName || "Unknown",
+        studentEmail: currentFeedbackUpload.userEmail || "",
+        cardNumber: currentFeedbackUpload.cardNumber,
+        fileName: currentFeedbackUpload.fileName || "",
+        rating: feedbackRating,
+        comment: comment,
+        adminId: currentUser.uid,
+        adminName: currentUser.displayName || "Teacher",
+        feedbackAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(function() {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Saved';
+        setTimeout(closeFeedbackModal, 1500);
+    }).catch(function(error) {
+        alert("Error saving feedback: " + error.message);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
+    });
+}
+</script>
+
+</body>
+
+</html>
