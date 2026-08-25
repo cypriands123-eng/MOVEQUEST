@@ -69,7 +69,7 @@
 
 <h1><i class="fa-solid fa-shield-halved"></i> Teacher Panel</h1>
 
-<p>Review student video submissions, provide ratings and feedback.</p>
+<p>Review student submissions and monitor quiz performance.</p>
 
 </div>
 
@@ -106,6 +106,26 @@
 </div>
 
 </div>
+
+<!-- Tab Navigation -->
+<div class="admin-tabs">
+
+<button class="admin-tab active" data-tab="uploads" onclick="switchTab('uploads')">
+
+<i class="fa-solid fa-video"></i> Video Submissions
+
+</button>
+
+<button class="admin-tab" data-tab="statistics" onclick="switchTab('statistics')">
+
+<i class="fa-solid fa-chart-bar"></i> Quiz Statistics
+
+</button>
+
+</div>
+
+<!-- TAB 1: Video Submissions -->
+<div class="admin-tab-panel active" id="tab-uploads">
 
 <!-- Filter Bar -->
 <div class="admin-filter-bar">
@@ -146,6 +166,194 @@
 <h3>No uploads yet</h3>
 
 <p>Student video submissions will appear here.</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TAB 2: Quiz Statistics -->
+<div class="admin-tab-panel" id="tab-statistics">
+
+<!-- Quiz Summary Stats -->
+<div class="quiz-stats-summary" id="quizStatsSummary">
+
+<div class="quiz-stat-card">
+
+<div class="quiz-stat-icon"><i class="fa-solid fa-users"></i></div>
+
+<div>
+
+<h3 id="quizTotalStudents">0</h3>
+
+<p>Total Students</p>
+
+</div>
+
+</div>
+
+<div class="quiz-stat-card">
+
+<div class="quiz-stat-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+
+<div>
+
+<h3 id="quizTotalAttempts">0</h3>
+
+<p>Total Quizzes Taken</p>
+
+</div>
+
+</div>
+
+<div class="quiz-stat-card">
+
+<div class="quiz-stat-icon"><i class="fa-solid fa-percent"></i></div>
+
+<div>
+
+<h3 id="quizPassRate">0%</h3>
+
+<p>Overall Pass Rate</p>
+
+</div>
+
+</div>
+
+<div class="quiz-stat-card">
+
+<div class="quiz-stat-icon"><i class="fa-solid fa-star"></i></div>
+
+<div>
+
+<h3 id="quizAvgScore">0%</h3>
+
+<p>Average Score</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Per-Lesson Breakdown -->
+<h2 class="stats-section-title"><i class="fa-solid fa-chart-pie"></i> Per-Lesson Performance</h2>
+
+<div class="lesson-stats-grid" id="lessonStatsGrid">
+
+<p class="stats-loading">Loading lesson statistics...</p>
+
+</div>
+
+<!-- Student Search & Filter -->
+<div class="admin-filter-bar" style="margin-top:35px;">
+
+<div class="admin-search">
+
+<i class="fa-solid fa-search"></i>
+
+<input type="text" id="quizSearchInput" placeholder="Search by student name or email...">
+
+</div>
+
+<select id="quizLessonFilter">
+
+<option value="all">All Lessons</option>
+
+<option value="1">Lesson 1</option>
+
+<option value="2">Lesson 2</option>
+
+<option value="3">Lesson 3</option>
+
+<option value="4">Lesson 4</option>
+
+<option value="5">Lesson 5</option>
+
+<option value="6">Lesson 6</option>
+
+<option value="7">Lesson 7</option>
+
+</select>
+
+<select id="quizStatusFilter">
+
+<option value="all">All Status</option>
+
+<option value="passed">Passed</option>
+
+<option value="failed">Failed</option>
+
+<option value="not-started">Not Started</option>
+
+</select>
+
+</div>
+
+<!-- Student Scores Table -->
+<div class="quiz-table-wrapper">
+
+<table class="quiz-table" id="quizTable">
+
+<thead>
+
+<tr>
+
+<th>Student</th>
+
+<th>Email</th>
+
+<th>Level</th>
+
+<th>Lessons Done</th>
+
+<th>Quizzes Passed</th>
+
+<th>Avg Score</th>
+
+<th>Points</th>
+
+<th>Details</th>
+
+</tr>
+
+</thead>
+
+<tbody id="quizTableBody">
+
+<tr><td colspan="8" class="stats-loading">Loading student data...</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- Student Detail Modal -->
+<div class="upload-modal" id="studentDetailModal">
+
+<div class="upload-modal-content" style="max-width:700px;">
+
+<div class="upload-modal-header">
+
+<h3><i class="fa-solid fa-chart-line"></i> Student Quiz Details</h3>
+
+<button class="upload-modal-close" onclick="closeStudentDetail()">&times;</button>
+
+</div>
+
+<div class="upload-modal-body" id="studentDetailBody">
+
+</div>
+
+<div class="upload-modal-footer">
+
+<button class="upload-cancel-btn" onclick="closeStudentDetail()">Close</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -539,6 +747,295 @@ function submitFeedback() {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
     });
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+
+function switchTab(tabName) {
+    document.querySelectorAll(".admin-tab").forEach(function(t) {
+        t.classList.toggle("active", t.getAttribute("data-tab") === tabName);
+    });
+    document.querySelectorAll(".admin-tab-panel").forEach(function(p) {
+        p.classList.toggle("active", p.id === "tab-" + tabName);
+    });
+    if (tabName === "statistics" && !quizStatsLoaded) {
+        loadQuizStatistics();
+    }
+}
+
+// ============================================================
+// QUIZ STATISTICS
+// ============================================================
+
+var quizStatsLoaded = false;
+var allStudentsData = [];
+
+var LESSON_NAMES = {
+    1: "Body Posture",
+    2: "Rhythm & Musicality",
+    3: "Coordination",
+    4: "Basic Footwork",
+    5: "Choreographic Understanding",
+    6: "Guided Practice",
+    7: "Final Dance Challenge"
+};
+
+function loadQuizStatistics() {
+    db.collection("users").get().then(function(snapshot) {
+        allStudentsData = [];
+        var totalAttempts = 0;
+        var totalPassed = 0;
+        var totalScoreSum = 0;
+        var totalScoreCount = 0;
+        var lessonStats = {};
+
+        for (var i = 1; i <= 7; i++) {
+            lessonStats[i] = { attempted: 0, passed: 0, scoreSum: 0, totalSum: 0 };
+        }
+
+        snapshot.forEach(function(doc) {
+            var data = doc.data();
+            if (data.isAdmin) return;
+
+            var progress = data.progress || {};
+            var lessons = progress.lessons || {};
+            var studentLessons = {};
+            var studentPassed = 0;
+            var studentScoreSum = 0;
+            var studentScoreCount = 0;
+
+            for (var j = 1; j <= 7; j++) {
+                var l = lessons[j] || { quizDone: false, score: 0, total: 0 };
+                studentLessons[j] = l;
+
+                if (l.total > 0) {
+                    totalAttempts++;
+                    lessonStats[j].attempted++;
+                    lessonStats[j].scoreSum += l.score;
+                    lessonStats[j].totalSum += l.total;
+                    studentScoreSum += l.score;
+                    studentScoreCount += l.total;
+                    totalScoreSum += l.score;
+                    totalScoreCount += l.total;
+
+                    if (l.quizDone) {
+                        totalPassed++;
+                        lessonStats[j].passed++;
+                        studentPassed++;
+                    }
+                }
+            }
+
+            allStudentsData.push({
+                id: doc.id,
+                name: data.name || "Unknown",
+                email: data.email || "",
+                level: progress.currentLevel || "Beginner",
+                lessonsCompleted: progress.lessonsCompleted || 0,
+                quizzesPassed: progress.quizzesPassed || 0,
+                points: progress.points || 0,
+                badges: progress.badges || [],
+                lessons: studentLessons,
+                avgScore: studentScoreCount > 0 ? Math.round((studentScoreSum / studentScoreCount) * 100) : 0
+            });
+        });
+
+        // Update summary stats
+        document.getElementById("quizTotalStudents").textContent = allStudentsData.length;
+        document.getElementById("quizTotalAttempts").textContent = totalAttempts;
+        document.getElementById("quizPassRate").textContent = totalAttempts > 0 ? Math.round((totalPassed / totalAttempts) * 100) + "%" : "0%";
+        document.getElementById("quizAvgScore").textContent = totalScoreCount > 0 ? Math.round((totalScoreSum / totalScoreCount) * 100) + "%" : "0%";
+
+        // Render per-lesson breakdown
+        renderLessonStats(lessonStats);
+
+        // Render student table
+        renderQuizTable(allStudentsData);
+
+        quizStatsLoaded = true;
+    }).catch(function(error) {
+        console.error("Error loading quiz statistics:", error);
+    });
+}
+
+function renderLessonStats(lessonStats) {
+    var grid = document.getElementById("lessonStatsGrid");
+    var html = "";
+
+    for (var i = 1; i <= 7; i++) {
+        var s = lessonStats[i];
+        var passRate = s.attempted > 0 ? Math.round((s.passed / s.attempted) * 100) : 0;
+        var avgScore = s.totalSum > 0 ? Math.round((s.scoreSum / s.totalSum) * 100) : 0;
+
+        html += '<div class="lesson-stat-card">' +
+            '<div class="lesson-stat-header">' +
+                '<span class="lesson-stat-number">L' + i + '</span>' +
+                '<h4>' + LESSON_NAMES[i] + '</h4>' +
+            '</div>' +
+            '<div class="lesson-stat-body">' +
+                '<div class="lesson-stat-row">' +
+                    '<span>Attempts</span>' +
+                    '<strong>' + s.attempted + '</strong>' +
+                '</div>' +
+                '<div class="lesson-stat-row">' +
+                    '<span>Passed</span>' +
+                    '<strong>' + s.passed + '</strong>' +
+                '</div>' +
+                '<div class="lesson-stat-row">' +
+                    '<span>Pass Rate</span>' +
+                    '<strong class="' + (passRate >= 75 ? 'text-success' : passRate >= 50 ? 'text-warning' : 'text-danger') + '">' + passRate + '%</strong>' +
+                '</div>' +
+                '<div class="lesson-stat-bar-wrap">' +
+                    '<div class="lesson-stat-bar">' +
+                        '<div class="lesson-stat-bar-fill" style="width:' + avgScore + '%"></div>' +
+                    '</div>' +
+                    '<span class="lesson-stat-bar-label">Avg: ' + avgScore + '%</span>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    }
+
+    grid.innerHTML = html;
+}
+
+function renderQuizTable(students) {
+    var tbody = document.getElementById("quizTableBody");
+
+    if (students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="stats-loading">No students found.</td></tr>';
+        return;
+    }
+
+    var html = "";
+    students.forEach(function(s, idx) {
+        var levelClass = s.level === "Advanced" ? "level-advanced" : s.level === "Intermediate" ? "level-intermediate" : "level-beginner";
+
+        html += '<tr>' +
+            '<td><strong>' + escapeHtml(s.name) + '</strong></td>' +
+            '<td>' + escapeHtml(s.email) + '</td>' +
+            '<td><span class="level-badge ' + levelClass + '">' + s.level + '</span></td>' +
+            '<td>' + s.lessonsCompleted + ' / 7</td>' +
+            '<td>' + s.quizzesPassed + ' / 7</td>' +
+            '<td><strong>' + s.avgScore + '%</strong></td>' +
+            '<td>' + s.points + '</td>' +
+            '<td><button class="admin-feedback-btn" onclick="openStudentDetail(' + idx + ')"><i class="fa-solid fa-eye"></i> View</button></td>' +
+        '</tr>';
+    });
+
+    tbody.innerHTML = html;
+}
+
+// Quiz table search and filter
+document.getElementById("quizSearchInput").addEventListener("input", filterQuizTable);
+document.getElementById("quizLessonFilter").addEventListener("change", filterQuizTable);
+document.getElementById("quizStatusFilter").addEventListener("change", filterQuizTable);
+
+function filterQuizTable() {
+    var search = document.getElementById("quizSearchInput").value.toLowerCase();
+    var lessonFilter = document.getElementById("quizLessonFilter").value;
+    var statusFilter = document.getElementById("quizStatusFilter").value;
+
+    var filtered = allStudentsData.filter(function(s) {
+        var matchSearch = !search ||
+            s.name.toLowerCase().indexOf(search) !== -1 ||
+            s.email.toLowerCase().indexOf(search) !== -1;
+
+        var matchLesson = true;
+        if (lessonFilter !== "all") {
+            var ln = parseInt(lessonFilter);
+            var l = s.lessons[ln];
+            if (statusFilter === "passed") {
+                matchLesson = l && l.quizDone;
+            } else if (statusFilter === "failed") {
+                matchLesson = l && l.total > 0 && !l.quizDone;
+            } else if (statusFilter === "not-started") {
+                matchLesson = !l || l.total === 0;
+            }
+        } else if (statusFilter !== "all") {
+            matchLesson = false;
+            for (var k = 1; k <= 7; k++) {
+                var lk = s.lessons[k];
+                if (statusFilter === "passed" && lk && lk.quizDone) { matchLesson = true; break; }
+                if (statusFilter === "failed" && lk && lk.total > 0 && !lk.quizDone) { matchLesson = true; break; }
+                if (statusFilter === "not-started" && (!lk || lk.total === 0)) { matchLesson = true; break; }
+            }
+        }
+
+        return matchSearch && matchLesson;
+    });
+
+    renderQuizTable(filtered);
+}
+
+// Student detail modal
+function openStudentDetail(idx) {
+    var s = allStudentsData[idx];
+    var body = document.getElementById("studentDetailBody");
+
+    var html = '<div class="feedback-student-info">' +
+        '<h3>' + escapeHtml(s.name) + '</h3>' +
+        '<p>' + escapeHtml(s.email) + '</p>' +
+        '<p><strong>Level:</strong> ' + s.level + ' &nbsp;|&nbsp; <strong>Points:</strong> ' + s.points + ' &nbsp;|&nbsp; <strong>Badges:</strong> ' + s.badges.length + '</p>' +
+    '</div>';
+
+    html += '<div class="detail-lessons-grid">';
+
+    for (var i = 1; i <= 7; i++) {
+        var l = s.lessons[i];
+        var status, statusClass, scoreText;
+
+        if (!l || l.total === 0) {
+            status = "Not Started";
+            statusClass = "status-not-started";
+            scoreText = "—";
+        } else if (l.quizDone) {
+            status = "Passed";
+            statusClass = "status-passed";
+            scoreText = l.score + " / " + l.total + " (" + Math.round((l.score / l.total) * 100) + "%)";
+        } else {
+            status = "Failed";
+            statusClass = "status-failed";
+            scoreText = l.score + " / " + l.total + " (" + Math.round((l.score / l.total) * 100) + "%)";
+        }
+
+        var barWidth = (l && l.total > 0) ? Math.round((l.score / l.total) * 100) : 0;
+        var barColor = l && l.quizDone ? "var(--success)" : (l && l.total > 0 ? "var(--danger)" : "var(--border)");
+
+        html += '<div class="detail-lesson-card">' +
+            '<div class="detail-lesson-header">' +
+                '<span class="detail-lesson-num">Lesson ' + i + '</span>' +
+                '<span class="detail-lesson-status ' + statusClass + '">' + status + '</span>' +
+            '</div>' +
+            '<h4>' + LESSON_NAMES[i] + '</h4>' +
+            '<p class="detail-score">' + scoreText + '</p>' +
+            '<div class="detail-bar">' +
+                '<div class="detail-bar-fill" style="width:' + barWidth + '%;background:' + barColor + '"></div>' +
+            '</div>' +
+        '</div>';
+    }
+
+    html += '</div>';
+
+    // Badges section
+    if (s.badges.length > 0) {
+        html += '<div class="detail-badges"><h4><i class="fa-solid fa-award"></i> Badges Earned</h4><div class="detail-badge-list">';
+        s.badges.forEach(function(bid) {
+            var b = BADGE_LIST[bid];
+            if (b) {
+                html += '<span class="detail-badge">' + b.icon + ' ' + b.name + '</span>';
+            }
+        });
+        html += '</div></div>';
+    }
+
+    body.innerHTML = html;
+    document.getElementById("studentDetailModal").classList.add("active");
+}
+
+function closeStudentDetail() {
+    document.getElementById("studentDetailModal").classList.remove("active");
 }
 </script>
 
