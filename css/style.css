@@ -1488,21 +1488,23 @@ VIEW ALL LESSONS BUTTON
 
     display:inline-block;
 
-    padding:14px 32px;
+    padding:20px 48px;
 
     background:#fff;
 
     color:var(--primary);
 
-    font-weight:600;
+    font-weight:700;
 
-    font-size:15px;
+    font-size:18px;
 
     border-radius:var(--radius-lg);
 
     text-decoration:none;
 
     transition:var(--transition);
+
+    box-shadow:var(--shadow-sm);
 
 }
 
@@ -4353,6 +4355,22 @@ VIEW ALL LESSONS BUTTON
     backdrop-filter:blur(10px);
 
     border:1px solid rgba(255,255,255,.2);
+
+}
+
+.arsc-hero-tagline{
+
+    font-size:20px;
+
+    font-weight:600;
+
+    font-style:italic;
+
+    color:rgba(255,255,1,.95);
+
+    margin-bottom:14px;
+
+    letter-spacing:.3px;
 
 }
 
@@ -7667,6 +7685,396 @@ VIEW ALL LESSONS BUTTON
     .detail-lessons-grid{
 
         grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+/* ==========================================================
+   ARSC CLAP CARDS
+   ========================================================== */
+
+.clap-section{
+
+    width:90%;
+    max-width:1250px;
+    margin:auto;
+    padding:60px 0 90px;
+
+}
+
+.clap-header{
+
+    text-align:center;
+    margin-bottom:40px;
+
+}
+
+.clap-header h2{
+
+    font-size:38px;
+    color:var(--primary-dark);
+    margin-bottom:12px;
+    font-weight:700;
+
+}
+
+.clap-header p{
+
+    color:var(--text-light);
+    font-size:17px;
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+
+}
+
+/* Clap Explanation Video */
+
+.clap-video-wrapper{
+
+    max-width:800px;
+    margin:0 auto 45px;
+    text-align:center;
+
+}
+
+.clap-video-wrapper h3{
+
+    font-size:22px;
+    color:var(--primary-dark);
+    margin-bottom:20px;
+    font-weight:700;
+
+}
+
+.clap-video-wrapper h3 i{
+
+    color:var(--secondary);
+    margin-right:8px;
+
+}
+
+/* Language Filter Tabs */
+
+.clap-filters{
+
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:45px;
+    flex-wrap:wrap;
+
+}
+
+.clap-filter-btn{
+
+    padding:10px 28px;
+    border-radius:50px;
+    background:#fff;
+    color:var(--text);
+    font-weight:600;
+    font-size:14px;
+    border:2px solid var(--border);
+    transition:var(--transition);
+    cursor:pointer;
+
+}
+
+.clap-filter-btn:hover{
+
+    border-color:var(--primary);
+    color:var(--primary);
+    background:#EDF5FD;
+
+}
+
+.clap-filter-btn.active{
+
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+
+}
+
+/* Clap Cards Grid */
+
+.clap-grid{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+
+}
+
+.clap-card{
+
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:var(--shadow-sm);
+    transition:var(--transition);
+    text-align:center;
+    padding-bottom:28px;
+
+}
+
+.clap-card:hover{
+
+    transform:translateY(-8px);
+    box-shadow:var(--shadow-lg);
+
+}
+
+.clap-card.hidden{
+
+    display:none;
+
+}
+
+/* Card Image */
+
+.clap-card-image{
+
+    width:100%;
+    height:200px;
+    overflow:hidden;
+
+}
+
+.clap-card-image img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+
+}
+
+.clap-card:hover .clap-card-image img{
+
+    transform:scale(1.05);
+
+}
+
+/* Play Button */
+
+.clap-play-btn{
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:20px auto 0;
+    padding:12px 32px;
+    background:linear-gradient(135deg,#2E7D32,#43A047);
+    color:#fff;
+    border:none;
+    border-radius:50px;
+    font-size:15px;
+    font-weight:600;
+    font-family:'Poppins',sans-serif;
+    cursor:pointer;
+    transition:var(--transition);
+    box-shadow:0 4px 15px rgba(46,125,50,.3);
+
+}
+
+.clap-play-btn:hover{
+
+    transform:translateY(-3px);
+    box-shadow:0 6px 20px rgba(46,125,50,.4);
+    background:linear-gradient(135deg,#1B5E20,#2E7D32);
+
+}
+
+.clap-play-btn.playing{
+
+    background:linear-gradient(135deg,#E65100,#FF8F00);
+    box-shadow:0 4px 15px rgba(230,81,0,.3);
+
+}
+
+.clap-play-btn.playing:hover{
+
+    box-shadow:0 6px 20px rgba(230,81,0,.4);
+
+}
+
+.clap-play-btn i{
+
+    font-size:16px;
+
+}
+
+/* Pulse animation when playing */
+
+@keyframes clapPulse{
+
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.06); }
+
+}
+
+.clap-play-btn.playing{
+
+    animation:clapPulse 1.2s ease-in-out infinite;
+
+}
+
+/* Phrase Text */
+
+.clap-phrase{
+
+    font-size:20px;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin:18px 20px 12px;
+    line-height:1.4;
+
+}
+
+/* Language Badge */
+
+.clap-lang-badge{
+
+    display:inline-block;
+    padding:6px 18px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+
+}
+
+.clap-lang-badge.english{
+
+    background:#E3F2FD;
+    color:#1565C0;
+
+}
+
+.clap-lang-badge.tagalog{
+
+    background:#E8F5E9;
+    color:#2E7D32;
+
+}
+
+.clap-lang-badge.chinese{
+
+    background:#FFEBEE;
+    color:#C62828;
+
+}
+
+.clap-lang-badge.spanish{
+
+    background:#FFF3E0;
+    color:#E65100;
+
+}
+
+.clap-lang-badge.japanese{
+
+    background:#FCE4EC;
+    color:#AD1457;
+
+}
+
+.clap-lang-badge.french{
+
+    background:#E8EAF6;
+    color:#283593;
+
+}
+
+.clap-lang-badge.bisaya{
+
+    background:#E0F2F1;
+    color:#00695C;
+
+}
+
+.clap-lang-badge.batangueno{
+
+    background:#FFF8E1;
+    color:#F57F17;
+
+}
+
+.clap-lang-badge.muslim{
+
+    background:#F3E5F5;
+    color:#7B1FA2;
+
+}
+
+.clap-lang-badge.waray{
+
+    background:#E0F7FA;
+    color:#00838F;
+
+}
+
+.clap-lang-badge.ilokano{
+
+    background:#F1F8E9;
+    color:#558B2F;
+
+}
+
+.clap-lang-badge.cuyonin{
+
+    background:#FFF3E0;
+    color:#BF360C;
+
+}
+
+.clap-lang-badge.ilonggo{
+
+    background:#EDE7F6;
+    color:#4527A0;
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+    .clap-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .clap-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .clap-header h2{
+
+        font-size:28px;
+
+    }
+
+    .clap-filter-btn{
+
+        padding:7px 16px;
+        font-size:12px;
+
+    }
+
+    .clap-filters{
+
+        gap:8px;
 
     }
 
