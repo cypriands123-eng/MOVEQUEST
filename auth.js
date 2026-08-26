@@ -295,6 +295,82 @@ function markQuizCompleted(lessonNumber, score, totalQuestions) {
 }
 
 // ============================================================
+// MARK VIDEO LESSON COMPLETED (Lessons 6 & 7)
+// ============================================================
+
+function markVideoCompleted(lessonNumber) {
+    const user = auth.currentUser;
+    if (!user) return Promise.reject("Not logged in");
+
+    const userRef = db.collection("users").doc(user.uid);
+
+    return userRef.get().then((doc) => {
+        if (!doc.exists) return null;
+
+        const data = doc.data();
+        const progress = data.progress || {};
+        const completed = progress.lessonsCompleted || 0;
+        const lessons = progress.lessons || {};
+
+        // Ensure lesson entry exists
+        if (!lessons[lessonNumber]) {
+            lessons[lessonNumber] = { quizDone: false, score: 0, total: 0 };
+        }
+
+        // Already completed
+        if (lessons[lessonNumber].quizDone) {
+            return { alreadyDone: true };
+        }
+
+        // Only complete if previous lessons are done
+        if (lessonNumber !== completed + 1) {
+            return { alreadyDone: false, skipped: true };
+        }
+
+        const newCompleted = completed + 1;
+        let points = (progress.points || 0) + 100;
+        let badges = progress.badges ? [...progress.badges] : [];
+
+        lessons[lessonNumber] = {
+            quizDone: true,
+            score: 1,
+            total: 1
+        };
+
+        function addBadge(id) {
+            if (!badges.includes(id)) badges.push(id);
+        }
+
+        addBadge("quiz_whiz");
+        if (newCompleted >= 3) addBadge("dancer");
+        if (newCompleted >= 4) addBadge("halfway");
+        if (newCompleted >= 5) addBadge("dedicated");
+        if (newCompleted >= 7) {
+            addBadge("champion");
+            addBadge("all_quizzes");
+            points += 200;
+        }
+
+        let level = "Beginner";
+        if (newCompleted >= 4) level = "Intermediate";
+        if (newCompleted >= 7) level = "Advanced";
+
+        return userRef.update({
+            progress: {
+                lessonsCompleted: newCompleted,
+                quizzesPassed: (progress.quizzesPassed || 0) + 1,
+                currentLevel: level,
+                points: points,
+                badges: badges,
+                lessons: lessons
+            }
+        }).then(() => {
+            return { completed: true };
+        });
+    });
+}
+
+// ============================================================
 // SPLASH SCREEN HELPERS
 // ============================================================
 

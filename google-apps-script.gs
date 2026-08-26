@@ -28,7 +28,14 @@ function doPost(e) {
     var studentFolder = getOrCreateFolder(rootFolder, userEmail);
     
     // Create submission folder name based on card number
-    var submissionFolderName = "ARSC Animation Song Part " + cardNumber;
+    var submissionFolderName;
+    if (cardNumber == 106) {
+      submissionFolderName = "Lesson 6 - Guided Practice";
+    } else if (cardNumber == 107) {
+      submissionFolderName = "Lesson 7 - Final Dance Challenge";
+    } else {
+      submissionFolderName = "ARSC Animation Song Part " + cardNumber;
+    }
     var submissionFolder = getOrCreateFolder(studentFolder, submissionFolderName);
 
     // Decode base64 to blob
@@ -65,7 +72,15 @@ function doGet(e) {
     try {
       var rootFolder = getOrCreateFolder(DriveApp.getRootFolder(), "MOVEQUEST Video Uploads");
       var studentFolder = getOrCreateFolder(rootFolder, params.email);
-      var submissionFolderName = "ARSC Animation Song Part " + params.cardNumber;
+      var cardNum = parseInt(params.cardNumber);
+      var submissionFolderName;
+      if (cardNum == 106) {
+        submissionFolderName = "Lesson 6 - Guided Practice";
+      } else if (cardNum == 107) {
+        submissionFolderName = "Lesson 7 - Final Dance Challenge";
+      } else {
+        submissionFolderName = "ARSC Animation Song Part " + params.cardNumber;
+      }
       var submissionFolder = getOrCreateFolder(studentFolder, submissionFolderName);
 
       var files = submissionFolder.getFiles();

@@ -176,21 +176,21 @@ Lesson Progress
 
 </div>
 
-<div class="motivation-card">
+<div class="motivation-card" id="motivationCard">
 
-<h2>
+<h2 id="motivationTitle">
 
 Keep Going! 💙
 
 </h2>
 
-<p>
+<p id="motivationText">
 
 Every lesson completed brings you one step closer to becoming a better dancer.
 
 </p>
 
-<a href="lessons.html">
+<a href="lessons.html" id="motivationBtn">
 
 Continue Learning
 
@@ -281,6 +281,15 @@ requireAuth().then((user) => {
                     statusEl.textContent = "Locked";
                     statusEl.style.color = "var(--text-light)";
                 }
+            }
+
+            // Update motivation card based on completion
+            if (completed >= 7) {
+                document.getElementById("motivationTitle").textContent = "Congratulations! You Did It!";
+                document.getElementById("motivationText").textContent = "You have completed all 7 MOVEQUEST lessons. You've improved your posture, rhythm, coordination, footwork, choreography, and performance skills. Amazing work!";
+                document.getElementById("motivationBtn").textContent = "Back to Dashboard";
+                document.getElementById("motivationBtn").href = "dashboard.html";
+                document.getElementById("motivationCard").classList.add("completed-card");
             }
         }
         hideSplash();

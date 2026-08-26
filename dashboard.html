@@ -258,7 +258,11 @@ requireAuth().then((user) => {
                     const lessonNum = parseInt(course.getAttribute("data-lesson"));
                     const link = course.querySelector("a");
 
-                    if (lessonNum <= completed + 1) {
+                    if (lessonNum <= completed) {
+                        course.classList.remove("locked");
+                        link.textContent = "Review Lesson";
+                        link.style.background = "var(--success)";
+                    } else if (lessonNum === completed + 1) {
                         course.classList.remove("locked");
                         link.textContent = "Start Lesson";
                     } else {

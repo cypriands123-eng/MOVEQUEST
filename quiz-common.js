@@ -4,14 +4,27 @@
 const config = QUIZ_CONFIG[LESSON_NUMBER];
 let currentUser = null;
 
+function shuffleArray(arr) {
+    var shuffled = arr.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+    }
+    return shuffled;
+}
+
 function buildQuiz() {
     const form = document.getElementById("quizForm");
     let html = "";
     config.questions.forEach(function(q, i) {
+        var qName = "q" + (i + 1);
+        var shuffledOptions = shuffleArray(q.options);
         html += '<div class="question">';
         html += '<h3>' + (i + 1) + '. ' + q.label + '</h3>';
-        q.options.forEach(function(opt) {
-            html += '<label><input type="radio" name="' + q.entryId + '" value="' + opt + '"> ' + opt + '</label><br>';
+        shuffledOptions.forEach(function(opt) {
+            html += '<label><input type="radio" name="' + qName + '" value="' + opt + '"> ' + opt + '</label><br>';
         });
         html += '</div>';
     });
@@ -33,8 +46,8 @@ function submitQuiz() {
     const resultTitle = document.getElementById("resultTitle");
     const resultMsg = document.getElementById("resultMessage");
 
-    const unanswered = config.questions.filter(function(q) {
-        return !document.querySelector('input[name="' + q.entryId + '"]:checked');
+    const unanswered = config.questions.filter(function(q, i) {
+        return !document.querySelector('input[name="q' + (i + 1) + '"]:checked');
     });
     if (unanswered.length > 0) { alert("Please answer all questions before submitting."); return; }
 
@@ -43,25 +56,9 @@ function submitQuiz() {
 
     let score = 0;
     const total = config.questions.length;
-    config.questions.forEach(function(q) {
-        const selected = document.querySelector('input[name="' + q.entryId + '"]:checked');
+    config.questions.forEach(function(q, i) {
+        const selected = document.querySelector('input[name="q' + (i + 1) + '"]:checked');
         if (selected && selected.value === q.answer) score++;
-    });
-
-    var params = new URLSearchParams();
-    config.questions.forEach(function(q) {
-        var selected = document.querySelector('input[name="' + q.entryId + '"]:checked');
-        if (selected) params.append(q.entryId, selected.value);
-    });
-    if (config.scoreEntry) params.append(config.scoreEntry, score + " / " + total);
-    params.append("fvv", "1");
-    params.append("pageHistory", "0");
-    params.append("fbzx", Math.random().toString());
-
-    fetch(config.formUrl, {
-        method: "POST",
-        body: params,
-        mode: "no-cors"
     });
 
     markQuizCompleted(LESSON_NUMBER, score, total).then(function(res) {

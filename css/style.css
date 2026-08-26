@@ -1672,6 +1672,20 @@ VIEW ALL LESSONS BUTTON
 
 }
 
+.lesson-item>a.completed-btn{
+
+    background:var(--success);
+
+}
+
+.lesson-item>a.completed-btn:hover{
+
+    background:#0d9668;
+
+    transform:translateY(-3px);
+
+}
+
 
 /* ==========================================================
    LESSON DETAIL PAGES
@@ -2837,6 +2851,18 @@ VIEW ALL LESSONS BUTTON
     transform:translateY(-3px);
 
     box-shadow:var(--shadow-lg);
+
+}
+
+.motivation-card.completed-card{
+
+    background:linear-gradient(135deg,#0d9668,var(--success));
+
+}
+
+.motivation-card.completed-card h2{
+
+    font-size:34px;
 
 }
 
