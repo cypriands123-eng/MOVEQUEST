@@ -14,6 +14,8 @@
 
 <body>
 
+<div class="nav-overlay" id="navOverlay"></div>
+
 <div class="splash-screen" id="splashScreen">
     <div class="splash-logo">
         <img src="images/logo.png" alt="MOVEQUEST">
@@ -38,6 +40,7 @@
 <a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
 <a href="#" class="login-btn" id="logoutBtn">Logout</a>
 </nav>
+<button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
 </header>
 
 <section class="quiz-content">
@@ -64,6 +67,26 @@
 <script src="quiz-config.js"></script>
 <script>const LESSON_NUMBER = 3;</script>
 <script src="quiz-common.js"></script>
+
+<script>
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navOverlay = document.getElementById("navOverlay");
+const mainNav = document.querySelector(".main-header nav, .header nav");
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener("click", function() {
+        hamburgerBtn.classList.toggle("active");
+        mainNav.classList.toggle("open");
+        navOverlay.classList.toggle("active");
+        document.body.style.overflow = mainNav.classList.contains("open") ? "hidden" : "";
+    });
+    navOverlay.addEventListener("click", function() {
+        hamburgerBtn.classList.remove("active");
+        mainNav.classList.remove("open");
+        navOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+    });
+}
+</script>
 
 </body>
 </html>

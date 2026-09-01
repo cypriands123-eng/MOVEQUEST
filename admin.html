@@ -23,6 +23,8 @@
 
 <body>
 
+<div class="nav-overlay" id="navOverlay"></div>
+
 <!-- Splash Screen -->
 <div class="splash-screen" id="splashScreen">
     <div class="splash-logo">
@@ -58,6 +60,8 @@
 <a href="#" class="login-btn" id="logoutBtn">Logout</a>
 
 </nav>
+
+<button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
 
 </header>
 
@@ -1042,6 +1046,26 @@ function openStudentDetail(idx) {
 
 function closeStudentDetail() {
     document.getElementById("studentDetailModal").classList.remove("active");
+}
+</script>
+
+<script>
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navOverlay = document.getElementById("navOverlay");
+const mainNav = document.querySelector(".main-header nav, .header nav");
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener("click", function() {
+        hamburgerBtn.classList.toggle("active");
+        mainNav.classList.toggle("open");
+        navOverlay.classList.toggle("active");
+        document.body.style.overflow = mainNav.classList.contains("open") ? "hidden" : "";
+    });
+    navOverlay.addEventListener("click", function() {
+        hamburgerBtn.classList.remove("active");
+        mainNav.classList.remove("open");
+        navOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+    });
 }
 </script>
 

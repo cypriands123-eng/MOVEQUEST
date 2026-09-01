@@ -1970,6 +1970,62 @@ VIEW ALL LESSONS BUTTON
    AUTH PAGES (LOGIN / REGISTER)
 ========================================================== */
 
+.auth-back-home{
+
+    position:fixed;
+
+    top:20px;
+
+    left:24px;
+
+    z-index:100;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 22px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(8px);
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    font-size:14px;
+
+    border-radius:50px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+    text-decoration:none;
+
+}
+
+.auth-back-home:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.auth-back-home i{
+
+    font-size:13px;
+
+}
+
 .auth-container{
 
     display:grid;
@@ -8039,11 +8095,205 @@ VIEW ALL LESSONS BUTTON
 
 }
 
-/* Responsive */
+/* ==========================================================
+   HAMBURGER MENU BUTTON
+   ========================================================== */
 
-@media(max-width:992px){
+.hamburger{
 
-    .clap-grid{
+    display:none;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:5px;
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:8px;
+
+    z-index:1001;
+
+}
+
+.hamburger span{
+
+    display:block;
+
+    width:26px;
+
+    height:3px;
+
+    background:var(--text);
+
+    border-radius:3px;
+
+    transition:.3s;
+
+}
+
+.hamburger.active span:nth-child(1){
+
+    transform:rotate(45deg) translate(5px,6px);
+
+}
+
+.hamburger.active span:nth-child(2){
+
+    opacity:0;
+
+}
+
+.hamburger.active span:nth-child(3){
+
+    transform:rotate(-45deg) translate(5px,-6px);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — TABLETS (max-width: 1024px)
+   ========================================================== */
+
+@media(max-width:1024px){
+
+    /* Hero */
+    .hero{
+
+        gap:40px;
+
+    }
+
+    .hero-left h1{
+
+        font-size:44px;
+
+    }
+
+    /* Statistics */
+    .statistics{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* Features */
+    .feature-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* Featured Lessons */
+    .lesson-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* Process */
+    .process-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+    /* Footer */
+    .footer-grid{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    /* Dashboard */
+    .dashboard-stats{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* Progress */
+    .progress-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* Profile */
+    .achievement-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .badge-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* About */
+    .about-info-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    /* Contact */
+    .contact-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .contact-split{
+
+        grid-template-columns:1fr;
+
+    }
+
+    /* Auth split on landing */
+    .auth-split{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .auth-split-card{
+
+        max-width:100%;
+
+    }
+
+    .auth-split-divider{
+
+        padding:15px 0;
+
+    }
+
+    .auth-split-divider span{
+
+        width:auto;
+
+        padding:8px 20px;
+
+    }
+
+    /* ARSC values */
+    .arsc-values-grid{
 
         grid-template-columns:repeat(2,1fr);
 
@@ -8051,11 +8301,834 @@ VIEW ALL LESSONS BUTTON
 
 }
 
-@media(max-width:600px){
 
-    .clap-grid{
+/* ==========================================================
+   RESPONSIVE — SMALL TABLETS (max-width: 768px)
+   ========================================================== */
+
+@media(max-width:768px){
+
+    /* Hamburger visible */
+    .hamburger{
+
+        display:flex;
+
+    }
+
+    /* Header / Nav */
+    .header,
+    .main-header{
+
+        padding:14px 5%;
+
+        position:relative;
+
+    }
+
+    .header nav,
+    .main-header nav{
+
+        position:fixed;
+
+        top:0;
+
+        right:-100%;
+
+        width:280px;
+
+        height:100vh;
+
+        background:#fff;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        padding:90px 30px 30px;
+
+        gap:6px;
+
+        box-shadow:-5px 0 25px rgba(0,0,0,.15);
+
+        transition:right .35s ease;
+
+        z-index:1000;
+
+        overflow-y:auto;
+
+    }
+
+    .header nav.open,
+    .main-header nav.open{
+
+        right:0;
+
+    }
+
+    .header nav a,
+    .main-header nav a{
+
+        width:100%;
+
+        padding:14px 18px;
+
+        border-radius:12px;
+
+        font-size:15px;
+
+    }
+
+    .nav-profile{
+
+        padding:10px 18px;
+
+    }
+
+    /* Overlay when menu is open */
+    .nav-overlay{
+
+        display:none;
+
+        position:fixed;
+
+        top:0;
+
+        left:0;
+
+        width:100%;
+
+        height:100%;
+
+        background:rgba(0,0,0,.4);
+
+        z-index:999;
+
+    }
+
+    .nav-overlay.active{
+
+        display:block;
+
+    }
+
+    /* Logo */
+    .logo img{
+
+        width:45px;
+
+        height:45px;
+
+    }
+
+    .logo h2{
+
+        font-size:18px;
+
+    }
+
+    .logo small{
+
+        font-size:11px;
+
+    }
+
+    .logo{
+
+        gap:10px;
+
+    }
+
+    /* Section padding */
+    section{
+
+        padding:60px 0;
+
+    }
+
+    /* Section titles */
+    .section-title{
+
+        font-size:28px;
+
+    }
+
+    .section-subtitle{
+
+        font-size:15px;
+
+        margin-bottom:40px;
+
+    }
+
+    /* Hero */
+    .hero{
 
         grid-template-columns:1fr;
+
+        gap:30px;
+
+        margin:30px auto 60px;
+
+        text-align:center;
+
+    }
+
+    .hero-left h1{
+
+        font-size:34px;
+
+    }
+
+    .hero-left p{
+
+        font-size:16px;
+
+        margin:auto auto 25px;
+
+    }
+
+    .hero-buttons{
+
+        justify-content:center;
+
+    }
+
+    .hero-right img{
+
+        max-width:320px;
+
+    }
+
+    /* Statistics */
+    .statistics{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:15px;
+
+    }
+
+    .stat-card{
+
+        padding:22px 15px;
+
+    }
+
+    .stat-card h2{
+
+        font-size:28px;
+
+    }
+
+    /* Features */
+    .features h2{
+
+        font-size:28px;
+
+    }
+
+    .feature-grid{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+    }
+
+    .feature-card{
+
+        padding:28px 22px;
+
+    }
+
+    /* Featured Lessons */
+    .featured h2{
+
+        font-size:28px;
+
+    }
+
+    .lesson-grid{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+    }
+
+    /* Process */
+    .process h2{
+
+        font-size:28px;
+
+    }
+
+    .process-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:15px;
+
+        margin-top:35px;
+
+    }
+
+    .process-grid div{
+
+        padding:25px 15px;
+
+    }
+
+    /* CTA */
+    .cta{
+
+        padding:45px 25px;
+
+        margin:60px auto;
+
+        border-radius:22px;
+
+    }
+
+    .cta h2{
+
+        font-size:26px;
+
+    }
+
+    .cta p{
+
+        font-size:15px;
+
+    }
+
+    /* Footer */
+    .footer{
+
+        padding:50px 5% 20px;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+    }
+
+    /* Page Banner */
+    .page-banner{
+
+        padding:100px 20px 60px;
+
+    }
+
+    .page-banner h1{
+
+        font-size:30px;
+
+    }
+
+    /* Lesson Page */
+    .lesson-banner{
+
+        padding:100px 20px 60px;
+
+    }
+
+    .lesson-banner h1{
+
+        font-size:28px;
+
+    }
+
+    .banner-btn{
+
+        padding:14px 28px;
+
+        font-size:15px;
+
+    }
+
+    /* Lesson Detail */
+    .lesson-hero{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+        padding:30px 0;
+
+        margin:20px auto 0;
+
+        text-align:center;
+
+    }
+
+    .lesson-hero-text h1{
+
+        font-size:32px;
+
+    }
+
+    .lesson-hero-text p{
+
+        font-size:16px;
+
+        max-width:100%;
+
+    }
+
+    .lesson-hero-image img{
+
+        max-width:100%;
+
+        margin:auto;
+
+    }
+
+    .lesson-cards{
+
+        grid-template-columns:1fr;
+
+        gap:15px;
+
+    }
+
+    .lesson-details h2{
+
+        font-size:22px;
+
+    }
+
+    .lesson-tip{
+
+        padding:18px 20px;
+
+    }
+
+    .lesson-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .lesson-buttons a{
+
+        text-align:center;
+
+    }
+
+    /* Auth Pages */
+    .auth-back-home{
+
+        top:12px;
+
+        left:12px;
+
+        padding:8px 16px;
+
+        font-size:13px;
+
+    }
+
+    .auth-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .auth-left{
+
+        padding:40px 25px;
+
+        padding-top:60px;
+
+    }
+
+    .auth-left img{
+
+        width:180px;
+
+    }
+
+    .auth-left h1{
+
+        font-size:26px;
+
+    }
+
+    .auth-right{
+
+        padding:25px;
+
+    }
+
+    .auth-card{
+
+        padding:35px 25px;
+
+    }
+
+    .auth-card h2{
+
+        font-size:24px;
+
+    }
+
+    /* Dashboard */
+    .dashboard-page{
+
+        padding:25px 0 60px;
+
+    }
+
+    .dashboard-header{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+        text-align:center;
+
+    }
+
+    .dashboard-header h1{
+
+        font-size:28px;
+
+    }
+
+    .dashboard-header img{
+
+        max-width:250px;
+
+        margin:auto;
+
+    }
+
+    .dashboard-stats{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:12px;
+
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+    .dashboard-banner{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:30px 25px;
+
+        gap:20px;
+
+    }
+
+    /* Progress */
+    .progress-page>h1{
+
+        font-size:28px;
+
+    }
+
+    .progress-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:15px;
+
+    }
+
+    .lesson-row{
+
+        padding:14px 18px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:6px;
+
+    }
+
+    .motivation-card{
+
+        padding:30px 20px;
+
+    }
+
+    .motivation-card h2{
+
+        font-size:24px;
+
+    }
+
+    /* Profile */
+    .profile-header{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:30px 20px;
+
+        gap:15px;
+
+    }
+
+    .profile-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .profile-stat{
+
+        border-right:none;
+
+        border-bottom:1px solid var(--border);
+
+        padding:18px;
+
+    }
+
+    .profile-stat:last-child{
+
+        border-bottom:none;
+
+    }
+
+    .profile-info{
+
+        grid-template-columns:1fr;
+
+        gap:15px;
+
+        padding:20px;
+
+    }
+
+    .achievement-section{
+
+        padding:0 20px 20px;
+
+    }
+
+    .achievement-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:12px;
+
+    }
+
+    .badge-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:12px;
+
+    }
+
+    /* Quiz */
+    .quiz-content{
+
+        padding:30px 20px;
+
+        margin:25px auto 60px;
+
+    }
+
+    .quiz-content h1{
+
+        font-size:24px;
+
+    }
+
+    .question h3{
+
+        font-size:15px;
+
+    }
+
+    .question label{
+
+        padding:10px 14px;
+
+        font-size:14px;
+
+    }
+
+    /* Get Started */
+    .get-started>h2{
+
+        font-size:28px;
+
+    }
+
+    .auth-split-card{
+
+        padding:30px 22px;
+
+    }
+
+    /* About */
+    .about-split{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+        text-align:center;
+
+    }
+
+    .about-text h2{
+
+        font-size:28px;
+
+    }
+
+    .about-info-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+    /* Contact */
+    .contact-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+    .contact-split{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+    }
+
+    .contact-form-card{
+
+        padding:30px 22px;
+
+    }
+
+    .form-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+    /* ARSC */
+    .arsc-hero h1{
+
+        font-size:30px;
+
+    }
+
+    .arsc-hero-stats{
+
+        gap:10px;
+
+    }
+
+    .arsc-stat{
+
+        padding:8px 14px;
+
+        font-size:12px;
+
+    }
+
+    .arsc-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .arsc-about-grid{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+    }
+
+    .arsc-about-text h2{
+
+        font-size:26px;
+
+    }
+
+    .arsc-values-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:10px;
+
+    }
+
+    .arsc-value-card{
+
+        padding:18px 10px;
+
+    }
+
+    .arsc-explainer-content{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:30px 20px;
+
+        gap:20px;
+
+    }
+
+    .arsc-explainer-text h2{
+
+        font-size:22px;
+
+    }
+
+    .arsc-videos-header{
+
+        padding:40px 15px 20px;
+
+    }
+
+    .arsc-videos-header h2{
+
+        font-size:24px;
+
+    }
+
+    /* Clap Cards */
+    .clap-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:18px;
 
     }
 
@@ -8065,16 +9138,621 @@ VIEW ALL LESSONS BUTTON
 
     }
 
+    /* Admin */
+    .admin-header{
+
+        flex-direction:column;
+
+    }
+
+    .admin-header h1{
+
+        font-size:24px;
+
+    }
+
+    .admin-stats{
+
+        width:100%;
+
+        flex-wrap:wrap;
+
+    }
+
+    .admin-stat-card{
+
+        flex:1;
+
+        min-width:0;
+
+        padding:12px 14px;
+
+    }
+
+    .admin-stat-card h3{
+
+        font-size:18px;
+
+    }
+
+    .admin-filter-bar{
+
+        flex-direction:column;
+
+    }
+
+    .admin-search{
+
+        min-width:100%;
+
+    }
+
+    .admin-upload-card{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .admin-upload-actions{
+
+        width:100%;
+
+    }
+
+    .admin-feedback-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .admin-tabs{
+
+        overflow-x:auto;
+
+    }
+
+    .admin-tab{
+
+        padding:10px 14px;
+
+        font-size:12px;
+
+        white-space:nowrap;
+
+    }
+
+    .quiz-stats-summary{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:10px;
+
+    }
+
+    .quiz-stat-card{
+
+        padding:14px;
+
+    }
+
+    .quiz-stat-card h3{
+
+        font-size:20px;
+
+    }
+
+    .lesson-stats-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .detail-lessons-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .quiz-table th,
+    .quiz-table td{
+
+        padding:8px 10px;
+
+        font-size:11px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — PHONES (max-width: 480px)
+   ========================================================== */
+
+@media(max-width:480px){
+
+    /* Header */
+    .header,
+    .main-header{
+
+        padding:12px 4%;
+
+    }
+
+    .header nav,
+    .main-header nav{
+
+        width:100%;
+
+    }
+
+    .logo h2{
+
+        font-size:16px;
+
+    }
+
+    .logo small{
+
+        display:none;
+
+    }
+
+    .logo img{
+
+        width:38px;
+
+        height:38px;
+
+    }
+
+    /* Hero */
+    .hero{
+
+        margin:20px auto 40px;
+
+    }
+
+    .hero-left h1{
+
+        font-size:26px;
+
+    }
+
+    .hero-left p{
+
+        font-size:14px;
+
+    }
+
+    .primary-btn,
+    .secondary-btn{
+
+        padding:12px 24px;
+
+        font-size:14px;
+
+    }
+
+    .hero-right img{
+
+        max-width:240px;
+
+    }
+
+    /* Statistics */
+    .statistics{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+    .stat-card{
+
+        padding:18px 10px;
+
+    }
+
+    .stat-card h2{
+
+        font-size:24px;
+
+    }
+
+    .stat-card p{
+
+        font-size:13px;
+
+    }
+
+    /* Section titles */
+    .section-title{
+
+        font-size:22px;
+
+    }
+
+    .features h2,
+    .featured h2,
+    .process h2,
+    .get-started>h2{
+
+        font-size:22px;
+
+    }
+
+    /* Process */
+    .process-grid{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+    .process-grid h3{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:22px;
+
+    }
+
+    /* CTA */
+    .cta{
+
+        padding:35px 18px;
+
+    }
+
+    .cta h2{
+
+        font-size:22px;
+
+    }
+
+    .cta a{
+
+        padding:13px 28px;
+
+        font-size:14px;
+
+    }
+
+    /* Lesson Banner */
+    .lesson-banner h1{
+
+        font-size:22px;
+
+    }
+
+    .lesson-banner p{
+
+        font-size:15px;
+
+    }
+
+    .banner-btn{
+
+        padding:12px 22px;
+
+        font-size:14px;
+
+        width:100%;
+
+    }
+
+    /* Lesson Detail */
+    .lesson-hero-text h1{
+
+        font-size:26px;
+
+    }
+
+    .lesson-details h2{
+
+        font-size:20px;
+
+    }
+
+    /* Auth */
+    .auth-left{
+
+        padding:30px 18px;
+
+    }
+
+    .auth-left img{
+
+        width:140px;
+
+    }
+
+    .auth-left h1{
+
+        font-size:22px;
+
+    }
+
+    .auth-card{
+
+        padding:28px 18px;
+
+    }
+
+    .auth-card h2{
+
+        font-size:20px;
+
+    }
+
+    /* Dashboard */
+    .dashboard-header h1{
+
+        font-size:24px;
+
+    }
+
+    .dashboard-stats{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+    .stat-card h2,
+    .dashboard-stats .stat-card h2{
+
+        font-size:22px;
+
+    }
+
+    .dashboard-banner h2{
+
+        font-size:20px;
+
+    }
+
+    .dashboard-banner a{
+
+        padding:12px 24px;
+
+        font-size:14px;
+
+    }
+
+    /* Progress */
+    .progress-page>h1{
+
+        font-size:24px;
+
+    }
+
+    .progress-grid{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+    .progress-card h2{
+
+        font-size:22px;
+
+    }
+
+    .motivation-card h2{
+
+        font-size:20px;
+
+    }
+
+    .motivation-card a{
+
+        padding:12px 28px;
+
+        font-size:14px;
+
+    }
+
+    /* Profile */
+    .profile-header h1{
+
+        font-size:22px;
+
+    }
+
+    .profile-stat h2{
+
+        font-size:22px;
+
+    }
+
+    .achievement-grid{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+    .achievement-card{
+
+        font-size:28px;
+
+        padding:18px;
+
+    }
+
+    /* Quiz */
+    .quiz-content{
+
+        padding:22px 16px;
+
+    }
+
+    .quiz-content h1{
+
+        font-size:20px;
+
+    }
+
+    /* Get Started */
+    .get-started>h2{
+
+        font-size:22px;
+
+    }
+
+    .auth-split-card{
+
+        padding:25px 18px;
+
+    }
+
+    .auth-split-card h3{
+
+        font-size:18px;
+
+    }
+
+    /* About */
+    .about-text h2{
+
+        font-size:24px;
+
+    }
+
+    .about-info-card{
+
+        padding:30px 18px;
+
+    }
+
+    /* Contact */
+    .contact-card{
+
+        padding:30px 18px;
+
+    }
+
+    .contact-form-card{
+
+        padding:25px 18px;
+
+    }
+
+    .contact-form-card h2{
+
+        font-size:24px;
+
+    }
+
+    /* ARSC */
+    .arsc-hero h1{
+
+        font-size:24px;
+
+    }
+
+    .arsc-hero p{
+
+        font-size:14px;
+
+    }
+
+    .arsc-about-text h2{
+
+        font-size:22px;
+
+    }
+
+    .arsc-values-grid{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .arsc-explainer-text h2{
+
+        font-size:20px;
+
+    }
+
+    /* Clap */
+    .clap-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .clap-header h2{
+
+        font-size:24px;
+
+    }
+
     .clap-filter-btn{
 
-        padding:7px 16px;
+        padding:7px 14px;
+
         font-size:12px;
 
     }
 
     .clap-filters{
 
-        gap:8px;
+        gap:6px;
+
+    }
+
+    /* Admin */
+    .admin-page{
+
+        padding:90px 15px 40px;
+
+    }
+
+    .admin-stats{
+
+        flex-direction:column;
+
+    }
+
+    .admin-stat-card{
+
+        width:100%;
+
+    }
+
+    .quiz-stats-summary{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .detail-lessons-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    /* Upload modal */
+    .upload-modal-content{
+
+        width:98%;
+
+        max-height:98vh;
 
     }
 
