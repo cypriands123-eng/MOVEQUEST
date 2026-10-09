@@ -51,17 +51,10 @@
 </div>
 
 <nav>
-
-<a href="dashboard.html">Dashboard</a>
-
-<a href="lessons.html">Lessons</a>
-
-<a href="progress.html" class="active">Progress</a>
-
-<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
-
-<a href="#" id="logoutBtn">Logout</a>
-
+<a href="index.html" >Home</a>
+<a href="lessons.html" >Lessons</a>
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -114,21 +107,11 @@ Monitor your improvement throughout the MOVEQUEST learning journey.
 
 <div class="progress-card">
 
-<h3><i class="fa-solid fa-clipboard-check"></i> Quizzes Passed</h3>
-
-<h2 id="quizzesCount">0 / 7</h2>
-
-<p>Pass every quiz to unlock all achievements.</p>
-
-</div>
-
-<div class="progress-card">
-
 <h3><i class="fa-solid fa-star"></i> Points Earned</h3>
 
 <h2 id="pointsCount">0</h2>
 
-<p>Earn 100 points per quiz completed.</p>
+<p>Earn points as you complete lessons.</p>
 
 </div>
 
@@ -152,7 +135,7 @@ Badges Earned
 
 <div class="badge-grid" id="badgeGrid">
 
-<p style="color:var(--text-light);text-align:center;grid-column:1/-1;">Complete lessons and quizzes to earn badges.</p>
+<p style="color:var(--text-light);text-align:center;grid-column:1/-1;">Complete lessons to earn badges.</p>
 
 </div>
 
@@ -166,17 +149,17 @@ Lesson Progress
 
 <div class="lesson-row"><span>Lesson 1 – Body Posture</span><span class="lesson-status">Not Started</span></div>
 
-<div class="lesson-row"><span>Lesson 2 – Rhythm and Musicality</span><span class="lesson-status">Locked</span></div>
+<div class="lesson-row"><span>Lesson 2 – Rhythm and Musicality</span><span class="lesson-status">Not Started</span></div>
 
-<div class="lesson-row"><span>Lesson 3 – Coordination</span><span class="lesson-status">Locked</span></div>
+<div class="lesson-row"><span>Lesson 3 – Coordination</span><span class="lesson-status">Not Started</span></div>
 
-<div class="lesson-row"><span>Lesson 4 – Basic Footwork</span><span class="lesson-status">Locked</span></div>
+<div class="lesson-row"><span>Lesson 4 – Basic Footwork</span><span class="lesson-status">Not Started</span></div>
 
-<div class="lesson-row"><span>Lesson 5 – Choreographic Understanding</span><span class="lesson-status">Locked</span></div>
+<div class="lesson-row"><span>Lesson 5 – Choreographic Understanding</span><span class="lesson-status">Not Started</span></div>
 
-<div class="lesson-row"><span>Lesson 6 – Guided Practice</span><span class="lesson-status">Locked</span></div>
+<div class="lesson-row"><span>Lesson 6 – Guided Practice</span><span class="lesson-status">Not Started</span></div>
 
-<div class="lesson-row"><span>Lesson 7 – Final Dance Challenge</span><span class="lesson-status">Locked</span></div>
+<div class="lesson-row"><span>Lesson 7 – Final Dance Challenge</span><span class="lesson-status">Not Started</span></div>
 
 </div>
 
@@ -233,77 +216,9 @@ const LESSON_NAMES = {
     7: "Final Dance Challenge"
 };
 
-requireAuth().then((user) => {
-    populateUserData(user);
+hideSplash();
 
-    fetchUserProgress(user.uid).then((data) => {
-        if (data && data.progress) {
-            const p = data.progress;
-            const completed = p.lessonsCompleted || 0;
-            const quizzes = p.quizzesPassed || 0;
-            const points = p.points || 0;
-            const level = p.currentLevel || "Beginner";
-            const badges = p.badges || [];
-            const lessons = p.lessons || {};
-            const percent = Math.round((completed / 7) * 100);
 
-            // Top stats
-            document.getElementById("progressPercent").textContent = percent + "%";
-            document.getElementById("progressFill").style.width = percent + "%";
-            document.getElementById("lessonsCount").textContent = completed + " / 7";
-            document.getElementById("quizzesCount").textContent = quizzes + " / 7";
-            document.getElementById("pointsCount").textContent = points;
-            document.getElementById("levelName").textContent = level;
-
-            // Badges
-            const badgeGrid = document.getElementById("badgeGrid");
-            if (badges.length > 0) {
-                badgeGrid.innerHTML = "";
-                badges.forEach(function(id) {
-                    const b = BADGE_LIST[id];
-                    if (b) {
-                        badgeGrid.innerHTML += '<div class="achievement-card">' + b.icon + '<p>' + b.name + '</p></div>';
-                    }
-                });
-            }
-
-            // Lesson rows
-            const rows = document.querySelectorAll("#lessonProgress .lesson-row");
-            for (let i = 1; i <= 7; i++) {
-                const statusEl = rows[i - 1].querySelector(".lesson-status");
-                const lessonData = lessons[i];
-
-                if (lessonData && lessonData.quizDone) {
-                    const scoreText = lessonData.total ? lessonData.score + "/" + lessonData.total : "";
-                    statusEl.innerHTML = '<span style="color:var(--success);font-weight:600;">Completed</span>' +
-                        (scoreText ? ' <span style="color:var(--text-light);font-size:13px;">(Score: ' + scoreText + ')</span>' : '');
-                } else if (i <= completed + 1) {
-                    statusEl.textContent = "In Progress";
-                    statusEl.style.color = "var(--accent)";
-                    statusEl.style.fontWeight = "600";
-                } else {
-                    statusEl.textContent = "Locked";
-                    statusEl.style.color = "var(--text-light)";
-                }
-            }
-
-            // Update motivation card based on completion
-            if (completed >= 7) {
-                document.getElementById("motivationTitle").textContent = "Congratulations! You Did It!";
-                document.getElementById("motivationText").textContent = "You have completed all 7 MOVEQUEST lessons. You've improved your posture, rhythm, coordination, footwork, choreography, and performance skills. Amazing work!";
-                document.getElementById("motivationBtn").textContent = "Back to Dashboard";
-                document.getElementById("motivationBtn").href = "dashboard.html";
-                document.getElementById("motivationCard").classList.add("completed-card");
-            }
-        }
-        hideSplash();
-    }).catch(() => { hideSplash(); });
-}).catch(() => { hideSplash(); });
-
-document.getElementById("logoutBtn").addEventListener("click", function(e) {
-    e.preventDefault();
-    logoutUser();
-});
 </script>
 
 <script>

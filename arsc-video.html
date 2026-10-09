@@ -52,17 +52,10 @@
 </div>
 
 <nav>
-
-<a href="dashboard.html">Dashboard</a>
-
+<a href="index.html" >Home</a>
 <a href="lessons.html" class="active">Lessons</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
-
-<a href="#" class="login-btn" id="logoutBtn">Logout</a>
-
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -147,21 +140,6 @@
 
 <p id="videoPractice">Loading...</p>
 
-<!-- Upload Section -->
-<div class="arsc-upload-section">
-
-<h2>Submit Your Practice Video</h2>
-
-<p>Record yourself practicing and upload your video for review.</p>
-
-<button class="upload-btn" id="uploadBtn" onclick="handleUpload()">
-
-<i class="fa-solid fa-cloud-arrow-up"></i> Upload Video
-
-</button>
-
-</div>
-
 <!-- Rating Section (Admin: form | Student: read-only) -->
 <div class="arsc-rating-section" id="ratingSection" style="display:none;">
 
@@ -223,19 +201,6 @@
 
 </div>
 
-<!-- Admin Feedback Section (Student view only) -->
-<div class="admin-feedback-section" id="adminFeedbackSection" style="display:none;">
-
-<h2><i class="fa-solid fa-clipboard-check"></i> Teacher Feedback on Your Submission</h2>
-
-<div class="admin-feedback-content" id="adminFeedbackContent">
-
-<p class="no-comments">No feedback from teacher yet.</p>
-
-</div>
-
-</div>
-
 <div class="lesson-buttons">
 
 <a href="arsc-animation-song.html" class="secondary-btn">
@@ -247,48 +212,6 @@
 </div>
 
 </section>
-
-<!-- Upload Modal -->
-<div class="upload-modal" id="uploadModal">
-    <div class="upload-modal-content">
-        <div class="upload-modal-header">
-            <h3><i class="fa-solid fa-cloud-arrow-up"></i> Upload Video</h3>
-            <button class="upload-modal-close" onclick="closeUploadModal()">&times;</button>
-        </div>
-        <div class="upload-modal-body">
-            <p id="uploadModalTitle">Upload your practice video</p>
-            <div class="upload-dropzone" id="uploadDropzone">
-                <i class="fa-solid fa-film"></i>
-                <p>Drag & drop your video here or</p>
-                <label for="videoFileInput" class="upload-browse-btn">Browse Files</label>
-                <input type="file" id="videoFileInput" accept="video/*" hidden>
-                <span class="upload-file-info">MP4, MOV, AVI up to 100MB</span>
-            </div>
-            <div class="upload-preview" id="uploadPreview" style="display:none;">
-                <i class="fa-solid fa-file-video"></i>
-                <p id="uploadFileName">video.mp4</p>
-                <span id="uploadFileSize">0 MB</span>
-            </div>
-            <div class="upload-progress-container" id="uploadProgressContainer" style="display:none;">
-                <div class="upload-progress-bar">
-                    <div class="upload-progress-fill" id="uploadProgressFill"></div>
-                </div>
-                <span class="upload-progress-text" id="uploadProgressText">0%</span>
-            </div>
-            <div class="upload-speed-info" id="uploadSpeedInfo" style="display:none;">
-                <span id="uploadSpeed">0 Mbps</span>
-                <span id="uploadEta">Estimating...</span>
-            </div>
-            <div class="upload-status" id="uploadStatus"></div>
-        </div>
-        <div class="upload-modal-footer">
-            <button class="upload-cancel-btn" onclick="closeUploadModal()">Cancel</button>
-            <button class="upload-submit-btn" id="uploadSubmitBtn" onclick="submitUpload()" disabled>
-                <i class="fa-solid fa-cloud-arrow-up"></i> Upload
-            </button>
-        </div>
-    </div>
-</div>
 
 <footer class="footer">
 
@@ -309,12 +232,12 @@ A Web-Based Learning Platform for Improving Dance Skills.
 <div>
 
 <h3>Quick Links</h3>
-
-<a href="dashboard.html">Dashboard</a>
-
+<a href="index.html">Home</a>
 <a href="lessons.html">Lessons</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a><a href="lessons.html">Lessons</a>
 
-<a href="profile.html">Profile</a>
+<a href="about.html">Profile</a>
 
 </div>
 
@@ -324,7 +247,7 @@ A Web-Based Learning Platform for Improving Dance Skills.
 
 <p>7 Complete Lessons</p>
 
-<p>Interactive Quizzes</p>
+<p>ARSC Resources</p>
 
 <p>Progress Tracking</p>
 
@@ -361,10 +284,7 @@ A Web-Based Learning Platform for Improving Dance Skills.
 <script src="auth.js"></script>
 
 <script>
-var UPLOAD_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7gzx6HYHccnTmy9ESNuqbeNzBNzlYitEOJa-J11NvxmJie3YIaufOB0dp9ZZrrcvYLw/exec";
-
 var currentUser = null;
-var selectedFile = null;
 var currentRating = 0;
 var isAdmin = false;
 var videoId = parseInt(new URLSearchParams(window.location.search).get("id")) || 1;
@@ -386,7 +306,7 @@ var VIDEOS = {
             "Develop initial coordination skills"
         ],
         tip: "Start slow and focus on matching your movements with the beat before increasing speed.",
-        practice: "Watch the video 2-3 times, then practice along with it. Record yourself on the third attempt and upload for feedback."
+        practice: "Watch the video 2-3 times, then practice along with it. Record yourself on the third attempt and review your performance."
     },
     2: {
         title: "ARSC Animation Song - Part 2",
@@ -437,7 +357,7 @@ var VIDEOS = {
             "Build stamina for longer sequences"
         ],
         tip: "Practice the full routine without stopping to build endurance and confidence.",
-        practice: "Perform the complete routine from Parts 1-4 without pausing. Upload your best attempt."
+        practice: "Perform the complete routine from Parts 1-4 without pausing. Give your best attempt."
     },
     5: {
         title: "ARSC Animation Song - Part 5",
@@ -454,7 +374,7 @@ var VIDEOS = {
             "Execute the routine with musicality"
         ],
         tip: "Focus on expression and enjoyment — you've learned the movements, now make them your own!",
-        practice: "Perform the complete routine as your final submission. Record your best performance and upload."
+        practice: "Perform the complete routine as your final practice. Record your best performance and review it."
     }
 };
 
@@ -485,50 +405,10 @@ function loadVideoData() {
     });
 }
 
-// Check if user already uploaded for this video
-function checkExistingUpload() {
-    if (!currentUser) return;
-    db.collection("video_uploads")
-        .where("userId", "==", currentUser.uid)
-        .where("cardNumber", "==", videoId)
-        .get()
-        .then(function(snapshot) {
-            if (!snapshot.empty) {
-                var uploadData = snapshot.docs[0].data();
-                var uploadDate = uploadData.uploadedAt ? uploadData.uploadedAt.toDate().toLocaleDateString() : "";
-                var btn = document.getElementById("uploadBtn");
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Already Submitted';
-                btn.classList.add("submitted");
-                var statusDiv = document.createElement("p");
-                statusDiv.className = "upload-status-text";
-                statusDiv.innerHTML = 'You submitted <strong>' + uploadData.fileName + '</strong> on ' + uploadDate;
-                btn.parentNode.insertBefore(statusDiv, btn.nextSibling);
-            }
-        });
-}
-
-// Auth and init
-requireAuth().then(function(user) {
-    currentUser = user;
-    populateUserData(user);
-    loadVideoData();
-    checkExistingUpload();
-
-    // Check if user is admin
-    db.collection("users").doc(user.uid).get().then(function(doc) {
-        if (doc.exists && doc.data().isAdmin === true) {
-            isAdmin = true;
-        }
-        setupRoleUI();
-        hideSplash();
-    }).catch(function() {
-        setupRoleUI();
-        hideSplash();
-    });
-}).catch(function() {
-    hideSplash();
-});
+// Init
+hideSplash();
+loadVideoData();
+setupRoleUI();
 
 function setupRoleUI() {
     var ratingSection = document.getElementById("ratingSection");
@@ -562,10 +442,8 @@ function setupRoleUI() {
         ratingTitle.textContent = "Video Rating";
         ratingSubtitle.textContent = "";
         adminRatingDisplay.style.display = "";
-        document.getElementById("adminFeedbackSection").style.display = "";
         loadAdminRating();
         loadComments();
-        loadAdminFeedback();
     }
 }
 
@@ -645,68 +523,13 @@ function loadGeneralAdminRating(starsContainer, valueEl) {
         });
 }
 
-function loadAdminFeedback() {
-    if (!currentUser) return;
-
-    var feedbackKey = currentUser.uid + "_part_" + videoId;
-    var container = document.getElementById("adminFeedbackContent");
-
-    db.collection("admin_feedback").doc(feedbackKey).get().then(function(doc) {
-        if (!doc.exists) {
-            container.innerHTML = '<p class="no-comments">No feedback from teacher yet.</p>';
-            return;
-        }
-
-        var data = doc.data();
-        var starsHtml = "";
-        for (var i = 1; i <= 5; i++) {
-            starsHtml += '<i class="fa-solid fa-star' + (i <= (data.rating || 0) ? ' active' : '') + '"></i>';
-        }
-
-        var texts = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
-        var ratingLabel = texts[data.rating] || "";
-        var date = data.feedbackAt ? data.feedbackAt.toDate().toLocaleDateString("en-US", {
-            year: "numeric", month: "long", day: "numeric"
-        }) : "";
-
-        container.innerHTML =
-            '<div class="admin-feedback-card">' +
-                '<div class="admin-feedback-header">' +
-                    '<div class="admin-feedback-stars">' + starsHtml + '</div>' +
-                    '<span class="admin-feedback-rating-label">' + ratingLabel + ' — ' + (data.rating || 0) + '/5</span>' +
-                '</div>' +
-                (data.comment ? '<p class="admin-feedback-comment">' + escapeHtml(data.comment) + '</p>' : '') +
-                '<div class="admin-feedback-meta">' +
-                    '<span><i class="fa-solid fa-user-shield"></i> ' + escapeHtml(data.adminName || "Teacher") + '</span>' +
-                    '<span><i class="fa-solid fa-clock"></i> ' + date + '</span>' +
-                '</div>' +
-            '</div>';
-    });
-}
-
 function escapeHtml(text) {
     var div = document.createElement("div");
     div.textContent = text;
     return div.innerHTML;
 }
 
-document.getElementById("logoutBtn").addEventListener("click", function(e) {
-    e.preventDefault();
-    logoutUser();
-});
 
-// Star rating
-document.querySelectorAll("#starRating i").forEach(function(star) {
-    star.addEventListener("click", function() {
-        currentRating = parseInt(this.getAttribute("data-value"));
-        updateStarDisplay();
-        saveRating();
-    });
-    star.addEventListener("mouseenter", function() {
-        var val = parseInt(this.getAttribute("data-value"));
-        highlightStars(val);
-    });
-});
 
 document.getElementById("starRating").addEventListener("mouseleave", function() {
     highlightStars(currentRating);
@@ -828,204 +651,6 @@ function loadComments() {
         });
 }
 
-// Upload
-var uploadInProgress = false;
-var uploadAborted = false;
-
-function handleUpload() {
-    var btn = document.getElementById("uploadBtn");
-    if (btn.disabled) return;
-    selectedFile = null;
-    uploadInProgress = false;
-    uploadAborted = false;
-    document.getElementById("uploadModalTitle").textContent = "Upload practice video for " + VIDEOS[videoId].title;
-    document.getElementById("uploadDropzone").style.display = "block";
-    document.getElementById("uploadPreview").style.display = "none";
-    document.getElementById("uploadProgressContainer").style.display = "none";
-    document.getElementById("uploadSpeedInfo").style.display = "none";
-    document.getElementById("uploadStatus").textContent = "";
-    document.getElementById("uploadStatus").className = "upload-status";
-    document.getElementById("uploadSubmitBtn").disabled = true;
-    document.getElementById("uploadSubmitBtn").innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Upload';
-    document.getElementById("videoFileInput").value = "";
-    document.getElementById("uploadModal").classList.add("active");
-}
-
-function closeUploadModal() {
-    if (uploadInProgress) {
-        uploadAborted = true;
-    }
-    document.getElementById("uploadModal").classList.remove("active");
-    selectedFile = null;
-}
-
-document.getElementById("videoFileInput").addEventListener("change", function(e) {
-    if (e.target.files.length > 0) {
-        selectFile(e.target.files[0]);
-    }
-});
-
-var dropzone = document.getElementById("uploadDropzone");
-dropzone.addEventListener("dragover", function(e) {
-    e.preventDefault();
-    dropzone.classList.add("dragover");
-});
-dropzone.addEventListener("dragleave", function() {
-    dropzone.classList.remove("dragover");
-});
-dropzone.addEventListener("drop", function(e) {
-    e.preventDefault();
-    dropzone.classList.remove("dragover");
-    if (e.dataTransfer.files.length > 0) {
-        selectFile(e.dataTransfer.files[0]);
-    }
-});
-
-function selectFile(file) {
-    if (!file.type.startsWith("video/")) {
-        document.getElementById("uploadStatus").textContent = "Please select a video file.";
-        document.getElementById("uploadStatus").className = "upload-status error";
-        return;
-    }
-    if (file.size > 100 * 1024 * 1024) {
-        document.getElementById("uploadStatus").textContent = "File size must be under 100MB.";
-        document.getElementById("uploadStatus").className = "upload-status error";
-        return;
-    }
-    selectedFile = file;
-    document.getElementById("uploadDropzone").style.display = "none";
-    document.getElementById("uploadPreview").style.display = "flex";
-    document.getElementById("uploadFileName").textContent = file.name;
-    document.getElementById("uploadFileSize").textContent = (file.size / (1024 * 1024)).toFixed(1) + " MB";
-    document.getElementById("uploadSubmitBtn").disabled = false;
-}
-
-function formatEta(seconds) {
-    if (!isFinite(seconds) || seconds < 0) return "Estimating...";
-    if (seconds < 60) return Math.ceil(seconds) + "s left";
-    var m = Math.floor(seconds / 60);
-    var s = Math.ceil(seconds % 60);
-    return m + "m " + s + "s left";
-}
-
-function submitUpload() {
-    if (!selectedFile || !currentUser) return;
-
-    uploadInProgress = true;
-    uploadAborted = false;
-
-    var btn = document.getElementById("uploadSubmitBtn");
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Uploading...';
-
-    document.getElementById("uploadProgressContainer").style.display = "flex";
-    document.getElementById("uploadSpeedInfo").style.display = "flex";
-    document.getElementById("uploadProgressFill").style.width = "0%";
-    document.getElementById("uploadProgressText").textContent = "0%";
-    document.getElementById("uploadSpeed").textContent = "0 Mbps";
-    document.getElementById("uploadEta").textContent = "Estimating...";
-    document.getElementById("uploadStatus").textContent = "";
-    document.getElementById("uploadStatus").className = "upload-status";
-
-    var fileName = selectedFile.name;
-    var fileSize = selectedFile.size;
-    var startTime = Date.now();
-
-    // Progress simulation: estimate based on file size and elapsed time
-    // Uses a conservative 2 Mbps baseline, then adjusts with real elapsed time
-    var progressTimer = setInterval(function() {
-        if (uploadAborted) { clearInterval(progressTimer); return; }
-
-        var elapsed = (Date.now() - startTime) / 1000;
-        var bytesUploaded = fileSize * 0.7 * (1 - Math.exp(-elapsed / (fileSize / 500000)));
-        var percent = Math.min(Math.round((bytesUploaded / fileSize) * 100), 95);
-
-        var mbps = elapsed > 0.5 ? ((bytesUploaded * 8) / (elapsed * 1000000)) : 0;
-        var remaining = elapsed > 0.5 ? ((fileSize - bytesUploaded) / (bytesUploaded / elapsed)) : 0;
-
-        document.getElementById("uploadProgressFill").style.width = percent + "%";
-        document.getElementById("uploadProgressText").textContent = percent + "%";
-        document.getElementById("uploadSpeed").textContent = mbps.toFixed(1) + " Mbps";
-        document.getElementById("uploadEta").textContent = formatEta(remaining);
-    }, 400);
-
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        if (uploadAborted) { clearInterval(progressTimer); uploadInProgress = false; return; }
-
-        var base64Data = e.target.result.split(",")[1];
-
-        fetch(UPLOAD_SCRIPT_URL, {
-            method: "POST",
-            body: JSON.stringify({
-                fileName: fileName,
-                fileData: base64Data,
-                mimeType: selectedFile.type,
-                userId: currentUser.uid,
-                userName: currentUser.displayName || "Unknown",
-                userEmail: currentUser.email,
-                cardNumber: videoId
-            }),
-            mode: "no-cors"
-        })
-        .then(function() {
-            if (uploadAborted) { clearInterval(progressTimer); uploadInProgress = false; return; }
-            clearInterval(progressTimer);
-
-            var elapsed = (Date.now() - startTime) / 1000;
-            var avgMbps = (fileSize * 8) / (elapsed * 1000000);
-
-            document.getElementById("uploadProgressFill").style.width = "100%";
-            document.getElementById("uploadProgressText").textContent = "100%";
-            document.getElementById("uploadSpeed").textContent = avgMbps.toFixed(1) + " Mbps avg";
-            document.getElementById("uploadEta").textContent = "Complete";
-
-            // Fetch the file URL via GET request
-            var getUrl = UPLOAD_SCRIPT_URL + "?email=" + encodeURIComponent(currentUser.email) + "&cardNumber=" + videoId;
-            return fetch(getUrl)
-                .then(function(res) { return res.json(); })
-                .then(function(fileData) {
-                    var fileUrl = (fileData && fileData.success) ? fileData.fileUrl : "";
-                    var fileId = (fileData && fileData.success) ? fileData.fileId : "";
-
-                    return db.collection("video_uploads").add({
-                        userId: currentUser.uid,
-                        userName: currentUser.displayName || "Unknown",
-                        userEmail: currentUser.email,
-                        cardNumber: videoId,
-                        fileName: fileName,
-                        fileUrl: fileUrl,
-                        fileId: fileId,
-                        uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                });
-        })
-        .then(function(result) {
-            if (uploadAborted || !result) { uploadInProgress = false; return; }
-
-            uploadInProgress = false;
-            document.getElementById("uploadStatus").textContent = "Video uploaded successfully!";
-            document.getElementById("uploadStatus").className = "upload-status success";
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Done';
-            var mainBtn = document.getElementById("uploadBtn");
-            mainBtn.disabled = true;
-            mainBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Already Submitted';
-            mainBtn.classList.add("submitted");
-            setTimeout(closeUploadModal, 2000);
-        })
-        .catch(function(error) {
-            if (uploadAborted) { clearInterval(progressTimer); uploadInProgress = false; return; }
-            clearInterval(progressTimer);
-
-            uploadInProgress = false;
-            document.getElementById("uploadStatus").textContent = "Upload failed: " + error.message;
-            document.getElementById("uploadStatus").className = "upload-status error";
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Upload';
-        });
-    };
-    reader.readAsDataURL(selectedFile);
-}
 </script>
 
 <script>

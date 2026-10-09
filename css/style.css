@@ -18,26 +18,26 @@
 
 :root{
 
-    --primary:#0F4C81;
-    --primary-dark:#08345B;
-    --secondary:#4F9DDE;
+    --primary:#0B5ED7;
+    --primary-dark:#062E6E;
+    --secondary:#4DA9FF;
 
-    --accent:#F4B400;
+    --accent:#FFC24B;
 
-    --background:#F5F8FC;
+    --background:#EDF4FF;
     --surface:#FFFFFF;
 
-    --text:#1F2937;
-    --text-light:#6B7280;
+    --text:#1E2A3B;
+    --text-light:#5A6B84;
 
     --success:#10B981;
     --danger:#EF4444;
 
-    --border:#E5E7EB;
+    --border:#DCE7F7;
 
-    --shadow-sm:0 5px 15px rgba(0,0,0,.06);
-    --shadow-md:0 10px 25px rgba(0,0,0,.08);
-    --shadow-lg:0 20px 45px rgba(0,0,0,.12);
+    --shadow-sm:0 5px 15px rgba(11,94,215,.08);
+    --shadow-md:0 10px 25px rgba(11,94,215,.12);
+    --shadow-lg:0 20px 45px rgba(11,94,215,.18);
 
     --radius-sm:10px;
     --radius-md:18px;
@@ -72,7 +72,7 @@ body{
 
     font-family:'Poppins',sans-serif;
 
-    background:var(--background);
+    background:radial-gradient(1200px 600px at 95% -10%,rgba(77,169,255,.14),transparent 60%),var(--background);
 
     color:var(--text);
 
@@ -396,9 +396,11 @@ section{
     width:100%;
     z-index:999;
 
-    background:#ffffff;
+    background:rgba(255,255,255,.92);
 
-    box-shadow:0 3px 15px rgba(0,0,0,.06);
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 3px 18px rgba(11,94,215,.10);
 
 }
 
@@ -517,7 +519,9 @@ NAVIGATION
 
     color:#fff;
 
-    background:var(--primary);
+    background:linear-gradient(135deg,var(--primary),#2E86F0);
+
+    box-shadow:0 4px 12px rgba(11,94,215,.28);
 
 }
 
@@ -617,7 +621,7 @@ PAGE BANNER
 
 .page-banner{
 
-    background:linear-gradient(135deg,#0F4C81,#4F9DDE);
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary) 55%,var(--secondary));
 
     color:#fff;
 
@@ -672,6 +676,11 @@ PAGE BANNER
     font-size:58px;
     line-height:1.15;
 
+    background:linear-gradient(135deg,var(--primary-dark) 10%,var(--primary) 55%,var(--secondary));
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
     color:var(--primary-dark);
 
     margin:20px 0;
@@ -723,7 +732,9 @@ PAGE BANNER
 
 .primary-btn{
 
-    background:var(--primary);
+    background:linear-gradient(135deg,var(--primary),#2E86F0);
+
+    box-shadow:0 8px 20px rgba(11,94,215,.30);
 
     color:#fff;
 
@@ -731,7 +742,9 @@ PAGE BANNER
 
 .primary-btn:hover{
 
-    background:var(--primary-dark);
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+
+    box-shadow:0 12px 26px rgba(11,94,215,.40);
 
     transform:translateY(-4px);
 
@@ -1164,7 +1177,7 @@ FEATURED LESSONS
 
     display:grid;
 
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(4,1fr);
 
     gap:25px;
 
@@ -1306,7 +1319,7 @@ FOOTER
 
 .footer{
 
-    background:var(--primary-dark);
+    background:linear-gradient(160deg,var(--primary-dark) 0%,#041F4A 100%);
 
     color:#fff;
 
@@ -3712,21 +3725,14 @@ VIEW ALL LESSONS BUTTON
 
 /* ==========================================================
    SPLASH / LOADING SCREEN
-========================================================== */
-
-.splash-screen{
+========================================================== */.splash-screen{
 
     position:fixed;
-
     top:0;
-
     left:0;
-
     width:100%;
-
     height:100%;
-
-    background:#fff;
+    background:linear-gradient(160deg,#fff 60%,#E3F0FF);
 
     z-index:9999;
 
@@ -7923,7 +7929,7 @@ VIEW ALL LESSONS BUTTON
     gap:10px;
     margin:20px auto 0;
     padding:12px 32px;
-    background:linear-gradient(135deg,#2E7D32,#43A047);
+    background:linear-gradient(135deg,var(--primary),#2E86F0);
     color:#fff;
     border:none;
     border-radius:50px;
@@ -7932,28 +7938,28 @@ VIEW ALL LESSONS BUTTON
     font-family:'Poppins',sans-serif;
     cursor:pointer;
     transition:var(--transition);
-    box-shadow:0 4px 15px rgba(46,125,50,.3);
+    box-shadow:0 4px 15px rgba(11,94,215,.35);
 
 }
 
 .clap-play-btn:hover{
 
     transform:translateY(-3px);
-    box-shadow:0 6px 20px rgba(46,125,50,.4);
-    background:linear-gradient(135deg,#1B5E20,#2E7D32);
+    box-shadow:0 6px 20px rgba(11,94,215,.45);
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
 
 }
 
 .clap-play-btn.playing{
 
-    background:linear-gradient(135deg,#E65100,#FF8F00);
-    box-shadow:0 4px 15px rgba(230,81,0,.3);
+    background:linear-gradient(135deg,#0091D5,#4DD0E1);
+    box-shadow:0 4px 15px rgba(0,145,213,.35);
 
 }
 
 .clap-play-btn.playing:hover{
 
-    box-shadow:0 6px 20px rgba(230,81,0,.4);
+    box-shadow:0 6px 20px rgba(0,145,213,.45);
 
 }
 
@@ -8199,7 +8205,7 @@ VIEW ALL LESSONS BUTTON
     /* Process */
     .process-grid{
 
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:repeat(2,1fr);
 
     }
 

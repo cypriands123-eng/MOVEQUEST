@@ -52,17 +52,10 @@
 </div>
 
 <nav>
-
-<a href="dashboard.html">Dashboard</a>
-
-<a href="lessons.html">Lessons</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html" class="nav-profile active"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
-
-<a href="#" id="logoutBtn">Logout</a>
-
+<a href="index.html" >Home</a>
+<a href="lessons.html" >Lessons</a>
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -188,10 +181,10 @@ A Web-Based Learning Platform for Improving Dance Skills among BPED Students.
 <div>
 
 <h3>Quick Links</h3>
-
-<a href="dashboard.html">Dashboard</a>
-
+<a href="index.html">Home</a>
 <a href="lessons.html">Lessons</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a><a href="lessons.html">Lessons</a>
 
 <a href="progress.html">Progress</a>
 
@@ -230,62 +223,8 @@ A Web-Based Learning Platform for Improving Dance Skills among BPED Students.
 <script src="auth.js"></script>
 
 <script>
-requireAuth().then((user) => {
-    populateUserData(user);
+hideSplash();
 
-    // Update profile info
-    const profileName = document.querySelector(".profile-header h1");
-    if (profileName && user.displayName) {
-        profileName.textContent = user.displayName;
-    }
-
-    // Update email
-    const infoBoxes = document.querySelectorAll(".info-box p");
-    infoBoxes.forEach(function(p) {
-        if (p.textContent.includes("Email:")) {
-            p.innerHTML = "<strong>Email:</strong> " + user.email;
-        }
-    });
-
-    fetchUserProgress(user.uid).then((data) => {
-        if (data) {
-            // Learning goal
-            if (data.learningGoal) {
-                document.getElementById("learningGoal").textContent = data.learningGoal;
-            }
-
-            if (data.progress) {
-                const p = data.progress;
-                const completed = p.lessonsCompleted || 0;
-                const points = p.points || 0;
-                const badges = p.badges || [];
-                const percent = Math.round((completed / 7) * 100);
-
-                document.getElementById("profilePercent").textContent = percent + "%";
-                document.getElementById("profilePoints").textContent = points;
-                document.getElementById("profileBadges").textContent = badges.length;
-
-                // Badges
-                const grid = document.getElementById("achievementGrid");
-                if (badges.length > 0) {
-                    grid.innerHTML = "";
-                    badges.forEach(function(id) {
-                        const b = BADGE_LIST[id];
-                        if (b) {
-                            grid.innerHTML += '<div class="achievement-card">' + b.icon + '<p>' + b.name + '</p></div>';
-                        }
-                    });
-                }
-            }
-        }
-        hideSplash();
-    }).catch(() => { hideSplash(); });
-}).catch(() => { hideSplash(); });
-
-document.getElementById("logoutBtn").addEventListener("click", function(e) {
-    e.preventDefault();
-    logoutUser();
-});
 </script>
 
 <script>

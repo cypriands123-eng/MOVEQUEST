@@ -44,25 +44,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 </div>
 
 <nav>
-
 <a href="index.html" class="active">Home</a>
-
-<a href="lessons.html">Lessons</a>
-
-<a href="about.html">About</a>
-
-<a href="contact.html">Contact</a>
-
-<a href="login.html" class="login-btn">
-<i class="fa-solid fa-right-to-bracket"></i>
-Login
-</a>
-
-<a href="register.html" class="btn-filled">
-<i class="fa-solid fa-user-plus"></i>
-Register
-</a>
-
+<a href="lessons.html" >Lessons</a>
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -99,7 +84,7 @@ MOVEQUEST is a research-based learning platform designed to improve the basic da
 
 <div class="hero-buttons">
 
-<a href="register.html" class="primary-btn">
+<a href="lessons.html" class="primary-btn">
 
 Start Learning
 
@@ -216,13 +201,13 @@ Explore Lessons
         <div class="feature-card">
 
             <div class="icon">
-                <i class="fa-solid fa-clipboard-question"></i>
+                <i class="fa-solid fa-circle-play"></i>
             </div>
 
-            <h3>Knowledge Checks</h3>
+            <h3>ARSC Resources</h3>
 
             <p>
-                Complete Google Forms quizzes after every lesson to evaluate your understanding.
+                Explore ARSC claps, animation songs, and videos available in different languages.
             </p>
 
         </div>
@@ -237,7 +222,7 @@ Explore Lessons
             <h3>Progress Tracking</h3>
 
             <p>
-                Keep track of completed lessons, submitted performances, and overall learning progress.
+                Keep track of completed lessons and overall learning progress.
             </p>
 
         </div>
@@ -403,16 +388,6 @@ Explore Lessons
 
 <h3>3</h3>
 
-<h4>Quiz</h4>
-
-<p>Assess your understanding by answering interactive quizzes.</p>
-
-</div>
-
-<div>
-
-<h3>4</h3>
-
 <h4>Reflection</h4>
 
 <p>Reflect on your learning experience and identify areas for improvement.</p>
@@ -421,7 +396,7 @@ Explore Lessons
 
 <div>
 
-<h3>5</h3>
+<h3>4</h3>
 
 <h4>Improve</h4>
 
@@ -434,114 +409,11 @@ Explore Lessons
 
 
 
-<!-- GET STARTED / AUTH SECTION -->
-
-<section class="get-started">
-
-    <h2>Get Started with MOVEQUEST</h2>
-
-    <p class="section-subtitle">
-        Log in to continue your learning journey or create a new account to begin.
-    </p>
-
-    <div class="auth-split">
-
-        <!-- Login Card -->
-        <div class="auth-split-card">
-
-            <div class="auth-split-icon">
-                <i class="fa-solid fa-right-to-bracket"></i>
-            </div>
-
-            <h3>Already a Member?</h3>
-
-            <p>
-                Log in to continue where you left off and keep improving your dance skills.
-            </p>
-
-            <form onsubmit="return false;">
-
-                <input type="email" placeholder="Email Address" required>
-
-                <input type="password" placeholder="Password" required>
-
-                <button type="submit">
-                    Login
-                </button>
-
-            </form>
-
-            <a href="login.html" class="auth-link">
-                Need help? Go to full login page
-            </a>
-
-        </div>
-
-        <!-- Divider -->
-        <div class="auth-split-divider">
-            <span>OR</span>
-        </div>
-
-        <!-- Register Card -->
-        <div class="auth-split-card">
-
-            <div class="auth-split-icon register-icon">
-                <i class="fa-solid fa-user-plus"></i>
-            </div>
-
-            <h3>New to MOVEQUEST?</h3>
-
-            <p>
-                Create your free account and start learning basic dance skills today.
-            </p>
-
-            <form onsubmit="return false;">
-
-                <input type="text" placeholder="Full Name" required>
-
-                <input type="email" placeholder="Email Address" required>
-
-                <input type="password" placeholder="Password" required>
-
-                <button type="submit" class="register-btn">
-                    Create Account
-                </button>
-
-            </form>
-
-            <a href="register.html" class="auth-link">
-                Need help? Go to full register page
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
 <!-- CALL TO ACTION -->
-
 <section class="cta">
-
-<h2>
-
-Ready to Become a Better Dancer?
-
-</h2>
-
-<p>
-
-Join MOVEQUEST today and start improving your dance skills.
-
-</p>
-
-<a href="register.html">
-
-Create Account
-
-</a>
-
+    <h2>Ready to Become a Better Dancer?</h2>
+    <p>Explore our research-based modules and start improving your skills today.</p>
+    <a href="lessons.html">Explore Lessons</a>
 </section>
 
 
@@ -620,59 +492,7 @@ Create Account
 
 </footer>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<script src="firebase-config.js"></script>
-<script src="auth.js"></script>
-
-<script>
-// Landing page login form
-const loginForm = document.querySelector(".auth-split-card:first-child form");
-if (loginForm) {
-    loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
-        const password = this.querySelector('input[type="password"]').value;
-        const btn = this.querySelector("button");
-        btn.textContent = "Logging in...";
-        btn.disabled = true;
-
-        loginUser(email, password)
-            .then(() => { window.location.href = "dashboard.html"; })
-            .catch((error) => {
-                alert(error.message);
-                btn.textContent = "Login";
-                btn.disabled = false;
-            });
-    });
-}
-
-// Landing page register form
-const registerForm = document.querySelector(".auth-split-card:last-child form");
-if (registerForm) {
-    registerForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
-        const password = this.querySelector('input[type="password"]').value;
-        const btn = this.querySelector("button");
-        btn.textContent = "Creating Account...";
-        btn.disabled = true;
-
-        registerUser(name, email, password)
-            .then(() => { window.location.href = "dashboard.html"; })
-            .catch((error) => {
-                alert(error.message);
-                btn.textContent = "Create Account";
-                btn.disabled = false;
-            });
-    });
-}
-</script>
-
+<!-- Removed Firebase & Auth for surfing-only version -->
 <script>
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const navOverlay = document.getElementById("navOverlay");

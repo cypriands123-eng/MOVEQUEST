@@ -52,17 +52,10 @@
 </div>
 
 <nav>
-
-<a href="dashboard.html">Dashboard</a>
-
+<a href="index.html" >Home</a>
 <a href="lessons.html" class="active">Lessons</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
-
-<a href="#" class="login-btn" id="logoutBtn">Logout</a>
-
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -72,7 +65,7 @@
 <section class="arsc-overview-page">
 
 <!-- HERO -->
-<div class="arsc-hero" style="background:linear-gradient(135deg,#2E7D32,#66BB6A);">
+<div class="arsc-hero">
 
 <div class="arsc-hero-content">
 
@@ -206,7 +199,7 @@ ARSC helps young people become active participants in the community while sharin
 
 <div class="arsc-explainer-content">
 
-<div class="arsc-explainer-icon" style="background:linear-gradient(135deg,#2E7D32,#66BB6A);">
+<div class="arsc-explainer-icon">
 
 <i class="fa-solid fa-hand-sparkles"></i>
 
@@ -622,14 +615,10 @@ A Web-Based Learning Platform for Improving Dance Skills.
 <div>
 
 <h3>Quick Links</h3>
-
-<a href="dashboard.html">Dashboard</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html">Profile</a>
-
-</div>
+<a href="index.html">Home</a>
+<a href="lessons.html">Lessons</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a></div>
 
 <div>
 
@@ -637,7 +626,7 @@ A Web-Based Learning Platform for Improving Dance Skills.
 
 <p>7 Complete Lessons</p>
 
-<p>Interactive Quizzes</p>
+<p>ARSC Resources</p>
 
 <p>Progress Tracking</p>
 
@@ -674,57 +663,45 @@ A Web-Based Learning Platform for Improving Dance Skills.
 <script src="auth.js"></script>
 
 <script>
-requireAuth().then(function(user) {
-    populateUserData(user);
-    hideSplash();
-}).catch(function() {
-    hideSplash();
-});
+hideSplash();
 
-document.getElementById("logoutBtn").addEventListener("click", function(e) {
-    e.preventDefault();
-    logoutUser();
-});
+// Shared state for the currently playing clap audio
+let currentAudio = null;
+let currentBtn = null;
 
-// ============================================================
-// CLAP CARDS — Audio Playback & Language Filtering
-// ============================================================
-
-var currentAudio = null;
-var currentBtn = null;
-
-// Play / Pause audio
+// Play/stop handlers for each clap button
 document.querySelectorAll(".clap-play-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
-        var audioSrc = this.getAttribute("data-audio");
+        var src = this.getAttribute("data-audio");
+        if (!src) return;
 
-        // If clicking the same button that's playing, stop it
-        if (currentBtn === this && currentAudio && !currentAudio.paused) {
+        // If this button is already playing, just stop it
+        if (currentBtn === this && currentAudio) {
             stopAudio();
             return;
         }
 
-        // Stop any currently playing audio
+        // Stop whatever is currently playing
         stopAudio();
 
-        // Play new audio
-        currentAudio = new Audio(audioSrc);
+        currentAudio = new Audio(src);
         currentBtn = this;
 
-        currentAudio.play().then(function() {
-            btn.classList.add("playing");
-            btn.querySelector("i").className = "fa-solid fa-pause";
-            btn.querySelector("span").textContent = "Playing";
-        }).catch(function() {
-            // Audio file not found or playback error
-            btn.querySelector("span").textContent = "No audio";
-            setTimeout(function() {
-                btn.querySelector("span").textContent = "Play";
-            }, 2000);
-        });
+        this.classList.add("playing");
+        this.querySelector("i").className = "fa-solid fa-pause";
+        this.querySelector("span").textContent = "Pause";
 
         currentAudio.addEventListener("ended", function() {
-            resetBtn(btn);
+            stopAudio();
+        });
+
+        currentAudio.addEventListener("error", function() {
+            stopAudio();
+        });
+
+        currentAudio.play().catch(function(err) {
+            console.error("Audio playback failed:", err);
+            stopAudio();
         });
     });
 });

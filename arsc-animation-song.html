@@ -52,17 +52,10 @@
 </div>
 
 <nav>
-
-<a href="dashboard.html">Dashboard</a>
-
+<a href="index.html" >Home</a>
 <a href="lessons.html" class="active">Lessons</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
-
-<a href="#" class="login-btn" id="logoutBtn">Logout</a>
-
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -436,14 +429,10 @@ A Web-Based Learning Platform for Improving Dance Skills.
 <div>
 
 <h3>Quick Links</h3>
-
-<a href="dashboard.html">Dashboard</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html">Profile</a>
-
-</div>
+<a href="index.html">Home</a>
+<a href="lessons.html">Lessons</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a></div>
 
 <div>
 
@@ -451,7 +440,7 @@ A Web-Based Learning Platform for Improving Dance Skills.
 
 <p>7 Complete Lessons</p>
 
-<p>Interactive Quizzes</p>
+<p>ARSC Resources</p>
 
 <p>Progress Tracking</p>
 
@@ -488,17 +477,9 @@ A Web-Based Learning Platform for Improving Dance Skills.
 <script src="auth.js"></script>
 
 <script>
-requireAuth().then(function(user) {
-    populateUserData(user);
-    hideSplash();
-}).catch(function() {
-    hideSplash();
-});
+hideSplash();
 
-document.getElementById("logoutBtn").addEventListener("click", function(e) {
-    e.preventDefault();
-    logoutUser();
-});
+
 </script>
 
 <script>

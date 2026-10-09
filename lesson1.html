@@ -52,17 +52,10 @@
 </div>
 
 <nav>
-
-<a href="dashboard.html">Dashboard</a>
-
-<a href="lessons.html">Lessons</a>
-
-<a href="progress.html">Progress</a>
-
-<a href="profile.html" class="nav-profile"><img src="images/profile.png" alt="Profile"><span>Profile</span></a>
-
-<a href="#" class="login-btn" id="logoutBtn">Logout</a>
-
+<a href="index.html" >Home</a>
+<a href="lessons.html" class="active">Lessons</a>
+<a href="about.html" >About</a>
+<a href="contact.html" >Contact</a>
 </nav>
 
 <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
@@ -190,12 +183,6 @@ How does maintaining proper posture improve your dance performance?
 
 <div class="lesson-buttons">
 
-<a href="quiz1.html" class="primary-btn">
-
-Take Quiz
-
-</a>
-
 <a href="lesson2.html" class="secondary-btn">
 
 Next Lesson →
@@ -225,12 +212,12 @@ A Web-Based Learning Platform for Improving Dance Skills among BPED Students.
 <div>
 
 <h3>Quick Links</h3>
-
-<a href="dashboard.html">Dashboard</a>
-
+<a href="index.html">Home</a>
 <a href="lessons.html">Lessons</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a><a href="lessons.html">Lessons</a>
 
-<a href="profile.html">Profile</a>
+<a href="about.html">Profile</a>
 
 </div>
 
@@ -255,11 +242,8 @@ A Web-Based Learning Platform for Improving Dance Skills among BPED Students.
 <script src="auth.js"></script>
 
 <script>
-requireAuthWithSplash();
-document.getElementById("logoutBtn").addEventListener("click", function(e) {
-    e.preventDefault();
-    logoutUser();
-});
+hideSplash();
+
 </script>
 
 <script>
