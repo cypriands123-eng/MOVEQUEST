@@ -66,6 +66,10 @@ html{
 
     scroll-behavior:smooth;
 
+    overflow-x:hidden;
+
+    max-width:100%;
+
 }
 
 body{
@@ -425,6 +429,89 @@ section{
 }
 
 /* ===========================
+BACK BUTTON
+=========================== */
+
+/* Anchored at the bottom-right of the lesson view. */
+
+.back-bar{
+
+    position:fixed;
+    right:25px;
+    bottom:calc(25px + env(safe-area-inset-bottom,0px));
+    z-index:10000;
+
+    transition:opacity .3s;
+
+}
+
+/* While the mobile slide-in menu is open, the floating button
+   steps aside until the menu is closed again. */
+
+body:has(.main-header nav.open) .back-bar,
+body:has(.header nav.open) .back-bar{
+
+    opacity:0;
+    pointer-events:none;
+
+}
+
+.back-btn{
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:13px 26px;
+
+    background:var(--primary);
+    color:#fff;
+
+    border-radius:50px;
+
+    font-size:15px;
+    font-weight:500;
+
+    box-shadow:0 10px 26px rgba(6,46,110,.35);
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.back-btn i{
+
+    font-size:14px;
+
+}
+
+.back-btn:hover{
+
+    background:var(--primary-dark);
+    transform:translateY(-4px);
+
+}
+
+@media(max-width:480px){
+
+    .back-bar{
+
+        right:16px;
+        bottom:calc(16px + env(safe-area-inset-bottom,0px));
+
+    }
+
+    .back-btn{
+
+        padding:13px 20px;
+        font-size:14px;
+
+    }
+
+}
+
+/* ===========================
 LOGO
 =========================== */
 
@@ -779,6 +866,8 @@ PAGE BANNER
     width:100%;
     max-width:550px;
 
+    border-radius:22px;
+
     animation:floatImage 4s ease-in-out infinite;
 
 }
@@ -968,6 +1057,42 @@ WHY MOVEQUEST
 .feature-card p{
 
     color:var(--text-light);
+
+}
+
+/* ==========================================================
+   FEATURES — CENTERED FINAL ROW (index.html: 5 cards)
+   6 columns; cards span 2, last two are offset to the
+   middle so the final row of 2 sits centered.
+   Desktop only — tablet/mobile keep the normal 2/1 column
+   rules below, and about.html (6 cards) is unaffected.
+========================================================== */
+
+@media(min-width:1025px){
+
+    .feature-grid-center-last{
+
+        grid-template-columns:repeat(6,1fr);
+
+    }
+
+    .feature-grid-center-last .feature-card{
+
+        grid-column:span 2;
+
+    }
+
+    .feature-grid-center-last .feature-card:nth-child(4){
+
+        grid-column:2 / span 2;
+
+    }
+
+    .feature-grid-center-last .feature-card:nth-child(5){
+
+        grid-column:4 / span 2;
+
+    }
 
 }
 
@@ -8322,12 +8447,21 @@ VIEW ALL LESSONS BUTTON
     }
 
     /* Header / Nav */
+    /* backdrop-filter makes the header the containing block for the
+       fixed slide-in nav below — which lets the drawer push the page
+       wider than the screen ("swipe left to see things" bug).
+       Solid background on mobile instead. */
     .header,
     .main-header{
 
         padding:14px 5%;
 
         position:relative;
+
+        backdrop-filter:none;
+        -webkit-backdrop-filter:none;
+
+        background:#fff;
 
     }
 
