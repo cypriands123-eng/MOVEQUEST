@@ -2023,6 +2023,48 @@ VIEW ALL LESSONS BUTTON
 
 }
 
+.lesson-details ol{
+
+    padding-left:0;
+
+    margin-bottom:15px;
+
+    list-style:none;
+
+    counter-reset:lesson-step;
+
+}
+
+.lesson-details ol li{
+
+    position:relative;
+
+    padding-left:30px;
+
+    color:var(--text-light);
+
+    font-size:16px;
+
+    line-height:2;
+
+    counter-increment:lesson-step;
+
+}
+
+.lesson-details ol li::before{
+
+    content:counter(lesson-step) ".";
+
+    position:absolute;
+
+    left:0;
+
+    font-weight:600;
+
+    color:var(--primary-dark);
+
+}
+
 .lesson-video{
 
     position:relative;
@@ -9895,5 +9937,45 @@ VIEW ALL LESSONS BUTTON
         max-height:98vh;
 
     }
+
+}
+
+/* ==========================================================
+   ARSC CLAPS — LOOP ANIMATION LAYER
+   ========================================================== */
+
+.clap-card-image{
+
+    position:relative;
+
+}
+
+.clap-anim-layer{
+
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:#fff;
+    z-index:2;
+
+}
+
+.clap-anim-layer svg{
+
+    display:block;
+    width:100%;
+    height:100%;
+
+}
+
+
+/* Static claps poster: show the whole frame, matching the animated overlay */
+
+.clap-card-image img{
+
+    object-fit:contain;
+
+    background:#fff;
 
 }
