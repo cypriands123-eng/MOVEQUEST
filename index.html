@@ -10,6 +10,8 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<link rel="stylesheet" href="css/landing.css">
+
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -17,11 +19,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
-<body>
+<body class="landing-page">
 
 <div class="nav-overlay" id="navOverlay"></div>
 
@@ -37,7 +39,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <h2>MOVEQUEST</h2>
 
-<small>Research-Based Learning Platform</small>
+<small>Move &bull; Learn &bull; Grow</small>
 
 </div>
 
@@ -62,23 +64,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <div class="hero-left">
 
-<span class="badge">
+<span class="hero-welcome">Welcome to</span>
 
-Research-Based Learning Platform
+<h1 class="hero-title"><span class="mq-move">MOVE</span><span class="mq-quest">QUEST</span></h1>
 
-</span>
+<p class="hero-lead">
 
-<h1>
+A Research-Based Learning Platform for Improving
 
-Improve Your Basic Dance Skills
+<strong>Basic Dance Skills among BPED Students</strong>
 
-with MOVEQUEST
+</p>
 
-</h1>
+<p class="hero-quote">
 
-<p>
-
-MOVEQUEST is a research-based learning platform designed to improve the basic dance skills of Bachelor of Physical Education (BPED) students through structured lessons, instructional videos, guided practice, performance submissions, and knowledge assessments.
+&ldquo;Small steps in learning, big moves in your journey.&rdquo;
 
 </p>
 
@@ -86,7 +86,7 @@ MOVEQUEST is a research-based learning platform designed to improve the basic da
 
 <a href="lessons.html" class="primary-btn">
 
-Start Learning
+Start Learning <i class="fa-solid fa-arrow-right"></i>
 
 </a>
 
@@ -102,7 +102,9 @@ Explore Lessons
 
 <div class="hero-right">
 
-<img src="images/hero.png">
+<img src="images/hero.png" alt="BPED students practising basic dance skills">
+
+<span class="hero-script">Dance<br>Builds<br>Better<br>You</span>
 
 </div>
 
@@ -497,6 +499,20 @@ if (hamburgerBtn) {
     });
 }
 </script>
+
+<!-- MOBILE BOTTOM TAB BAR -->
+
+<nav class="mq-tabbar" aria-label="Mobile navigation">
+
+<a href="index.html" class="active" aria-current="page"><i class="fa-solid fa-house"></i><span>Home</span></a>
+
+<a href="lessons.html"><i class="fa-solid fa-book-open"></i><span>Lessons</span></a>
+
+<a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+<a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+
+</nav>
 
 </body>
 

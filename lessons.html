@@ -9,7 +9,7 @@
 
 <title>MOVEQUEST | Lessons</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=8">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -21,7 +21,28 @@
 
 </head>
 
-<body>
+<body class="has-sidebar">
+
+<!-- SIDEBAR NAV -->
+
+<aside class="mq-sidebar">
+
+<div class="mq-sidebar-brand">
+<img src="images/logo.png" alt="MOVEQUEST">
+<div>
+<h2>MOVEQUEST</h2>
+<small>Move &bull; Learn &bull; Grow</small>
+</div>
+</div>
+
+<nav class="mq-sidebar-nav">
+<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+<a href="lessons.html" class="active"><i class="fa-solid fa-book-open"></i> Lessons</a>
+<a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+<a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+</nav>
+
+</aside>
 
 <div class="nav-overlay" id="navOverlay"></div>
 
@@ -86,73 +107,115 @@ Complete each lesson in sequence to build your dance skills from basic movements
 
 <div class="lesson-grid">
     <div class="lesson-item" data-lesson="1">
-        <img src="images/rhythm.jpg">
-        <span class="lesson-badge beginner">Beginner</span>
-        <h2>Lesson 1</h2>
-        <h3>Rhythm and Timing</h3>
-        <p>Move in time with the beat of the music.</p>
-        <p><strong>Duration:</strong> 10 Minutes</p>
-        <a href="lesson1.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/rhythm.jpg" alt="Rhythm and Timing">
+            <span class="lesson-badge beginner">Beginner</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 1</span>
+            <h3>Rhythm and Timing</h3>
+            <p class="lesson-desc">Move in time with the beat of the music.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 10 Minutes</span>
+            </div>
+            <a href="lesson1.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 
     <div class="lesson-item" data-lesson="2">
-        <img src="images/coordination.jpg">
-        <span class="lesson-badge beginner">Beginner</span>
-        <h2>Lesson 2</h2>
-        <h3>Coordination</h3>
-        <p>Move different body parts together smoothly.</p>
-        <p><strong>Duration:</strong> 12 Minutes</p>
-        <a href="lesson2.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/coordination.jpg" alt="Coordination">
+            <span class="lesson-badge beginner">Beginner</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 2</span>
+            <h3>Coordination</h3>
+            <p class="lesson-desc">Move different body parts together smoothly.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 12 Minutes</span>
+            </div>
+            <a href="lesson2.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 
     <div class="lesson-item" data-lesson="3">
-        <img src="images/posture.jpg">
-        <span class="lesson-badge beginner">Beginner</span>
-        <h2>Lesson 3</h2>
-        <h3>Balance</h3>
-        <p>Maintain body stability while standing, turning, or changing positions.</p>
-        <p><strong>Duration:</strong> 15 Minutes</p>
-        <a href="lesson3.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/posture.jpg" alt="Balance">
+            <span class="lesson-badge beginner">Beginner</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 3</span>
+            <h3>Balance</h3>
+            <p class="lesson-desc">Maintain body stability while standing, turning, or changing positions.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 15 Minutes</span>
+            </div>
+            <a href="lesson3.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 
     <div class="lesson-item" data-lesson="4">
-        <img src="images/guided-practice.jpg">
-        <span class="lesson-badge intermediate">Intermediate</span>
-        <h2>Lesson 4</h2>
-        <h3>Body Control</h3>
-        <p>Perform movements with proper posture, precision, and control.</p>
-        <p><strong>Duration:</strong> 18 Minutes</p>
-        <a href="lesson4.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/guided-practice.jpg" alt="Body Control">
+            <span class="lesson-badge intermediate">Intermediate</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 4</span>
+            <h3>Body Control</h3>
+            <p class="lesson-desc">Perform movements with proper posture, precision, and control.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 18 Minutes</span>
+            </div>
+            <a href="lesson4.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 
     <div class="lesson-item" data-lesson="5">
-        <img src="images/footwork.jpg">
-        <span class="lesson-badge intermediate">Intermediate</span>
-        <h2>Lesson 5</h2>
-        <h3>Footwork and Basic Steps</h3>
-        <p>Perform the fundamental steps and patterns of a particular dance.</p>
-        <p><strong>Duration:</strong> 20 Minutes</p>
-        <a href="lesson5.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/footwork.jpg" alt="Footwork and Basic Steps">
+            <span class="lesson-badge intermediate">Intermediate</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 5</span>
+            <h3>Footwork and Basic Steps</h3>
+            <p class="lesson-desc">Perform the fundamental steps and patterns of a particular dance.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 20 Minutes</span>
+            </div>
+            <a href="lesson5.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 
     <div class="lesson-item" data-lesson="6">
-        <img src="images/final-challenge.jpg">
-        <span class="lesson-badge intermediate">Intermediate</span>
-        <h2>Lesson 6</h2>
-        <h3>Spatial Awareness</h3>
-        <p>Understand directions, levels, and the space used when dancing.</p>
-        <p><strong>Duration:</strong> 25 Minutes</p>
-        <a href="lesson6.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/final-challenge.jpg" alt="Spatial Awareness">
+            <span class="lesson-badge intermediate">Intermediate</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 6</span>
+            <h3>Spatial Awareness</h3>
+            <p class="lesson-desc">Understand directions, levels, and the space used when dancing.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 25 Minutes</span>
+            </div>
+            <a href="lesson6.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 
     <div class="lesson-item" data-lesson="7">
-        <img src="images/choreography.jpg">
-        <span class="lesson-badge advanced">Advanced</span>
-        <h2>Lesson 7</h2>
-        <h3>Movement Sequencing</h3>
-        <p>Perform dance steps in the correct order.</p>
-        <p><strong>Duration:</strong> 30 Minutes</p>
-        <a href="lesson7.html">Start Lesson</a>
+        <div class="lesson-cover">
+            <img src="images/choreography.jpg" alt="Movement Sequencing">
+            <span class="lesson-badge advanced">Advanced</span>
+        </div>
+        <div class="lesson-body">
+            <span class="lesson-eyebrow">Lesson 7</span>
+            <h3>Movement Sequencing</h3>
+            <p class="lesson-desc">Perform dance steps in the correct order.</p>
+            <div class="lesson-meta">
+                <span class="lesson-chip"><i class="fa-solid fa-clock"></i> 30 Minutes</span>
+            </div>
+            <a href="lesson7.html" class="lesson-start">Start Lesson</a>
+        </div>
     </div>
 </div>
 
@@ -253,6 +316,20 @@ if (hamburgerBtn) {
     });
 }
 </script>
+
+<!-- MOBILE BOTTOM TAB BAR -->
+
+<nav class="mq-tabbar" aria-label="Mobile navigation">
+
+<a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+
+<a href="lessons.html" class="active" aria-current="page"><i class="fa-solid fa-book-open"></i><span>Lessons</span></a>
+
+<a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+<a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+
+</nav>
 
 </body>
 

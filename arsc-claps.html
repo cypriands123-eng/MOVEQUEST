@@ -9,7 +9,7 @@
 
 <title>MOVEQUEST | ARSC Claps</title>
 
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=8">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -21,7 +21,32 @@
 
 </head>
 
-<body>
+<body class="has-sidebar">
+
+<!-- SIDEBAR NAV -->
+
+<aside class="mq-sidebar">
+
+<div class="mq-sidebar-brand">
+<img src="images/logo.png" alt="MOVEQUEST">
+<div>
+<h2>MOVEQUEST</h2>
+<small>Move &bull; Learn &bull; Grow</small>
+</div>
+</div>
+
+<nav class="mq-sidebar-nav">
+<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+<a href="lessons.html" class="mq-section-active"><i class="fa-solid fa-book-open"></i> Lessons</a>
+<ul class="mq-subnav">
+<li><a href="arsc-animation-song.html">ARSC Animation Song</a></li>
+<li><a href="arsc-claps.html" class="active">ARSC Claps</a></li>
+</ul>
+<a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+<a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+</nav>
+
+</aside>
 
 <div class="nav-overlay" id="navOverlay"></div>
 
@@ -812,6 +837,20 @@ if (hamburgerBtn) {
     });
 }
 </script>
+
+<!-- MOBILE BOTTOM TAB BAR -->
+
+<nav class="mq-tabbar" aria-label="Mobile navigation">
+
+<a href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+
+<a href="lessons.html" class="active" aria-current="page"><i class="fa-solid fa-book-open"></i><span>Lessons</span></a>
+
+<a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
+
+<a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+
+</nav>
 
 </body>
 
