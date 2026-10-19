@@ -1,6 +1,6 @@
 /* ==========================================================
    LANDING PAGE — HOME HERO
-   Dark navy + yellow design, applied to index.html only.
+   Purple → blue gradient design, applied to index.html only.
 
    style.css is shared by all 28 pages, so every rule in this
    file is scoped to body.landing-page. That scoping is what
@@ -9,12 +9,12 @@
 
 .landing-page{
 
-    --mq-navy:#081731;
-    --mq-navy-soft:#0C2A50;
-    --mq-accent:#FFC93C;
-    --mq-ink:#08182F;
-    --mq-text:#E6EEF9;
-    --mq-text-dim:rgba(230,238,249,.74);
+    --mq-navy:#0F0F1A;
+    --mq-navy-soft:#1E182E;
+    --mq-accent:#A855F7;
+    --mq-ink:#0F0F1A;
+    --mq-text:#F1F5FF;
+    --mq-text-dim:rgba(241,245,255,.72);
 
 }
 
@@ -25,19 +25,19 @@
 
 .landing-page .main-header{
 
-    background:rgba(8,23,49,.94);
+    background:linear-gradient(120deg,rgba(30,22,52,.96) 0%,rgba(15,15,26,.92) 100%);
 
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
 
-    box-shadow:0 3px 24px rgba(0,0,0,.28);
+    box-shadow:0 12px 34px rgba(0,0,0,.45);
 
-    border-bottom:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(168,85,247,.22);
 
 }
 
-/* The logo artwork is itself dark navy, so it needs a light chip
-   behind it to stay legible on the navy header. */
+/* The logo artwork is itself dark, so it needs a light chip
+   behind it to stay legible on the dark header. */
 
 .landing-page .main-header .logo img{
 
@@ -49,7 +49,7 @@
     background:#FFFFFF;
     border-radius:50%;
 
-    box-shadow:0 6px 16px rgba(0,0,0,.30);
+    box-shadow:0 0 0 2px rgba(168,85,247,.38),0 8px 22px rgba(0,0,0,.42);
 
 }
 
@@ -87,7 +87,7 @@
 .landing-page .main-header nav a:hover{
 
     color:#FFFFFF;
-    background:rgba(255,255,255,.09);
+    background:rgba(108,72,255,.20);
 
 }
 
@@ -115,7 +115,7 @@
 
     border-radius:2px;
 
-    background:var(--mq-accent);
+    background:linear-gradient(90deg,#6C48FF 0%,#3882F6 100%);
 
 }
 
@@ -131,15 +131,15 @@
 
     border-radius:50px;
 
-    background:var(--mq-accent);
-    color:var(--mq-ink);
+    background:linear-gradient(135deg,#6C48FF 0%,#3882F6 100%);
+    color:#FFFFFF;
 
     font-size:15px;
     font-weight:600;
 
     white-space:nowrap;
 
-    box-shadow:0 8px 22px rgba(255,201,60,.26);
+    box-shadow:0 12px 28px rgba(108,72,255,.40);
 
     transition:var(--transition);
 
@@ -147,8 +147,10 @@
 
 .landing-page .login-pill:hover{
 
-    background:#FFD964;
+    background:linear-gradient(135deg,#7C5CFF 0%,#4A90FF 100%);
     transform:translateY(-2px);
+
+    box-shadow:0 16px 34px rgba(108,72,255,.50);
 
 }
 
@@ -172,9 +174,10 @@
     gap:50px;
 
     background:
-        radial-gradient(900px 520px at 78% 45%,rgba(23,92,174,.50),transparent 62%),
-        radial-gradient(620px 420px at 6% 102%,rgba(12,42,80,.75),transparent 70%),
-        linear-gradient(160deg,#0A1B3A 0%,var(--mq-navy) 55%,#061225 100%);
+        radial-gradient(900px 560px at 78% 42%,rgba(108,72,255,.50),transparent 62%),
+        radial-gradient(620px 480px at 6% 104%,rgba(56,130,246,.32),transparent 70%),
+        radial-gradient(520px 420px at 55% 88%,rgba(168,85,247,.26),transparent 66%),
+        linear-gradient(160deg,#141024 0%,var(--mq-navy) 55%,#0B0A14 100%);
 
     overflow:hidden;
 
@@ -195,7 +198,7 @@
 
     transform:translateY(-50%);
 
-    background:radial-gradient(circle,rgba(38,124,224,.45),rgba(38,124,224,0) 66%);
+    background:radial-gradient(circle,rgba(124,92,255,.48),rgba(124,92,255,0) 66%);
 
     filter:blur(6px);
 
@@ -255,8 +258,13 @@
 
 .landing-page .hero-title .mq-quest{
 
-    color:var(--mq-accent);
-    -webkit-text-fill-color:var(--mq-accent);
+    background-image:linear-gradient(135deg,#A855F7 0%,#6C48FF 45%,#3882F6 100%);
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
 
 }
 
@@ -302,27 +310,27 @@
 
 .landing-page .hero .primary-btn{
 
-    background:var(--mq-accent);
-    background-image:none;
+    background:linear-gradient(135deg,#6C48FF 0%,#3882F6 100%);
+    background-image:linear-gradient(135deg,#6C48FF 0%,#3882F6 100%);
 
-    color:var(--mq-ink);
+    color:#FFFFFF;
 
     gap:10px;
 
     padding:16px 36px;
 
-    box-shadow:0 10px 28px rgba(255,201,60,.30);
+    box-shadow:0 14px 34px rgba(108,72,255,.42);
 
 }
 
 .landing-page .hero .primary-btn:hover{
 
-    background:#FFD964;
-    background-image:none;
+    background:linear-gradient(135deg,#7C5CFF 0%,#4A90FF 100%);
+    background-image:linear-gradient(135deg,#7C5CFF 0%,#4A90FF 100%);
 
     transform:translateY(-3px);
 
-    box-shadow:0 14px 32px rgba(255,201,60,.38);
+    box-shadow:0 18px 40px rgba(108,72,255,.52);
 
 }
 
@@ -353,7 +361,7 @@
 }
 
 /* hero.png is an opaque portrait photo, not a cut-out, so it is
-   framed as a rounded card rather than blended into the navy. */
+   framed as a rounded card rather than blended into the backdrop. */
 
 .landing-page .hero-right img{
 
@@ -365,7 +373,7 @@
 
     border-radius:24px;
 
-    box-shadow:0 30px 70px rgba(0,0,0,.45);
+    box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(168,85,247,.28),0 0 60px rgba(108,72,255,.30);
 
 }
 
@@ -442,7 +450,7 @@
 
     .landing-page .main-header{
 
-        background:#081731;
+        background:rgba(15,15,26,.98);
 
         backdrop-filter:none;
         -webkit-backdrop-filter:none;
@@ -464,7 +472,7 @@
 
         margin-left:0;
 
-        background:#0A1B36;
+        background:linear-gradient(180deg,#1B1330 0%,#0F0F1A 100%);
 
         box-shadow:-5px 0 28px rgba(0,0,0,.50);
 
@@ -482,14 +490,14 @@
 
     .landing-page .main-header nav a:hover{
 
-        background:rgba(255,255,255,.08);
+        background:rgba(108,72,255,.18);
 
     }
 
     .landing-page .main-header nav a.active{
 
-        color:var(--mq-accent);
-        background:rgba(255,201,60,.12);
+        color:#FFFFFF;
+        background:rgba(108,72,255,.22);
 
     }
 

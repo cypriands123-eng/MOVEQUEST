@@ -18,26 +18,40 @@
 
 :root{
 
-    --primary:#0B3C5D;
-    --primary-dark:#072B44;
-    --secondary:#2E6E8E;
+    color-scheme:dark;
 
-    --accent:#FFD166;
+    /* Brand — purple → blue gradient system.
+       --primary-dark is kept as the light "ink" shade used by
+       headings and labels on dark surfaces; the dark gradient
+       stops are declared explicitly in the theme layer. */
+    --primary:#7C5CFF;
+    --primary-dark:#C9BAFF;
+    --secondary:#3882F6;
 
-    --background:#F5F7FA;
-    --surface:#FFFFFF;
+    --accent:#A855F7;
 
-    --text:#1E293B;
-    --text-light:#6B7280;
+    /* Surfaces */
+    --background:#0F0F1A;
+    --surface:#1E182E;
+    --surface-2:#251B3C;
 
-    --success:#10B981;
-    --danger:#EF4444;
+    --text:#F1F5FF;
+    --text-light:#94A3B8;
 
-    --border:#E2E8F0;
+    --success:#34D399;
+    --danger:#F87171;
 
-    --shadow-sm:0 5px 15px rgba(11,60,93,.08);
-    --shadow-md:0 10px 25px rgba(11,60,93,.12);
-    --shadow-lg:0 20px 45px rgba(11,60,93,.18);
+    --border:rgba(148,163,184,.18);
+
+    /* Gradients */
+    --gradient-primary:linear-gradient(135deg,#6C48FF 0%,#3882F6 100%);
+    --gradient-accent:linear-gradient(135deg,#A855F7 0%,#60A5FA 100%);
+    --gradient-surface:linear-gradient(150deg,#251B3C 0%,#1A142B 100%);
+    --glow-primary:0 16px 38px rgba(108,72,255,.35);
+
+    --shadow-sm:0 8px 24px rgba(0,0,0,.30);
+    --shadow-md:0 14px 34px rgba(0,0,0,.42);
+    --shadow-lg:0 26px 60px rgba(0,0,0,.55);
 
     --radius-sm:10px;
     --radius-md:18px;
@@ -10752,5 +10766,898 @@ body.landing-page .mq-tabbar a.active{
         bottom:calc(var(--mq-tabbar-h) + 12px + env(safe-area-inset-bottom,0px));
 
     }
+
+}
+
+
+/* ==========================================================
+   GRADIENT DARK THEME
+   Purple → blue gradients on a near-black canvas, matching
+   the supplied design board:
+   #6C48FF primary · #3882F6 secondary · #0F0F1A canvas
+   #1E182E cards · #A855F7 accent · #F1F5FF text · #94A3B8 muted
+   Appended last so it layers over every earlier section.
+   ========================================================== */
+
+
+/* ===========================
+CANVAS
+=========================== */
+
+body{
+
+    background:
+        radial-gradient(1100px 620px at 88% -12%,rgba(108,72,255,.26),transparent 60%),
+        radial-gradient(900px 620px at -10% 18%,rgba(56,130,246,.16),transparent 62%),
+        radial-gradient(700px 520px at 50% 112%,rgba(168,85,247,.12),transparent 65%),
+        var(--background);
+
+    color:var(--text);
+
+}
+
+::selection{
+
+    background:rgba(108,72,255,.55);
+    color:#fff;
+
+}
+
+
+/* ===========================
+HEADINGS
+=========================== */
+
+.section-title,
+.features h2,
+.process h2,
+.about-text h2,
+.clap-header h2,
+.clap-video-wrapper h3{
+
+    color:var(--text);
+
+}
+
+
+/* ===========================
+TOP CHROME
+=========================== */
+
+.header,
+.main-header{
+
+    background:linear-gradient(120deg,rgba(30,22,52,.97) 0%,rgba(15,15,26,.95) 100%);
+
+    border-bottom:1px solid rgba(168,85,247,.22);
+
+    box-shadow:0 12px 34px rgba(0,0,0,.45);
+
+}
+
+.logo img{
+
+    background:#fff;
+
+    border-radius:50%;
+
+    padding:5px;
+
+    box-shadow:0 0 0 2px rgba(168,85,247,.35),0 8px 22px rgba(0,0,0,.45);
+
+}
+
+.logo h2{
+
+    color:#fff;
+
+}
+
+.logo small{
+
+    color:rgba(241,245,255,.68);
+
+}
+
+.header nav a,
+.main-header nav a{
+
+    color:rgba(241,245,255,.78);
+
+}
+
+.header nav a:hover,
+.main-header nav a:hover{
+
+    color:#fff;
+
+    background:rgba(108,72,255,.20);
+
+}
+
+.header nav a.active,
+.main-header nav a.active{
+
+    color:#fff;
+
+    background-image:var(--gradient-primary);
+
+    box-shadow:0 8px 22px rgba(108,72,255,.38);
+
+}
+
+.nav-profile:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.nav-profile img{
+
+    border-color:var(--accent);
+
+}
+
+.hamburger span{
+
+    background:#fff;
+
+}
+
+@media(max-width:768px){
+
+    .header,
+    .main-header{
+
+        background:rgba(15,15,26,.98);
+
+        border-bottom-color:rgba(168,85,247,.18);
+
+    }
+
+}
+
+
+/* ===========================
+BUTTONS & PILLS
+=========================== */
+
+.primary-btn,
+.btn-primary,
+.btn-filled,
+.login-btn{
+
+    background-color:var(--primary);
+    background-image:var(--gradient-primary);
+
+    color:#fff;
+
+    border:none;
+
+    box-shadow:var(--glow-primary);
+
+}
+
+.primary-btn:hover,
+.btn-primary:hover,
+.btn-filled:hover{
+
+    background-image:linear-gradient(135deg,#7C5CFF 0%,#4A90FF 100%);
+
+    color:#fff;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 22px 46px rgba(108,72,255,.45);
+
+}
+
+.secondary-btn,
+.btn-outline{
+
+    background:transparent;
+
+    border-color:rgba(255,255,255,.34);
+
+    color:var(--text);
+
+}
+
+.secondary-btn:hover,
+.btn-outline:hover{
+
+    background:#fff;
+
+    border-color:#fff;
+
+    color:#0F0F1A;
+
+    box-shadow:0 16px 36px rgba(0,0,0,.35);
+
+}
+
+.btn-secondary{
+
+    background:rgba(255,255,255,.06);
+
+    border-color:rgba(255,255,255,.22);
+
+    color:var(--text);
+
+}
+
+.btn-secondary:hover{
+
+    background-image:var(--gradient-primary);
+
+    border-color:transparent;
+
+    color:#fff;
+
+}
+
+.btn-gold{
+
+    background:var(--gradient-accent);
+
+    color:#fff;
+
+}
+
+.badge{
+
+    background:rgba(108,72,255,.18);
+
+    border:1px solid rgba(168,85,247,.35);
+
+    color:#C4B5FD;
+
+}
+
+
+/* ===========================
+CARDS & PANELS
+=========================== */
+
+.card,
+.stat-card,
+.feature-card,
+.lesson-card,
+.process-grid div,
+.lesson-item,
+.lesson-card-info,
+.auth-card,
+.auth-split-card,
+.dashboard-course,
+.overall-progress,
+.progress-card,
+.lesson-progress,
+.profile-card,
+.about-info-card,
+.contact-card,
+.contact-form-card,
+.faq-item,
+.arsc-card,
+.upload-modal-content,
+.clap-card{
+
+    background:var(--gradient-surface);
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow-sm);
+
+    color:var(--text);
+
+}
+
+.card:hover,
+.feature-card:hover,
+.lesson-card:hover,
+.lesson-item:hover,
+.process-grid div:hover,
+.about-info-card:hover,
+.dashboard-course:hover,
+.arsc-card:hover,
+.clap-card:hover{
+
+    border-color:rgba(168,85,247,.38);
+
+    box-shadow:0 26px 60px rgba(0,0,0,.55),0 0 0 1px rgba(168,85,247,.12);
+
+}
+
+.feature-card .icon,
+.about-info-card .icon{
+
+    background:rgba(108,72,255,.16);
+
+    border:1px solid rgba(168,85,247,.26);
+
+    color:#C4B5FD;
+
+}
+
+.stat-card h2{
+
+    background-image:var(--gradient-accent);
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    color:#C4B5FD;
+
+}
+
+.process-grid h3{
+
+    background:var(--gradient-primary);
+
+    box-shadow:var(--glow-primary);
+
+}
+
+.lesson-level,
+.lesson-chip,
+.lesson-hero-text .lesson-tag{
+
+    background:rgba(108,72,255,.16);
+
+    border:1px solid rgba(168,85,247,.28);
+
+    color:#C4B5FD;
+
+}
+
+
+/* ===========================
+LESSON LEVEL BADGES
+=========================== */
+
+.lesson-badge.beginner,
+.arsc-card-badge.beginner{
+
+    background:rgba(52,211,153,.16);
+
+    border:1px solid rgba(52,211,153,.34);
+
+    color:#6EE7B7;
+
+}
+
+.lesson-badge.intermediate,
+.arsc-card-badge.intermediate{
+
+    background:rgba(251,191,36,.16);
+
+    border:1px solid rgba(251,191,36,.34);
+
+    color:#FCD34D;
+
+}
+
+.lesson-badge.advanced,
+.arsc-card-badge.advanced{
+
+    background:rgba(248,113,113,.16);
+
+    border:1px solid rgba(248,113,113,.34);
+
+    color:#FCA5A5;
+
+}
+
+
+/* ===========================
+BANNERS & HERO
+=========================== */
+
+.page-banner{
+
+    background:linear-gradient(135deg,#6C48FF 0%,#3882F6 55%,#A855F7 100%);
+
+}
+
+.lesson-banner,
+.arsc-hero{
+
+    background-image:linear-gradient(135deg,#6C48FF 0%,#3882F6 55%,#A855F7 100%);
+
+}
+
+.banner-btn{
+
+    background:rgba(255,255,255,.10);
+
+    border:1px solid rgba(255,255,255,.30);
+
+    color:#fff;
+
+    box-shadow:none;
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+}
+
+.banner-btn:hover{
+
+    background:#fff;
+
+    color:#1E182E;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+
+}
+
+.hero{
+
+    background:linear-gradient(150deg,#1B1330 0%,#0F0F1A 60%,#0B0A14 100%);
+
+    border:1px solid rgba(168,85,247,.14);
+
+}
+
+.hero-left h1{
+
+    background-image:linear-gradient(135deg,#C4B5FD 0%,#A855F7 45%,#60A5FA 100%);
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+.hero .badge{
+
+    background:rgba(168,85,247,.16);
+
+    border-color:rgba(168,85,247,.42);
+
+    color:#D8B4FE;
+
+}
+
+.arsc-explainer-content{
+
+    background-image:linear-gradient(135deg,rgba(108,72,255,.14),rgba(56,130,246,.10));
+
+}
+
+
+/* ===========================
+CTA & FOOTER
+=========================== */
+
+.cta{
+
+    background-image:linear-gradient(135deg,#6C48FF 0%,#3882F6 55%,#A855F7 100%);
+
+    box-shadow:0 30px 70px rgba(108,72,255,.28);
+
+}
+
+.cta a{
+
+    background:#fff;
+
+    color:#1E182E;
+
+}
+
+.cta a:hover{
+
+    background:#F1F5FF;
+
+}
+
+.footer{
+
+    background:linear-gradient(160deg,#151021 0%,#0B0A14 100%);
+
+    border-top:1px solid rgba(168,85,247,.18);
+
+    color:var(--text);
+
+}
+
+.footer h2,
+.footer h3{
+
+    color:var(--text);
+
+}
+
+.footer p,
+.footer a,
+.copyright{
+
+    color:rgba(241,245,255,.66);
+
+}
+
+.footer a:hover{
+
+    color:#C4B5FD;
+
+}
+
+
+/* ===========================
+FORMS & AUTH
+=========================== */
+
+.auth-back-home{
+
+    background:rgba(30,24,46,.92);
+
+    border:1px solid rgba(168,85,247,.30);
+
+    color:var(--text);
+
+}
+
+.auth-back-home:hover{
+
+    background-image:var(--gradient-primary);
+
+    color:#fff;
+
+}
+
+.auth-card input,
+.auth-card textarea,
+.auth-split-card input,
+.password-toggle,
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+    background:rgba(255,255,255,.045);
+
+    border-color:rgba(148,163,184,.24);
+
+    color:var(--text);
+
+}
+
+.auth-card input:focus,
+.auth-card textarea:focus,
+.auth-split-card input:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+    border-color:var(--accent);
+
+    box-shadow:0 0 0 3px rgba(168,85,247,.18);
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:rgba(148,163,184,.75);
+
+}
+
+.auth-split-icon{
+
+    background:rgba(108,72,255,.16);
+
+    color:#C4B5FD;
+
+}
+
+.register-icon{
+
+    background:rgba(168,85,247,.16);
+
+    color:#D8B4FE;
+
+}
+
+.auth-card>p a{
+
+    color:#C4B5FD;
+
+}
+
+
+/* ===========================
+SPLASH
+=========================== */
+
+.splash-screen{
+
+    background:
+        radial-gradient(700px 500px at 50% 30%,rgba(108,72,255,.28),transparent 65%),
+        linear-gradient(160deg,#151021 0%,#0F0F1A 60%,#0B0A14 100%);
+
+}
+
+.splash-logo img{
+
+    background:#fff;
+
+    border-radius:50%;
+
+    padding:6px;
+
+    box-shadow:0 0 0 2px rgba(168,85,247,.35),0 10px 26px rgba(0,0,0,.45);
+
+}
+
+.splash-logo h2{
+
+    color:var(--text);
+
+}
+
+.splash-text{
+
+    color:var(--text-light);
+
+}
+
+.splash-spinner{
+
+    border-color:rgba(255,255,255,.14);
+
+    border-top-color:var(--accent);
+
+}
+
+
+/* ===========================
+PROGRESS & LESSON DETAIL
+=========================== */
+
+.progress-bar{
+
+    background:rgba(255,255,255,.10);
+
+}
+
+.lesson-row:hover{
+
+    background:rgba(255,255,255,.04);
+
+}
+
+.lesson-tip{
+
+    background:rgba(168,85,247,.10);
+
+    border-left:4px solid var(--accent);
+
+    color:var(--text);
+
+}
+
+.lesson-tip h3{
+
+    color:#D8B4FE;
+
+}
+
+
+/* ===========================
+ARSC CLAPS
+=========================== */
+
+.clap-filter-btn{
+
+    background:rgba(255,255,255,.06);
+
+    border:2px solid rgba(255,255,255,.16);
+
+    color:var(--text-light);
+
+}
+
+.clap-filter-btn:hover{
+
+    border-color:var(--accent);
+
+    color:#C4B5FD;
+
+    background:rgba(108,72,255,.16);
+
+}
+
+.clap-filter-btn.active{
+
+    background-image:var(--gradient-primary);
+
+    border-color:transparent;
+
+    color:#fff;
+
+}
+
+.clap-card .clap-lang-badge{
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(168,85,247,.26);
+
+    color:#C4B5FD;
+
+}
+
+.clap-card-image img,
+.clap-anim-layer{
+
+    background:linear-gradient(160deg,#EDE9FE 0%,#DBEAFE 100%);
+
+}
+
+.arsc-section-label{
+
+    background:rgba(108,72,255,.18);
+
+    border:1px solid rgba(168,85,247,.28);
+
+    color:#C4B5FD;
+
+}
+
+.arsc-value-card i{
+
+    background:rgba(108,72,255,.16);
+
+    color:#C4B5FD;
+
+}
+
+
+/* ===========================
+SIDEBAR APP SHELL
+=========================== */
+
+.mq-sidebar{
+
+    background:linear-gradient(180deg,#1B1330 0%,#0F0F1A 100%);
+
+    border-right:1px solid rgba(168,85,247,.18);
+
+    box-shadow:6px 0 30px rgba(0,0,0,.45);
+
+}
+
+.mq-sidebar-brand img{
+
+    background:#fff;
+
+    box-shadow:0 0 0 2px rgba(168,85,247,.30);
+
+}
+
+.mq-sidebar a.active,
+.mq-subnav li a.active{
+
+    background-image:var(--gradient-primary);
+
+    color:#fff;
+
+    box-shadow:0 8px 20px rgba(108,72,255,.40);
+
+}
+
+.mq-sidebar a.active:hover,
+.mq-subnav li a.active:hover{
+
+    background-image:linear-gradient(135deg,#7C5CFF 0%,#4A90FF 100%);
+
+    color:#fff;
+
+}
+
+
+/* ===========================
+MOBILE BOTTOM TAB BAR
+=========================== */
+
+.mq-tabbar{
+
+    background:linear-gradient(180deg,rgba(30,22,52,.98) 0%,rgba(15,15,26,.98) 100%);
+
+    border-top-color:rgba(168,85,247,.22);
+
+    box-shadow:0 -10px 30px rgba(0,0,0,.50);
+
+}
+
+.mq-tabbar a.active{
+
+    color:#C4B5FD;
+
+}
+
+body.landing-page .mq-tabbar{
+
+    background:linear-gradient(180deg,#1B1330 0%,#0F0F1A 100%);
+
+}
+
+body.landing-page .mq-tabbar a.active{
+
+    color:#C4B5FD;
+
+}
+
+
+/* ===========================
+TEXT ACCENTS
+=========================== */
+
+.lesson-info h3,
+.lesson-info a,
+.lesson-card-info h3,
+.lesson-eyebrow,
+.dashboard-course h3{
+
+    color:#C4B5FD;
+
+}
+
+.lesson-details a,
+.lesson-references a,
+.about-text a,
+.contact-card a,
+.contact-detail a,
+.auth-split-card a{
+
+    color:#A78BFA;
+
+}
+
+.lesson-details a:hover,
+.lesson-references a:hover,
+.about-text a:hover,
+.contact-card a:hover,
+.contact-detail a:hover{
+
+    color:#C4B5FD;
+
+}
+
+/* These two are pinned with !important further up the file. */
+
+.btn-outline:hover,
+.login-btn:hover{
+
+    background:#fff !important;
+    border-color:#fff;
+    color:#0F0F1A !important;
+
+}
+
+/* Hover states that used to darken to navy; keep them on the
+   purple → blue gradient so white labels stay legible. */
+
+.back-btn:hover,
+.lesson-start:hover,
+.auth-card button:hover,
+.dashboard-course a:hover,
+.auth-split-card button:hover,
+.submit-btn:hover,
+.upload-btn:hover,
+.upload-browse-btn:hover,
+.upload-submit-btn:hover:not(:disabled),
+.clap-play-btn:hover{
+
+    background-color:#6C48FF;
+    background-image:linear-gradient(135deg,#7C5CFF 0%,#3882F6 100%);
+    color:#fff;
+
+}
+
+.auth-split-card .register-btn:hover{
+
+    background-color:var(--accent);
+    background-image:var(--gradient-accent);
+    color:#fff;
 
 }
