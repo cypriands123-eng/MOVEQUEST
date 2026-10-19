@@ -146,7 +146,17 @@
 
 <div class="lesson-video">
 
-<iframe id="videoFrame" src="" title="ARSC Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe id="videoFrame" title="ARSC Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<div class="video-placeholder" id="videoPlaceholder" style="display:none;">
+
+<i class="fa-solid fa-video-slash"></i>
+
+<span>Video coming soon</span>
+
+<small id="videoPlaceholderText">This part has not been uploaded yet. Use the buttons below to open another part.</small>
+
+</div>
 
 </div>
 
@@ -233,9 +243,21 @@
 
 <div class="lesson-buttons">
 
+<a href="#" id="prevVideoBtn" class="secondary-btn" style="display:none;">
+
+← Previous Part
+
+</a>
+
 <a href="arsc-animation-song.html" class="secondary-btn">
 
 ← Back to ARSC Animation Song
+
+</a>
+
+<a href="#" id="nextVideoBtn" class="secondary-btn" style="display:none;">
+
+Next Part →
 
 </a>
 
@@ -376,8 +398,8 @@ var VIDEOS = {
         title: "ARSC Animation Song - Part 4",
         tag: "ARSC Animation Song",
         description: "Practice the complete routine with guided transitions and timing cues for a smooth performance.",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        duration: "15 Minutes",
+        videoUrl: "",
+        duration: "TBA",
         difficulty: "Intermediate",
         part: "Part 4 of 5",
         objectives: [
@@ -393,8 +415,8 @@ var VIDEOS = {
         title: "ARSC Animation Song - Part 5",
         tag: "ARSC Animation Song",
         description: "Final review and full performance practice of the complete ARSC Animation Song routine.",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        duration: "18 Minutes",
+        videoUrl: "",
+        duration: "TBA",
         difficulty: "Advanced",
         part: "Part 5 of 5",
         objectives: [
@@ -419,7 +441,20 @@ function loadVideoData() {
     document.getElementById("videoTag").textContent = data.tag;
     document.getElementById("videoTitle").textContent = data.title;
     document.getElementById("videoDescription").textContent = data.description;
-    document.getElementById("videoFrame").src = data.videoUrl;
+    var frame = document.getElementById("videoFrame");
+    var placeholder = document.getElementById("videoPlaceholder");
+
+    if (data.videoUrl) {
+        frame.src = data.videoUrl;
+        frame.style.display = "";
+        placeholder.style.display = "none";
+    } else {
+        frame.removeAttribute("src");
+        frame.style.display = "none";
+        placeholder.style.display = "flex";
+        document.getElementById("videoPlaceholderText").textContent =
+            data.part + " has not been uploaded yet. Use the buttons below to open another part.";
+    }
     document.getElementById("videoDuration").textContent = data.duration;
     document.getElementById("videoDifficulty").textContent = data.difficulty;
     document.getElementById("videoPart").textContent = data.part;
@@ -435,9 +470,27 @@ function loadVideoData() {
     });
 }
 
+// Previous / next part navigation
+function setupPartNav() {
+    var prev = document.getElementById("prevVideoBtn");
+    var next = document.getElementById("nextVideoBtn");
+    if (!prev || !next) return;
+
+    if (videoId > 1 && VIDEOS[videoId - 1]) {
+        prev.href = "arsc-video.html?id=" + (videoId - 1);
+        prev.style.display = "inline-flex";
+    }
+
+    if (VIDEOS[videoId + 1]) {
+        next.href = "arsc-video.html?id=" + (videoId + 1);
+        next.style.display = "inline-flex";
+    }
+}
+
 // Init
 hideSplash();
 loadVideoData();
+setupPartNav();
 setupRoleUI();
 
 function setupRoleUI() {
