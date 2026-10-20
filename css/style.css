@@ -1201,11 +1201,12 @@ FEATURED LESSONS
 
 .lesson-card img{
 
+    display:block;
     width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
 
-    height:240px;
-
-    object-fit:cover;
+    object-fit:contain;
 
     transition:.5s;
 
@@ -1711,11 +1712,12 @@ VIEW ALL LESSONS BUTTON
 
 .lesson-item img{
 
+    display:block;
     width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
 
-    height:250px;
-
-    object-fit:cover;
+    object-fit:contain;
 
     transition:.5s;
 
@@ -1990,9 +1992,11 @@ VIEW ALL LESSONS BUTTON
 
 .lesson-hero-image img{
 
+    display:block;
     width:100%;
+    height:auto;
 
-    max-width:500px;
+    max-width:620px;
 
     border-radius:22px;
 
@@ -2748,11 +2752,12 @@ VIEW ALL LESSONS BUTTON
 
 .dashboard-course img{
 
+    display:block;
     width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
 
-    height:180px;
-
-    object-fit:cover;
+    object-fit:contain;
 
 }
 
@@ -10476,12 +10481,6 @@ body.has-sidebar .main-header{
 ========================================================== */
 
 @media(max-width:768px){
-
-    .lesson-item img{
-
-        height:220px;
-
-    }
 
     .lesson-body{
 
