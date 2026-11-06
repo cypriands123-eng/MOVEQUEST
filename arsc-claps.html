@@ -9,7 +9,7 @@
 
 <title>MOVEQUEST | ARSC Claps</title>
 
-<link rel="stylesheet" href="css/style.css?v=10">
+<link rel="stylesheet" href="css/style.css?v=11">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
@@ -724,7 +724,8 @@ document.querySelectorAll(".clap-play-btn").forEach(function(btn) {
         // Stop whatever is currently playing
         stopAudio();
 
-        currentAudio = new Audio(src);
+        var audio = new Audio(src);
+        currentAudio = audio;
         currentBtn = this;
 
         this.classList.add("playing");
@@ -733,15 +734,20 @@ document.querySelectorAll(".clap-play-btn").forEach(function(btn) {
 
         showClapAnim(this.closest(".clap-card"));
 
-        currentAudio.addEventListener("ended", function() {
-            stopAudio();
+        // A replaced or interrupted track can still fire "ended", "error",
+        // or reject its play() promise a moment later. Those late callbacks
+        // must only stop their own track, never a newer one that has already
+        // started — otherwise the new clap stops by itself.
+        audio.addEventListener("ended", function() {
+            if (currentAudio === audio) stopAudio();
         });
 
-        currentAudio.addEventListener("error", function() {
-            stopAudio();
+        audio.addEventListener("error", function() {
+            if (currentAudio === audio) stopAudio();
         });
 
-        currentAudio.play().catch(function(err) {
+        audio.play().catch(function(err) {
+            if (currentAudio !== audio) return;
             console.error("Audio playback failed:", err);
             stopAudio();
         });
@@ -751,10 +757,19 @@ document.querySelectorAll(".clap-play-btn").forEach(function(btn) {
 function stopAudio() {
     hideClapAnim();
 
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        currentAudio = null;
+    var audio = currentAudio;
+
+    // Clear the shared reference first so any pending promise/event from
+    // this track sees that it is no longer the active one and bails out.
+    currentAudio = null;
+
+    if (audio) {
+        try {
+            audio.pause();
+            audio.currentTime = 0;
+        } catch (e) {
+            /* the track may have errored before its metadata loaded */
+        }
     }
     if (currentBtn) {
         resetBtn(currentBtn);

@@ -2228,6 +2228,52 @@ VIEW ALL LESSONS BUTTON
 
 }
 
+/* Learning Objectives / Practice Activity cards */
+
+.lesson-objectives{
+
+    background:#EFF6FF;
+
+    border-left:5px solid var(--secondary);
+
+    border-radius:12px;
+
+    padding:25px 30px;
+
+    margin:30px 0;
+
+}
+
+.lesson-practice{
+
+    background:#ECFDF5;
+
+    border-left:5px solid var(--success);
+
+    border-radius:12px;
+
+    padding:25px 30px;
+
+    margin:30px 0;
+
+}
+
+.lesson-details .lesson-objectives h2,
+.lesson-details .lesson-practice h2{
+
+    margin:0 0 14px;
+
+    font-size:20px;
+
+}
+
+.lesson-objectives ul,
+.lesson-practice ol{
+
+    margin-bottom:0;
+
+}
+
 .lesson-buttons{
 
     display:flex;
@@ -8980,7 +9026,9 @@ VIEW ALL LESSONS BUTTON
 
     }
 
-    .lesson-tip{
+    .lesson-tip,
+    .lesson-objectives,
+    .lesson-practice{
 
         padding:18px 20px;
 
@@ -11437,6 +11485,38 @@ PROGRESS & LESSON DETAIL
 .lesson-tip h3{
 
     color:#D8B4FE;
+
+}
+
+.lesson-objectives{
+
+    background:rgba(56,130,246,.10);
+
+    border-left:4px solid var(--secondary);
+
+    color:var(--text);
+
+}
+
+.lesson-objectives h2{
+
+    color:#93C5FD;
+
+}
+
+.lesson-practice{
+
+    background:rgba(52,211,153,.10);
+
+    border-left:4px solid var(--success);
+
+    color:var(--text);
+
+}
+
+.lesson-practice h2{
+
+    color:#86EFAC;
 
 }
 
